@@ -1,0 +1,92 @@
+from __future__ import annotations
+
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+import yfinance as yf
+
+from .schemas import MarketQuote, MarketSnapshot
+
+
+TICKERS = {
+    "^GSPC": ("S&P 500", "US"),
+    "^IXIC": ("Nasdaq Composite", "US"),
+    "^SOX": ("PHLX Semiconductor", "US"),
+    "^VIX": ("VIX", "US"),
+    "^TNX": ("US 10Y yield proxy", "US"),
+    "^KS11": ("KOSPI", "KOREA"),
+    "^KQ11": ("KOSDAQ", "KOREA"),
+    "005930.KS": ("Samsung Electronics", "KOREA"),
+    "000660.KS": ("SK Hynix", "KOREA"),
+    "KRW=X": ("USD/KRW", "CROSS"),
+}
+
+
+def _quote(symbol: str, label: str, market: str) -> MarketQuote:
+    try:
+        hist = yf.download(
+            symbol,
+            period="7d",
+            interval="1d",
+            auto_adjust=False,
+            progress=False,
+            threads=False,
+        )
+        if hist is None or hist.empty or len(hist) < 1:
+            return MarketQuote(
+                symbol=symbol, label=label, market=market,
+                status="MISSING", note="No daily data returned."
+            )
+
+        # yfinance may return multi-index columns depending on version.
+        close_col = hist["Close"]
+        if hasattr(close_col, "columns"):
+            close_col = close_col.iloc[:, 0]
+        close_col = close_col.dropna()
+
+        if close_col.empty:
+            return MarketQuote(
+                symbol=symbol, label=label, market=market,
+                status="MISSING", note="Close series is empty."
+            )
+
+        last = float(close_col.iloc[-1])
+        prev = float(close_col.iloc[-2]) if len(close_col) >= 2 else None
+        change = ((last / prev) - 1.0) * 100 if prev not in (None, 0) else None
+        idx = close_col.index[-1]
+        as_of = idx.strftime("%Y-%m-%d") if hasattr(idx, "strftime") else str(idx)
+
+        return MarketQuote(
+            symbol=symbol,
+            label=label,
+            market=market,
+            as_of=as_of,
+            close=round(last, 4),
+            previous_close=round(prev, 4) if prev is not None else None,
+            change_pct=round(change, 3) if change is not None else None,
+            status="OK",
+        )
+    except Exception as exc:
+        return MarketQuote(
+            symbol=symbol, label=label, market=market,
+            status="ERROR", note=f"{type(exc).__name__}: {exc}"
+        )
+
+
+def collect_market_snapshot(timezone: str = "Europe/Berlin") -> MarketSnapshot:
+    quotes = [
+        _quote(symbol, label, market)
+        for symbol, (label, market) in TICKERS.items()
+    ]
+    return MarketSnapshot(
+        generated_at=datetime.now(ZoneInfo(timezone)).isoformat(),
+        quotes=quotes,
+    )
+
+
+def latest_market_date(snapshot: MarketSnapshot, market: str) -> str | None:
+    dates = [
+        q.as_of for q in snapshot.quotes
+        if q.market == market and q.status == "OK" and q.as_of
+    ]
+    return max(dates) if dates else None

@@ -1,0 +1,36 @@
+name: Manual MVP Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      skip_research:
+        description: "Run market-data only"
+        required: true
+        default: true
+        type: boolean
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - run: pip install -r requirements.txt
+      - name: Run MVP
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.5' }}
+          BRIEF_TIMEZONE: Europe/Berlin
+        run: |
+          if [ "${{ inputs.skip_research }}" = "true" ]; then
+            python main.py --skip-research
+          else
+            python main.py
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mvp-output
+          path: data/runs/*.json
