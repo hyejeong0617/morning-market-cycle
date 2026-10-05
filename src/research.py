@@ -91,7 +91,8 @@ def run_research(market: str, target_date: str) -> ResearchBundle:
     if not api_key:
         raise RuntimeError("OPENAI_API_KEY is not set.")
 
-    model = os.getenv("OPENAI_MODEL", "gpt-5.5")
+    # Low-cost default for MVP testing. Upgrade later by changing OPENAI_MODEL only.
+    model = os.getenv("OPENAI_MODEL", "gpt-6-luna")
     client = OpenAI(api_key=api_key)
 
     prompt_file = "research_us.md" if market == "US" else "research_korea.md"
@@ -104,7 +105,12 @@ def run_research(market: str, target_date: str) -> ResearchBundle:
 
     response = client.responses.create(
         model=model,
-        tools=[{"type": "web_search", "external_web_access": True}],
+        reasoning={"effort": "low"},
+        tools=[{
+            "type": "web_search",
+            "external_web_access": True,
+            "search_context_size": "low",
+        }],
         tool_choice="required",
         input=[
             {"role": "system", "content": instructions},
