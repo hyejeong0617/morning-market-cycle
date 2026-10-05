@@ -30,7 +30,7 @@ jobs:
       - name: Run MVP
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.5' }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-6-luna' }}
           BRIEF_TIMEZONE: Europe/Berlin
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.skip_research }}" != "true" ]; then
