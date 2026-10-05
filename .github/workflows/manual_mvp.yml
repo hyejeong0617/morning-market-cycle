@@ -13,8 +13,8 @@ on:
     inputs:
       skip_research:
         description: "Run market-data only"
-        required: true
-        default: true
+        required: false
+        default: false
         type: boolean
 
 jobs:
