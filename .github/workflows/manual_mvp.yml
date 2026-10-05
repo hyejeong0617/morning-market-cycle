@@ -1,6 +1,14 @@
-name: Manual MVP Test
+name: MVP Test
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "main.py"
+      - "requirements.txt"
+      - "src/**"
+      - "prompts/**"
+      - ".github/workflows/manual_mvp.yml"
   workflow_dispatch:
     inputs:
       skip_research:
@@ -25,10 +33,10 @@ jobs:
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.5' }}
           BRIEF_TIMEZONE: Europe/Berlin
         run: |
-          if [ "${{ inputs.skip_research }}" = "true" ]; then
-            python main.py --skip-research
-          else
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.skip_research }}" != "true" ]; then
             python main.py
+          else
+            python main.py --skip-research
           fi
       - uses: actions/upload-artifact@v4
         with:
