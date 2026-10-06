@@ -99,7 +99,7 @@ def _usage_value(obj: object, name: str, default: int = 0) -> int:
         return default
 
 
-def _build_usage(response: object, market: str, model: str) -> ApiUsage:
+def build_usage(response: object, market: str, model: str) -> ApiUsage:
     usage = getattr(response, "usage", None)
     input_tokens = _usage_value(usage, "input_tokens") if usage else 0
     output_tokens = _usage_value(usage, "output_tokens") if usage else 0
@@ -192,5 +192,5 @@ def run_research(market: str, target_date: str) -> ResearchResult:
 
     data = json.loads(response.output_text)
     bundle = ResearchBundle.model_validate(data)
-    usage = _build_usage(response, market, model)
+    usage = build_usage(response, market, model)
     return ResearchResult(bundle=bundle, usage=usage)
