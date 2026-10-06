@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import Counter
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
@@ -21,6 +22,11 @@ TICKERS = {
     "KRW=X": ("USD/KRW", "CROSS"),
 }
 
+US_DATE_ANCHOR = "^GSPC"
+US_DATE_FALLBACK = {"^GSPC", "^IXIC", "^SOX", "^TNX"}
+KOREA_DATE_ANCHOR = "^KS11"
+KOREA_DATE_FALLBACK = {"^KS11", "^KQ11", "005930.KS", "000660.KS"}
+
 
 def _quote(symbol: str, label: str, market: str) -> MarketQuote:
     try:
@@ -38,7 +44,6 @@ def _quote(symbol: str, label: str, market: str) -> MarketQuote:
                 status="MISSING", note="No daily data returned."
             )
 
-        # yfinance may return multi-index columns depending on version.
         close_col = hist["Close"]
         if hasattr(close_col, "columns"):
             close_col = close_col.iloc[:, 0]
@@ -56,6 +61,13 @@ def _quote(symbol: str, label: str, market: str) -> MarketQuote:
         idx = close_col.index[-1]
         as_of = idx.strftime("%Y-%m-%d") if hasattr(idx, "strftime") else str(idx)
 
+        note = ""
+        if symbol == "KRW=X":
+            note = (
+                "Latest yfinance daily FX observation; NOT a Korea 15:30 closing FX rate. "
+                "Use a Korea-close official/reported USD/KRW observation for cross-market interpretation."
+            )
+
         return MarketQuote(
             symbol=symbol,
             label=label,
@@ -65,6 +77,7 @@ def _quote(symbol: str, label: str, market: str) -> MarketQuote:
             previous_close=round(prev, 4) if prev is not None else None,
             change_pct=round(change, 3) if change is not None else None,
             status="OK",
+            note=note,
         )
     except Exception as exc:
         return MarketQuote(
@@ -84,9 +97,32 @@ def collect_market_snapshot(timezone: str = "Europe/Berlin") -> MarketSnapshot:
     )
 
 
-def latest_market_date(snapshot: MarketSnapshot, market: str) -> str | None:
+def _anchor_date(snapshot: MarketSnapshot, anchor: str, fallback_symbols: set[str]) -> str | None:
+    for q in snapshot.quotes:
+        if q.symbol == anchor and q.status == "OK" and q.as_of:
+            return q.as_of
+
     dates = [
-        q.as_of for q in snapshot.quotes
-        if q.market == market and q.status == "OK" and q.as_of
+        q.as_of
+        for q in snapshot.quotes
+        if q.symbol in fallback_symbols and q.status == "OK" and q.as_of
     ]
-    return max(dates) if dates else None
+    if not dates:
+        return None
+
+    counts = Counter(dates)
+    return counts.most_common(1)[0][0]
+
+
+def latest_market_date(snapshot: MarketSnapshot, market: str) -> str | None:
+    """Return the completed regular-session date for the requested market.
+
+    US is anchored to S&P 500, with Nasdaq/SOX/10Y majority fallback.
+    Korea is anchored to KOSPI, with Korea equity majority fallback.
+    This intentionally avoids VIX or 24-hour FX timestamps advancing the cycle date.
+    """
+    if market == "US":
+        return _anchor_date(snapshot, US_DATE_ANCHOR, US_DATE_FALLBACK)
+    if market == "KOREA":
+        return _anchor_date(snapshot, KOREA_DATE_ANCHOR, KOREA_DATE_FALLBACK)
+    return None
