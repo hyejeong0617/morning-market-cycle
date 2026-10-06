@@ -47,10 +47,7 @@ def _research_schema() -> dict:
                                 "Commodities", "Other"
                             ],
                         },
-                        "event_status": {
-                            "type": "string",
-                            "enum": ["NEW", "FOLLOW-UP", "REPEAT", "NOISE"],
-                        },
+                        "event_status": {"type": "string", "enum": ["NEW", "FOLLOW-UP", "REPEAT", "NOISE"]},
                         "summary": {"type": "string"},
                         "why_important": {"type": "string"},
                         "facts": {"type": "array", "items": {"type": "string"}},
@@ -61,26 +58,19 @@ def _research_schema() -> dict:
                                 "properties": {
                                     "title": {"type": "string"},
                                     "url": {"type": "string"},
-                                    "source_type": {
-                                        "type": "string",
-                                        "enum": ["PRIMARY", "TRUSTED_REPORTING", "OTHER"],
-                                    },
+                                    "source_type": {"type": "string", "enum": ["PRIMARY", "TRUSTED_REPORTING", "OTHER"]},
                                 },
                                 "required": ["title", "url", "source_type"],
                                 "additionalProperties": False,
                             },
                         },
                         "portfolio_links": {"type": "array", "items": {"type": "string"}},
-                        "portfolio_relevance": {
-                            "type": "string",
-                            "enum": ["HIGH", "MEDIUM", "LOW", "NONE"],
-                        },
+                        "portfolio_relevance": {"type": "string", "enum": ["HIGH", "MEDIUM", "LOW", "NONE"]},
                         "next_check": {"type": "string"},
                     },
                     "required": [
-                        "event_key", "title", "market", "category", "event_status",
-                        "summary", "why_important", "facts", "sources",
-                        "portfolio_links", "portfolio_relevance", "next_check"
+                        "event_key", "title", "market", "category", "event_status", "summary",
+                        "why_important", "facts", "sources", "portfolio_links", "portfolio_relevance", "next_check"
                     ],
                     "additionalProperties": False,
                 },
@@ -104,18 +94,13 @@ def build_usage(response: object, market: str, model: str) -> ApiUsage:
     input_tokens = _usage_value(usage, "input_tokens") if usage else 0
     output_tokens = _usage_value(usage, "output_tokens") if usage else 0
     total_tokens = _usage_value(usage, "total_tokens") if usage else input_tokens + output_tokens
-
     cached_input_tokens = 0
     if usage:
         details = getattr(usage, "input_tokens_details", None)
         if details is not None:
             cached_input_tokens = _usage_value(details, "cached_tokens")
 
-    web_search_calls = 0
-    for item in getattr(response, "output", []) or []:
-        if getattr(item, "type", None) == "web_search_call":
-            web_search_calls += 1
-
+    web_search_calls = sum(1 for item in getattr(response, "output", []) or [] if getattr(item, "type", None) == "web_search_call")
     model_cost = None
     pricing = MODEL_PRICING_PER_MTOK.get(model)
     if pricing:
@@ -125,10 +110,8 @@ def build_usage(response: object, market: str, model: str) -> ApiUsage:
             + cached_input_tokens * pricing["cached_input"] / 1_000_000
             + output_tokens * pricing["output"] / 1_000_000
         )
-
     search_cost = web_search_calls * WEB_SEARCH_USD_PER_CALL
     total_cost = (model_cost + search_cost) if model_cost is not None else None
-
     return ApiUsage(
         market=market,
         model=model,
@@ -147,50 +130,44 @@ def build_usage(response: object, market: str, model: str) -> ApiUsage:
     )
 
 
-def run_research(market: str, target_date: str) -> ResearchResult:
+def run_research(
+    market: str,
+    target_date: str,
+    *,
+    brief_date: str,
+    session_status: str,
+    is_monday: bool,
+) -> ResearchResult:
     if market not in {"US", "KOREA"}:
         raise ValueError("market must be US or KOREA")
-
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         raise RuntimeError("OPENAI_API_KEY is not set.")
 
     model = os.getenv("OPENAI_MODEL", "gpt-6-luna")
     client = OpenAI(api_key=api_key)
-
     prompt_file = "research_us.md" if market == "US" else "research_korea.md"
     instructions = _load_prompt(prompt_file)
     user_input = (
-        f"Research target date: {target_date}. "
-        f"Return only market-moving events relevant to the {market} research scope. "
-        "Use live web search. Prefer primary sources, and keep the list selective."
+        f"Morning Brief date (Europe/Berlin): {brief_date}. "
+        f"Latest actual completed {market} market date: {target_date}. "
+        f"Session status for the expected cycle date: {session_status}. "
+        f"Monday mode: {is_monday}. "
+        "Use live web search and return only market-moving events relevant to this cycle. "
+        "When the market had no new session, focus on important news since the latest actual close rather than inventing price action. "
+        "Write explanatory fields in Korean. Prefer primary sources and keep the list selective."
     )
 
     response = client.responses.create(
         model=model,
         reasoning={"effort": "low"},
-        tools=[{
-            "type": "web_search",
-            "external_web_access": True,
-            "search_context_size": "low",
-        }],
+        tools=[{"type": "web_search", "external_web_access": True, "search_context_size": "low"}],
         tool_choice="required",
-        input=[
-            {"role": "system", "content": instructions},
-            {"role": "user", "content": user_input},
-        ],
-        text={
-            "format": {
-                "type": "json_schema",
-                "name": f"{market.lower()}_market_research",
-                "strict": True,
-                "schema": _research_schema(),
-            }
-        },
+        input=[{"role": "system", "content": instructions}, {"role": "user", "content": user_input}],
+        text={"format": {"type": "json_schema", "name": f"{market.lower()}_market_research", "strict": True, "schema": _research_schema()}},
         include=["web_search_call.action.sources"],
     )
 
-    data = json.loads(response.output_text)
-    bundle = ResearchBundle.model_validate(data)
+    bundle = ResearchBundle.model_validate(json.loads(response.output_text))
     usage = build_usage(response, market, model)
     return ResearchResult(bundle=bundle, usage=usage)
