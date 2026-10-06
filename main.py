@@ -9,6 +9,7 @@ from zoneinfo import ZoneInfo
 
 from dotenv import load_dotenv
 
+from src.email_sender import send_morning_brief_email
 from src.market_data import collect_market_snapshot, latest_market_date
 from src.notion_store import sync_market_inbox
 from src.render import render_morning_brief_markdown
@@ -23,6 +24,7 @@ def main() -> None:
     parser.add_argument("--date", help="Brief date YYYY-MM-DD. Defaults to Europe/Berlin today.")
     parser.add_argument("--skip-research", action="store_true", help="Collect only market data.")
     parser.add_argument("--skip-notion", action="store_true", help="Do not sync selected events to Market Inbox.")
+    parser.add_argument("--skip-email", action="store_true", help="Do not send the Morning Brief email.")
     args = parser.parse_args()
 
     load_dotenv()
@@ -124,6 +126,25 @@ def main() -> None:
                 }
                 warnings.append(f"Market Inbox sync failed: {type(exc).__name__}: {exc}")
         output["notion_sync"] = notion_sync
+
+        if args.skip_email:
+            email_delivery = {"status": "SKIPPED", "reason": "--skip-email supplied"}
+        else:
+            try:
+                email_delivery = send_morning_brief_email(
+                    brief_date=brief_date,
+                    us_market_date=us_market_date,
+                    korea_market_date=korea_market_date,
+                    brief=morning_brief,
+                    estimated_api_cost_usd=estimated_api_cost_usd,
+                )
+            except Exception as exc:
+                email_delivery = {
+                    "status": "ERROR",
+                    "reason": f"{type(exc).__name__}: {exc}",
+                }
+                warnings.append(f"Morning Brief email failed: {type(exc).__name__}: {exc}")
+        output["email_delivery"] = email_delivery
         output["warnings"] = warnings
 
     out_path = out_dir / f"{brief_date}.json"
