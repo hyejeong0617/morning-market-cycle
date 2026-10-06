@@ -115,7 +115,7 @@ def send_morning_brief_email(
     username = os.getenv("SMTP_USERNAME", "").strip()
     password = os.getenv("SMTP_PASSWORD", "").strip()
     recipient = os.getenv("EMAIL_TO", "").strip()
-    sender = os.getenv("EMAIL_FROM", username).strip()
+    sender = os.getenv("EMAIL_FROM", "").strip() or username
 
     missing = [name for name, value in {
         "SMTP_USERNAME": username,
