@@ -111,6 +111,7 @@ class MorningBrief(BaseModel):
     market_one_liner: str
     us_one_liner: str
     korea_one_liner: str
+    weekend_watch: list[str] = []
     cross_market: CrossMarketAnalysis
     portfolio: list[PortfolioImpact] = []
     questions: list[str] = []
