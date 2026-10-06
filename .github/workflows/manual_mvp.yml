@@ -16,6 +16,11 @@ on:
         required: false
         default: false
         type: boolean
+      skip_notion:
+        description: "Skip Market Inbox sync"
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   run:
@@ -32,13 +37,21 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-6-luna' }}
           BRIEF_TIMEZONE: Europe/Berlin
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATA_SOURCE_ID: ${{ vars.NOTION_DATA_SOURCE_ID || 'de2d05dd-6694-4cb0-b7d0-c65db73cb01a' }}
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.skip_research }}" != "true" ]; then
-            python main.py
+            if [ "${{ inputs.skip_notion }}" = "true" ]; then
+              python main.py --skip-notion
+            else
+              python main.py
+            fi
           else
             python main.py --skip-research
           fi
       - uses: actions/upload-artifact@v4
         with:
           name: mvp-output
-          path: data/runs/*.json
+          path: |
+            data/runs/*.json
+            data/runs/*.md
