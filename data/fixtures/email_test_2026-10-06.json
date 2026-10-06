@@ -1,0 +1,53 @@
+{
+  "brief_date": "2026-10-06",
+  "us_market_date": "2026-10-05",
+  "korea_market_date": "2026-10-06",
+  "selected_event_keys": [
+    "ism-services-september-2026",
+    "nasdaq-record-yields-near-highs",
+    "kospi-tech-led-decline-foreign-outflows"
+  ],
+  "morning_brief": {
+    "market_one_liner": "The prior US session’s gains in the Nasdaq and S&P 500 did not carry through to Korea’s large-cap chip stocks: the KOSPI fell and foreign investors sold heavily, while the KOSDAQ rose sharply.",
+    "us_one_liner": "On October 5, the S&P 500 rose 0.66% and the Nasdaq gained 1.05% to a record, even as the US 10-year yield proxy rose to 5.31%; the September ISM services index remained expansionary at 54.9, with prices paid at 74.0.",
+    "korea_one_liner": "On October 6, the KOSPI fell 0.89% below 7,000 as foreigners sold a net KRW 1.75 trillion; Samsung Electronics fell 1.45% and SK hynix 3.69%, while the KOSDAQ rose 2.98%.",
+    "cross_market": {
+      "us_signal": "US equities advanced, led by mega-cap technology, while Treasury yields remained elevated. The ISM services report showed continued expansion and a higher prices-paid index, but the supplied evidence does not establish that the report drove the market move.",
+      "expected_korea_response": "A positive US technology-market signal might have supported Korean technology shares, while elevated US yields could have been a countervailing pressure. These are possible channels, not confirmed causes.",
+      "observed_korea_response": "The broad Korean market diverged: the KOSPI declined, with Samsung Electronics and SK hynix among the notable losers. Foreign investors were net sellers. The KOSDAQ gained 2.98%, but no driver for that move is supplied.",
+      "korea_specific_factors": [
+        "Foreign investors sold a net KRW 1.75 trillion and institutions also sold; individuals were net buyers.",
+        "The Korean event report characterized the session as tech-led losses amid rising bond yields.",
+        "The KOSDAQ's sharp gain contrasted with the KOSPI decline; the available events do not explain the divergence."
+      ],
+      "transmission": "NO",
+      "confidence": "MEDIUM",
+      "key_difference": "The US technology rally was not reflected in Korea’s major chip stocks during the completed Korean session. This is a divergence in observed price direction, not proof that US gains or yields caused Korea’s move."
+    },
+    "portfolio": [
+      {"asset": "KODEX 미국나스닥", "relevance": "HIGH", "reason": "The Nasdaq rose 1.05% to a record in the prior US session, alongside elevated US yields. One session does not establish how durable this combination is."},
+      {"asset": "TIGER 미국S&P500", "relevance": "MEDIUM", "reason": "The S&P 500 rose 0.66% in the prior US session; the supplied event also highlights persistent services input-price pressure as a factor to monitor."},
+      {"asset": "TIGER200", "relevance": "HIGH", "reason": "The KOSPI fell 0.89%, with foreign net selling and weakness in major chip stocks."},
+      {"asset": "삼성전자", "relevance": "HIGH", "reason": "Samsung Electronics fell 1.45% in the Korean session despite the prior US technology-market advance."}
+    ],
+    "questions": [
+      "Do foreign net flows and Samsung Electronics’ performance stabilize in the next Korean session?",
+      "Do subsequent inflation data or Fed communications reinforce or ease the pressure from elevated US yields and services prices?"
+    ]
+  },
+  "estimated_api_cost_usd": 0.057186,
+  "us_research": {
+    "events": [
+      {"event_key": "ism-services-september-2026", "title": "ISM services remained in expansion, while prices paid rose to a multi-year high", "market": "US"},
+      {"event_key": "nasdaq-record-yields-near-highs", "title": "Nasdaq closed at a record as Treasury yields remained elevated", "market": "US"},
+      {"event_key": "chro-rxo-acquisition", "title": "C.H. Robinson agreed to acquire RXO in a $5.8 billion deal", "market": "US"}
+    ]
+  },
+  "korea_research": {
+    "events": [
+      {"event_key": "kospi-tech-led-decline-foreign-outflows", "title": "KOSPI slipped below 7,000 as foreigners sold heavily; Samsung Electronics and SK hynix led losses", "market": "KOREA"},
+      {"event_key": "lg-electronics-5gw-ai-data-center-chiller-contract", "title": "LG Electronics announced long-term chiller supply agreement supporting more than 5GW of North American AI data centers", "market": "KOREA"},
+      {"event_key": "usdkrw-korea-close", "title": "Won edged stronger at the Korean market close", "market": "KOREA"}
+    ]
+  }
+}
