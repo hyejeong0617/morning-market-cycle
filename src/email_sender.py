@@ -5,7 +5,7 @@ import os
 import smtplib
 from email.message import EmailMessage
 
-from .schemas import MorningBrief
+from .schemas import MorningBrief, ResearchEvent
 
 
 def _portfolio_lines(brief: MorningBrief) -> str:
@@ -23,12 +23,36 @@ def _question_lines(brief: MorningBrief) -> str:
     return "\n".join(f"- {q}" for q in brief.questions[:2])
 
 
+def _more_headline_events(
+    all_events: list[ResearchEvent],
+    selected_event_keys: list[str],
+    limit: int = 5,
+) -> list[ResearchEvent]:
+    selected = set(selected_event_keys)
+    extras = [
+        event for event in all_events
+        if event.event_key not in selected
+    ]
+    # Preserve research order: US first, then Korea, while keeping the section short.
+    return extras[:limit]
+
+
+def _more_headline_lines(events: list[ResearchEvent]) -> str:
+    if not events:
+        return "- No additional headlines today."
+    return "\n".join(
+        f"- [{event.market}] {event.title}"
+        for event in events
+    )
+
+
 def _plain_text(
     *,
     brief_date: str,
     us_market_date: str | None,
     korea_market_date: str | None,
     brief: MorningBrief,
+    more_headlines: list[ResearchEvent],
     estimated_api_cost_usd: float | None,
 ) -> str:
     cost = f"${estimated_api_cost_usd:.4f}" if estimated_api_cost_usd is not None else "n/a"
@@ -54,6 +78,9 @@ Key difference: {brief.cross_market.key_difference}
 💼 MY PORTFOLIO
 {_portfolio_lines(brief)}
 
+📰 MORE HEADLINES
+{_more_headline_lines(more_headlines)}
+
 🔎 TODAY'S QUESTIONS
 {_question_lines(brief)}
 
@@ -67,6 +94,7 @@ def _html_body(
     us_market_date: str | None,
     korea_market_date: str | None,
     brief: MorningBrief,
+    more_headlines: list[ResearchEvent],
     estimated_api_cost_usd: float | None,
 ) -> str:
     esc = html.escape
@@ -81,6 +109,10 @@ def _html_body(
     factors = "".join(
         f"<li>{esc(x)}</li>" for x in brief.cross_market.korea_specific_factors
     )
+    headlines = "".join(
+        f"<li><strong>{esc(event.market)}</strong> · {esc(event.title)}</li>"
+        for event in more_headlines
+    ) or "<li>No additional headlines today.</li>"
 
     return f"""<!doctype html>
 <html><body style="font-family:Arial,sans-serif;max-width:720px;margin:auto;line-height:1.55;color:#222">
@@ -97,6 +129,7 @@ def _html_body(
 {f'<ul>{factors}</ul>' if factors else ''}
 <p><strong>Key difference:</strong> {esc(brief.cross_market.key_difference)}</p>
 <h3>💼 My Portfolio</h3><ul>{portfolio}</ul>
+<h3>📰 More Headlines</h3><ul>{headlines}</ul>
 <h3>🔎 Today's Questions</h3><ul>{questions}</ul>
 <hr><p style="font-size:12px;color:#777">Estimated OpenAI API cost for this run: {esc(cost)}</p>
 </body></html>"""
@@ -108,6 +141,8 @@ def send_morning_brief_email(
     us_market_date: str | None,
     korea_market_date: str | None,
     brief: MorningBrief,
+    all_events: list[ResearchEvent],
+    selected_event_keys: list[str],
     estimated_api_cost_usd: float | None,
 ) -> dict:
     host = os.getenv("SMTP_HOST", "smtp.gmail.com").strip()
@@ -128,6 +163,12 @@ def send_morning_brief_email(
             "reason": f"Missing email configuration: {', '.join(missing)}",
         }
 
+    more_headlines = _more_headline_events(
+        all_events=all_events,
+        selected_event_keys=selected_event_keys,
+        limit=5,
+    )
+
     msg = EmailMessage()
     msg["Subject"] = f"Morning Market Brief | {brief_date} | {brief.cross_market.transmission}"
     msg["From"] = sender
@@ -137,6 +178,7 @@ def send_morning_brief_email(
         us_market_date=us_market_date,
         korea_market_date=korea_market_date,
         brief=brief,
+        more_headlines=more_headlines,
         estimated_api_cost_usd=estimated_api_cost_usd,
     ))
     msg.add_alternative(_html_body(
@@ -144,6 +186,7 @@ def send_morning_brief_email(
         us_market_date=us_market_date,
         korea_market_date=korea_market_date,
         brief=brief,
+        more_headlines=more_headlines,
         estimated_api_cost_usd=estimated_api_cost_usd,
     ), subtype="html")
 
@@ -155,4 +198,5 @@ def send_morning_brief_email(
         "status": "SENT",
         "recipient": recipient,
         "subject": msg["Subject"],
+        "more_headlines_count": len(more_headlines),
     }
