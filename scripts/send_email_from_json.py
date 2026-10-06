@@ -21,6 +21,14 @@ def main() -> None:
         *data.get("us_research", {}).get("events", []),
         *data.get("korea_research", {}).get("events", []),
     ]
+    learning_signal = data.get("learning_signal") or {
+        "signal": False,
+        "strength": "NONE",
+        "reasons": [],
+        "suggested_question": None,
+        "action": "이 fixture에는 Learning Signal이 저장되어 있지 않음",
+        "rule_version": "fixture-default",
+    }
 
     result = send_morning_brief_email(
         brief_date=data["brief_date"],
@@ -30,6 +38,7 @@ def main() -> None:
         estimated_api_cost_usd=data.get("estimated_api_cost_usd"),
         all_events=all_events,
         selected_event_keys=data.get("selected_event_keys", []),
+        learning_signal=learning_signal,
     )
 
     print(json.dumps(result, ensure_ascii=False, indent=2))
