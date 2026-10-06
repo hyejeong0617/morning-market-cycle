@@ -19,6 +19,7 @@ def _brief_schema() -> dict:
             "market_one_liner": {"type": "string"},
             "us_one_liner": {"type": "string"},
             "korea_one_liner": {"type": "string"},
+            "weekend_watch": {"type": "array", "items": {"type": "string"}, "maxItems": 4},
             "cross_market": {
                 "type": "object",
                 "properties": {
@@ -48,12 +49,19 @@ def _brief_schema() -> dict:
             },
             "questions": {"type": "array", "items": {"type": "string"}, "maxItems": 2}
         },
-        "required": ["market_one_liner", "us_one_liner", "korea_one_liner", "cross_market", "portfolio", "questions"],
+        "required": ["market_one_liner", "us_one_liner", "korea_one_liner", "weekend_watch", "cross_market", "portfolio", "questions"],
         "additionalProperties": False
     }
 
 
-def run_synthesis(brief_date: str, us_market_date: str | None, korea_market_date: str | None, snapshot: MarketSnapshot, selected_events: list[ResearchEvent]) -> tuple[MorningBrief, ApiUsage]:
+def run_synthesis(
+    brief_date: str,
+    us_market_date: str | None,
+    korea_market_date: str | None,
+    snapshot: MarketSnapshot,
+    selected_events: list[ResearchEvent],
+    session_info: dict,
+) -> tuple[MorningBrief, ApiUsage]:
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         raise RuntimeError("OPENAI_API_KEY is not set.")
@@ -64,6 +72,7 @@ def run_synthesis(brief_date: str, us_market_date: str | None, korea_market_date
         "brief_date": brief_date,
         "us_market_date": us_market_date,
         "korea_market_date": korea_market_date,
+        "session_info": session_info,
         "market_snapshot": snapshot.model_dump(mode="json"),
         "selected_events": [e.model_dump(mode="json") for e in selected_events],
     }
