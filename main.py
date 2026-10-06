@@ -16,6 +16,7 @@ from src.render import render_morning_brief_markdown
 from src.research import run_research
 from src.scoring import score_and_select
 from src.schemas import Mvp2Run
+from src.session_status import detect_session_status
 from src.synthesis import run_synthesis
 
 
@@ -34,12 +35,17 @@ def main() -> None:
     snapshot = collect_market_snapshot(tz)
     us_market_date = latest_market_date(snapshot, "US")
     korea_market_date = latest_market_date(snapshot, "KOREA")
+    session_info = detect_session_status(brief_date, us_market_date, korea_market_date)
 
     warnings: list[str] = []
     if not us_market_date:
         warnings.append("US market date could not be inferred from regular-session anchor data.")
     if not korea_market_date:
         warnings.append("Korea market date could not be inferred from regular-session anchor data.")
+    if session_info["us_status"] == "NO_NEW_SESSION":
+        warnings.append("US market had no new completed session for the expected cycle date; use news since the latest actual close.")
+    if session_info["korea_status"] == "NO_NEW_SESSION":
+        warnings.append("Korean market had no new completed session for the expected cycle date; use news since the latest actual close.")
 
     fx_quote = next((q for q in snapshot.quotes if q.symbol == "KRW=X"), None)
     if fx_quote and fx_quote.status == "OK":
@@ -57,12 +63,36 @@ def main() -> None:
             "brief_date": brief_date,
             "us_market_date": us_market_date,
             "korea_market_date": korea_market_date,
+            "session_info": session_info,
             "market_snapshot": snapshot.model_dump(mode="json"),
             "warnings": warnings,
         }
+    elif session_info["both_closed"]:
+        output = {
+            "schema_version": "mvp2-no-publication",
+            "brief_date": brief_date,
+            "us_market_date": us_market_date,
+            "korea_market_date": korea_market_date,
+            "session_info": session_info,
+            "market_snapshot": snapshot.model_dump(mode="json"),
+            "publication_status": "SKIPPED_BOTH_MARKETS_CLOSED",
+            "notion_sync": {"status": "SKIPPED", "reason": "Both markets had no new session."},
+            "email_delivery": {"status": "SKIPPED", "reason": "Both markets had no new session."},
+            "warnings": warnings,
+        }
     else:
-        us_result = run_research("US", us_market_date or brief_date)
-        korea_result = run_research("KOREA", korea_market_date or brief_date)
+        us_result = run_research(
+            "US", us_market_date or brief_date,
+            brief_date=brief_date,
+            session_status=session_info["us_status"],
+            is_monday=session_info["is_monday"],
+        )
+        korea_result = run_research(
+            "KOREA", korea_market_date or brief_date,
+            brief_date=brief_date,
+            session_status=session_info["korea_status"],
+            is_monday=session_info["is_monday"],
+        )
 
         all_events = us_result.bundle.events + korea_result.bundle.events
         event_scores, selected_events = score_and_select(all_events, max_events=5)
@@ -74,6 +104,7 @@ def main() -> None:
             korea_market_date=korea_market_date,
             snapshot=snapshot,
             selected_events=selected_events,
+            session_info=session_info,
         )
 
         api_usage = [us_result.usage, korea_result.usage, synthesis_usage]
@@ -94,6 +125,7 @@ def main() -> None:
             estimated_api_cost_usd=estimated_api_cost_usd,
             warnings=warnings,
         ).model_dump(mode="json")
+        output["session_info"] = session_info
 
         markdown = render_morning_brief_markdown(
             brief_date=brief_date,
@@ -119,12 +151,7 @@ def main() -> None:
                     morning_brief=morning_brief,
                 )
             except Exception as exc:
-                notion_sync = {
-                    "status": "ERROR",
-                    "reason": f"{type(exc).__name__}: {exc}",
-                    "created": 0,
-                    "duplicates": 0,
-                }
+                notion_sync = {"status": "ERROR", "reason": f"{type(exc).__name__}: {exc}", "created": 0, "duplicates": 0}
                 warnings.append(f"Market Inbox sync failed: {type(exc).__name__}: {exc}")
         output["notion_sync"] = notion_sync
 
@@ -142,17 +169,13 @@ def main() -> None:
                     estimated_api_cost_usd=estimated_api_cost_usd,
                 )
             except Exception as exc:
-                email_delivery = {
-                    "status": "ERROR",
-                    "reason": f"{type(exc).__name__}: {exc}",
-                }
+                email_delivery = {"status": "ERROR", "reason": f"{type(exc).__name__}: {exc}"}
                 warnings.append(f"Morning Brief email failed: {type(exc).__name__}: {exc}")
         output["email_delivery"] = email_delivery
         output["warnings"] = warnings
 
     out_path = out_dir / f"{brief_date}.json"
     out_path.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
-
     print(json.dumps(output, ensure_ascii=False, indent=2))
     print(f"\nSaved: {out_path}")
 
