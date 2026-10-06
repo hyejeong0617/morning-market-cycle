@@ -66,6 +66,7 @@ def main() -> None:
 
         all_events = us_result.bundle.events + korea_result.bundle.events
         event_scores, selected_events = score_and_select(all_events, max_events=5)
+        selected_event_keys = [e.event_key for e in selected_events]
 
         morning_brief, synthesis_usage = run_synthesis(
             brief_date=brief_date,
@@ -87,7 +88,7 @@ def main() -> None:
             us_research=us_result.bundle,
             korea_research=korea_result.bundle,
             event_scores=event_scores,
-            selected_event_keys=[e.event_key for e in selected_events],
+            selected_event_keys=selected_event_keys,
             morning_brief=morning_brief,
             api_usage=api_usage,
             estimated_api_cost_usd=estimated_api_cost_usd,
@@ -136,6 +137,8 @@ def main() -> None:
                     us_market_date=us_market_date,
                     korea_market_date=korea_market_date,
                     brief=morning_brief,
+                    all_events=all_events,
+                    selected_event_keys=selected_event_keys,
                     estimated_api_cost_usd=estimated_api_cost_usd,
                 )
             except Exception as exc:
