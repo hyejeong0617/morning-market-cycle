@@ -30,13 +30,20 @@ def main() -> None:
 
     warnings: list[str] = []
     if not us_market_date:
-        warnings.append("US market date could not be inferred from market data.")
+        warnings.append("US market date could not be inferred from regular-session anchor data.")
     if not korea_market_date:
-        warnings.append("Korea market date could not be inferred from market data.")
+        warnings.append("Korea market date could not be inferred from regular-session anchor data.")
+
+    fx_quote = next((q for q in snapshot.quotes if q.symbol == "KRW=X"), None)
+    if fx_quote and fx_quote.status == "OK":
+        warnings.append(
+            "USD/KRW from yfinance is a latest FX observation, not the Korea 15:30 closing rate; "
+            "use official/reported Korea-close FX for cross-market interpretation."
+        )
 
     if args.skip_research:
         output = {
-            "schema_version": "mvp1-market-data-only",
+            "schema_version": "mvp1-market-data-only-v2",
             "brief_date": brief_date,
             "us_market_date": us_market_date,
             "korea_market_date": korea_market_date,
@@ -44,16 +51,26 @@ def main() -> None:
             "warnings": warnings,
         }
     else:
-        us_research = run_research("US", us_market_date or brief_date)
-        korea_research = run_research("KOREA", korea_market_date or brief_date)
+        us_result = run_research("US", us_market_date or brief_date)
+        korea_result = run_research("KOREA", korea_market_date or brief_date)
+
+        api_usage = [us_result.usage, korea_result.usage]
+        known_costs = [
+            item.estimated_total_cost_usd
+            for item in api_usage
+            if item.estimated_total_cost_usd is not None
+        ]
+        estimated_api_cost_usd = round(sum(known_costs), 6) if len(known_costs) == len(api_usage) else None
 
         output = MvpRun(
             brief_date=brief_date,
             us_market_date=us_market_date,
             korea_market_date=korea_market_date,
             market_snapshot=snapshot,
-            us_research=us_research,
-            korea_research=korea_research,
+            us_research=us_result.bundle,
+            korea_research=korea_result.bundle,
+            api_usage=api_usage,
+            estimated_api_cost_usd=estimated_api_cost_usd,
             warnings=warnings,
         ).model_dump(mode="json")
 
