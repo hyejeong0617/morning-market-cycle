@@ -143,6 +143,28 @@ def _html_body(
 </body></html>"""
 
 
+def _send_via_smtp(
+    *,
+    host: str,
+    port: int,
+    username: str,
+    password: str,
+    msg: EmailMessage,
+) -> None:
+    if port == 465:
+        with smtplib.SMTP_SSL(host, port, timeout=30) as smtp:
+            smtp.login(username, password)
+            smtp.send_message(msg)
+        return
+
+    with smtplib.SMTP(host, port, timeout=30) as smtp:
+        smtp.ehlo()
+        smtp.starttls()
+        smtp.ehlo()
+        smtp.login(username, password)
+        smtp.send_message(msg)
+
+
 def send_morning_brief_email(
     *,
     brief_date: str,
@@ -154,9 +176,9 @@ def send_morning_brief_email(
     estimated_api_cost_usd: float | None,
 ) -> dict:
     host = os.getenv("SMTP_HOST", "smtp.gmail.com").strip()
-    port = int(os.getenv("SMTP_PORT", "465"))
+    port = int(os.getenv("SMTP_PORT", "587"))
     username = os.getenv("SMTP_USERNAME", "").strip()
-    password = os.getenv("SMTP_PASSWORD", "").strip()
+    password = os.getenv("SMTP_PASSWORD", "").replace(" ", "").strip()
     recipient = os.getenv("EMAIL_TO", "").strip()
     sender = os.getenv("EMAIL_FROM", "").strip() or username
 
@@ -198,13 +220,19 @@ def send_morning_brief_email(
         estimated_api_cost_usd=estimated_api_cost_usd,
     ), subtype="html")
 
-    with smtplib.SMTP_SSL(host, port, timeout=30) as smtp:
-        smtp.login(username, password)
-        smtp.send_message(msg)
+    _send_via_smtp(
+        host=host,
+        port=port,
+        username=username,
+        password=password,
+        msg=msg,
+    )
 
     return {
         "status": "SENT",
         "recipient": recipient,
         "subject": msg["Subject"],
+        "smtp_host": host,
+        "smtp_port": port,
         "more_headlines_count": len(more_headlines),
     }
