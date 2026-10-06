@@ -49,13 +49,28 @@ def _weekend_text(brief: MorningBrief) -> str:
     return "\n🗓️ WEEKEND WATCH\n" + "\n".join(f"- {x}" for x in brief.weekend_watch) + "\n"
 
 
+def _learning_signal_text(learning_signal: dict[str, Any]) -> str:
+    if not learning_signal.get("signal"):
+        return "🧭 LEARNING SIGNAL\nNO SIGNAL\n오늘은 이메일 확인으로 충분; Daily Market Filter 생략 권장"
+    reasons = "\n".join(f"- {x}" for x in learning_signal.get("reasons", []))
+    question = learning_signal.get("suggested_question")
+    question_line = f"\n추천 질문: {question}" if question else ""
+    return (
+        f"🧭 LEARNING SIGNAL\nSIGNAL [{learning_signal.get('strength', 'MEDIUM')}]\n"
+        f"{reasons}{question_line}\nDaily Market Filter 실행 권장"
+    )
+
+
 def _plain_text(
     *, brief_date: str, us_market_date: str | None, korea_market_date: str | None,
-    brief: MorningBrief, more_headlines: list[Any], estimated_api_cost_usd: float | None,
+    brief: MorningBrief, more_headlines: list[Any], learning_signal: dict[str, Any],
+    estimated_api_cost_usd: float | None,
 ) -> str:
     cost = f"${estimated_api_cost_usd:.4f}" if estimated_api_cost_usd is not None else "n/a"
     return f"""Morning Market Brief — {brief_date}
 미국시장 기준일: {us_market_date or 'n/a'} | 한국시장 기준일: {korea_market_date or 'n/a'}
+
+{_learning_signal_text(learning_signal)}
 
 오늘 시장 한 문장
 {brief.market_one_liner}
@@ -88,7 +103,8 @@ Transmission: {brief.cross_market.transmission} ({brief.cross_market.confidence}
 
 def _html_body(
     *, brief_date: str, us_market_date: str | None, korea_market_date: str | None,
-    brief: MorningBrief, more_headlines: list[Any], estimated_api_cost_usd: float | None,
+    brief: MorningBrief, more_headlines: list[Any], learning_signal: dict[str, Any],
+    estimated_api_cost_usd: float | None,
 ) -> str:
     esc = html.escape
     cost = f"${estimated_api_cost_usd:.4f}" if estimated_api_cost_usd is not None else "n/a"
@@ -104,10 +120,27 @@ def _html_body(
         items = "".join(f"<li>{esc(x)}</li>" for x in brief.weekend_watch)
         weekend = f"<h3>🗓️ Weekend Watch</h3><ul>{items}</ul>"
 
+    if learning_signal.get("signal"):
+        reasons = "".join(f"<li>{esc(x)}</li>" for x in learning_signal.get("reasons", []))
+        question = learning_signal.get("suggested_question")
+        question_html = f"<p><strong>추천 질문:</strong> {esc(question)}</p>" if question else ""
+        signal_html = (
+            f"<div style='padding:14px;border:1px solid #999;border-radius:8px'>"
+            f"<h3>🧭 Learning Signal — SIGNAL [{esc(learning_signal.get('strength', 'MEDIUM'))}]</h3>"
+            f"<ul>{reasons}</ul>{question_html}<p><strong>Daily Market Filter 실행 권장</strong></p></div>"
+        )
+    else:
+        signal_html = (
+            "<div style='padding:14px;border:1px solid #ccc;border-radius:8px'>"
+            "<h3>🧭 Learning Signal — NO SIGNAL</h3>"
+            "<p>오늘은 이메일 확인으로 충분; Daily Market Filter 생략 권장</p></div>"
+        )
+
     return f"""<!doctype html>
 <html><body style="font-family:Arial,sans-serif;max-width:720px;margin:auto;line-height:1.55;color:#222">
 <h2>Morning Market Brief — {esc(brief_date)}</h2>
 <p style="color:#666">미국시장 기준일: {esc(us_market_date or 'n/a')} · 한국시장 기준일: {esc(korea_market_date or 'n/a')}</p>
+{signal_html}
 <h3>오늘 시장 한 문장</h3><p><strong>{esc(brief.market_one_liner)}</strong></p>
 <h3>🇺🇸 미국시장</h3><p>{esc(brief.us_one_liner)}</p>
 {weekend}
@@ -143,7 +176,7 @@ def _send_via_smtp(*, host: str, port: int, username: str, password: str, msg: E
 def send_morning_brief_email(
     *, brief_date: str, us_market_date: str | None, korea_market_date: str | None,
     brief: MorningBrief, all_events: list[Any], selected_event_keys: list[str],
-    estimated_api_cost_usd: float | None,
+    learning_signal: dict[str, Any], estimated_api_cost_usd: float | None,
 ) -> dict:
     host = os.getenv("SMTP_HOST", "smtp.gmail.com").strip()
     port = int(os.getenv("SMTP_PORT", "587"))
@@ -157,22 +190,25 @@ def send_morning_brief_email(
         return {"status": "SKIPPED", "reason": f"Missing email configuration: {', '.join(missing)}"}
 
     more_headlines = _more_headline_events(all_events, selected_event_keys, limit=5)
+    signal_label = "SIGNAL" if learning_signal.get("signal") else "NO SIGNAL"
     msg = EmailMessage()
-    msg["Subject"] = f"Morning Market Brief | {brief_date} | {brief.cross_market.transmission}"
+    msg["Subject"] = f"Morning Market Brief | {brief_date} | {signal_label}"
     msg["From"] = sender
     msg["To"] = recipient
     msg.set_content(_plain_text(
         brief_date=brief_date, us_market_date=us_market_date, korea_market_date=korea_market_date,
-        brief=brief, more_headlines=more_headlines, estimated_api_cost_usd=estimated_api_cost_usd,
+        brief=brief, more_headlines=more_headlines, learning_signal=learning_signal,
+        estimated_api_cost_usd=estimated_api_cost_usd,
     ))
     msg.add_alternative(_html_body(
         brief_date=brief_date, us_market_date=us_market_date, korea_market_date=korea_market_date,
-        brief=brief, more_headlines=more_headlines, estimated_api_cost_usd=estimated_api_cost_usd,
+        brief=brief, more_headlines=more_headlines, learning_signal=learning_signal,
+        estimated_api_cost_usd=estimated_api_cost_usd,
     ), subtype="html")
 
     _send_via_smtp(host=host, port=port, username=username, password=password, msg=msg)
     return {
         "status": "SENT", "recipient": recipient, "subject": msg["Subject"],
         "smtp_host": host, "smtp_port": port, "more_headlines_count": len(more_headlines),
-        "weekend_watch_count": len(brief.weekend_watch),
+        "weekend_watch_count": len(brief.weekend_watch), "learning_signal": signal_label,
     }
