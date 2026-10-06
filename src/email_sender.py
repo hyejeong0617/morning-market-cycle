@@ -4,8 +4,9 @@ import html
 import os
 import smtplib
 from email.message import EmailMessage
+from typing import Any
 
-from .schemas import MorningBrief, ResearchEvent
+from .schemas import MorningBrief
 
 
 def _portfolio_lines(brief: MorningBrief) -> str:
@@ -23,25 +24,32 @@ def _question_lines(brief: MorningBrief) -> str:
     return "\n".join(f"- {q}" for q in brief.questions[:2])
 
 
+def _event_value(event: Any, field: str, default: str = "") -> str:
+    if isinstance(event, dict):
+        value = event.get(field, default)
+    else:
+        value = getattr(event, field, default)
+    return str(value) if value is not None else default
+
+
 def _more_headline_events(
-    all_events: list[ResearchEvent],
+    all_events: list[Any],
     selected_event_keys: list[str],
     limit: int = 5,
-) -> list[ResearchEvent]:
+) -> list[Any]:
     selected = set(selected_event_keys)
     extras = [
         event for event in all_events
-        if event.event_key not in selected
+        if _event_value(event, "event_key") not in selected
     ]
-    # Preserve research order: US first, then Korea, while keeping the section short.
     return extras[:limit]
 
 
-def _more_headline_lines(events: list[ResearchEvent]) -> str:
+def _more_headline_lines(events: list[Any]) -> str:
     if not events:
         return "- No additional headlines today."
     return "\n".join(
-        f"- [{event.market}] {event.title}"
+        f"- [{_event_value(event, 'market', 'OTHER')}] {_event_value(event, 'title', 'Untitled event')}"
         for event in events
     )
 
@@ -52,7 +60,7 @@ def _plain_text(
     us_market_date: str | None,
     korea_market_date: str | None,
     brief: MorningBrief,
-    more_headlines: list[ResearchEvent],
+    more_headlines: list[Any],
     estimated_api_cost_usd: float | None,
 ) -> str:
     cost = f"${estimated_api_cost_usd:.4f}" if estimated_api_cost_usd is not None else "n/a"
@@ -94,7 +102,7 @@ def _html_body(
     us_market_date: str | None,
     korea_market_date: str | None,
     brief: MorningBrief,
-    more_headlines: list[ResearchEvent],
+    more_headlines: list[Any],
     estimated_api_cost_usd: float | None,
 ) -> str:
     esc = html.escape
@@ -110,7 +118,7 @@ def _html_body(
         f"<li>{esc(x)}</li>" for x in brief.cross_market.korea_specific_factors
     )
     headlines = "".join(
-        f"<li><strong>{esc(event.market)}</strong> · {esc(event.title)}</li>"
+        f"<li><strong>{esc(_event_value(event, 'market', 'OTHER'))}</strong> · {esc(_event_value(event, 'title', 'Untitled event'))}</li>"
         for event in more_headlines
     ) or "<li>No additional headlines today.</li>"
 
@@ -141,7 +149,7 @@ def send_morning_brief_email(
     us_market_date: str | None,
     korea_market_date: str | None,
     brief: MorningBrief,
-    all_events: list[ResearchEvent],
+    all_events: list[Any],
     selected_event_keys: list[str],
     estimated_api_cost_usd: float | None,
 ) -> dict:
