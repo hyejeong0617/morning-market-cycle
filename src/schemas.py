@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 MarketScope = Literal["US", "KOREA", "CROSS-MARKET"]
 EventStatus = Literal["NEW", "FOLLOW-UP", "REPEAT", "NOISE"]
 PortfolioRelevance = Literal["HIGH", "MEDIUM", "LOW", "NONE"]
+Transmission = Literal["YES", "PARTIAL", "NO", "UNCLEAR", "N/A"]
 
 
 class SourceItem(BaseModel):
@@ -41,7 +42,7 @@ class ResearchBundle(BaseModel):
 
 
 class ApiUsage(BaseModel):
-    market: Literal["US", "KOREA"]
+    market: Literal["US", "KOREA", "SYNTHESIS"]
     model: str
     input_tokens: int = 0
     cached_input_tokens: int = 0
@@ -76,6 +77,45 @@ class MarketSnapshot(BaseModel):
     quotes: list[MarketQuote]
 
 
+class EventScore(BaseModel):
+    event_key: str
+    market: MarketScope
+    title: str
+    market_impact: int = Field(ge=0, le=3)
+    portfolio_relevance_score: int = Field(ge=0, le=3)
+    macro_importance: int = Field(ge=0, le=2)
+    evidence_strength: int = Field(ge=0, le=2)
+    learning_value: int = Field(ge=0, le=2)
+    total_score: int = Field(ge=0, le=12)
+    include_in_brief: bool
+    reason: str
+
+
+class PortfolioImpact(BaseModel):
+    asset: str
+    relevance: Literal["HIGH", "MEDIUM", "LOW"]
+    reason: str
+
+
+class CrossMarketAnalysis(BaseModel):
+    us_signal: str
+    expected_korea_response: str
+    observed_korea_response: str
+    korea_specific_factors: list[str] = []
+    transmission: Transmission
+    confidence: Literal["HIGH", "MEDIUM", "LOW"]
+    key_difference: str
+
+
+class MorningBrief(BaseModel):
+    market_one_liner: str
+    us_one_liner: str
+    korea_one_liner: str
+    cross_market: CrossMarketAnalysis
+    portfolio: list[PortfolioImpact] = []
+    questions: list[str] = []
+
+
 class MvpRun(BaseModel):
     schema_version: Literal["mvp1-v2"] = "mvp1-v2"
     brief_date: str
@@ -84,6 +124,22 @@ class MvpRun(BaseModel):
     market_snapshot: MarketSnapshot
     us_research: ResearchBundle
     korea_research: ResearchBundle
+    api_usage: list[ApiUsage] = []
+    estimated_api_cost_usd: float | None = None
+    warnings: list[str] = []
+
+
+class Mvp2Run(BaseModel):
+    schema_version: Literal["mvp2-v1"] = "mvp2-v1"
+    brief_date: str
+    us_market_date: str | None
+    korea_market_date: str | None
+    market_snapshot: MarketSnapshot
+    us_research: ResearchBundle
+    korea_research: ResearchBundle
+    event_scores: list[EventScore]
+    selected_event_keys: list[str]
+    morning_brief: MorningBrief
     api_usage: list[ApiUsage] = []
     estimated_api_cost_usd: float | None = None
     warnings: list[str] = []
