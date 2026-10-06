@@ -11,6 +11,11 @@ Priority:
 5. Major Korean corporate earnings, filings, supply-demand or industry news
 6. Cases where the Korean market diverged from the prior US signal
 
+Market-close convention:
+- When USD/KRW is relevant, prefer the Korea market-close reference (around 15:30 KST) from an official or trusted source.
+- Clearly state the reference time when available.
+- Do not substitute a later 24-hour FX quote for the Korean closing-session FX level.
+
 Evidence rules:
 - Prefer PRIMARY sources: Bank of Korea, KRX, DART, Korean ministries/agencies, company IR.
 - Use trusted financial reporting for discovery/context, then verify important facts with primary sources when possible.
