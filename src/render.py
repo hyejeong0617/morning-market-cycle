@@ -13,15 +13,22 @@ def render_morning_brief_markdown(
     lines: list[str] = [
         f"# Morning Market Brief — {brief_date}",
         "",
-        f"> US market: {us_market_date or 'N/A'} · Korea market: {korea_market_date or 'N/A'}",
+        f"> 미국시장 기준일: {us_market_date or 'N/A'} · 한국시장 기준일: {korea_market_date or 'N/A'}",
         "",
         "## 오늘 시장 한 문장",
         brief.market_one_liner,
         "",
-        "## 🇺🇸 Overnight US",
+        "## 🇺🇸 미국시장",
         brief.us_one_liner,
+    ]
+
+    if brief.weekend_watch:
+        lines += ["", "## 🗓️ Weekend Watch"]
+        lines += [f"- {item}" for item in brief.weekend_watch]
+
+    lines += [
         "",
-        "## 🇰🇷 Today's Korea",
+        "## 🇰🇷 한국시장",
         brief.korea_one_liner,
         "",
         "## 🔗 US → Korea",
@@ -29,16 +36,16 @@ def render_morning_brief_markdown(
         "",
         brief.cross_market.key_difference,
         "",
-        f"- US signal: {brief.cross_market.us_signal}",
-        f"- Expected Korea response: {brief.cross_market.expected_korea_response}",
-        f"- Observed Korea response: {brief.cross_market.observed_korea_response}",
+        f"- 미국 신호: {brief.cross_market.us_signal}",
+        f"- 예상 한국 반응: {brief.cross_market.expected_korea_response}",
+        f"- 실제 한국 반응: {brief.cross_market.observed_korea_response}",
     ]
 
     if brief.cross_market.korea_specific_factors:
-        lines += ["", "### Korea-specific factors"]
+        lines += ["", "### 한국 고유 변수"]
         lines += [f"- {item}" for item in brief.cross_market.korea_specific_factors]
 
-    lines += ["", "## 💼 My Portfolio"]
+    lines += ["", "## 💼 내 포트폴리오"]
     for item in brief.portfolio:
         lines.append(f"- **{item.asset} — {item.relevance}**: {item.reason}")
 
@@ -47,6 +54,6 @@ def render_morning_brief_markdown(
         lines.append(f"- {question}")
 
     if estimated_api_cost_usd is not None:
-        lines += ["", "---", f"Estimated OpenAI API cost: **${estimated_api_cost_usd:.6f}**"]
+        lines += ["", "---", f"예상 OpenAI API 비용: **${estimated_api_cost_usd:.6f}**"]
 
     return "\n".join(lines).strip() + "\n"
