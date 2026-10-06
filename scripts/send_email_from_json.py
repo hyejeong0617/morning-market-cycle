@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 from src.email_sender import send_morning_brief_email
-from src.schemas import MorningBrief, ResearchEvent
+from src.schemas import MorningBrief
 
 
 def main() -> None:
@@ -17,11 +17,10 @@ def main() -> None:
     data = json.loads(path.read_text(encoding="utf-8"))
 
     brief = MorningBrief.model_validate(data["morning_brief"])
-    raw_events = [
+    all_events = [
         *data.get("us_research", {}).get("events", []),
         *data.get("korea_research", {}).get("events", []),
     ]
-    all_events = [ResearchEvent.model_validate(event) for event in raw_events]
 
     result = send_morning_brief_email(
         brief_date=data["brief_date"],
