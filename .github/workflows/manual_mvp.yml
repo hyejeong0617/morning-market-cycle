@@ -10,10 +10,16 @@ on:
       - "main.py"
       - "requirements.txt"
       - "src/**"
+      - "scripts/**"
       - "prompts/**"
       - ".github/workflows/manual_mvp.yml"
   workflow_dispatch:
     inputs:
+      email_test_only:
+        description: "Send email from the saved Oct 6 fixture only (no OpenAI/Notion)"
+        required: false
+        default: false
+        type: boolean
       skip_research:
         description: "Run market-data only"
         required: false
@@ -54,7 +60,9 @@ jobs:
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
         run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.email_test_only }}" = "true" ]; then
+            PYTHONPATH=. python scripts/send_email_from_json.py data/fixtures/email_test_2026-10-06.json
+          elif [ "${{ github.event_name }}" = "push" ]; then
             python main.py --skip-research
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.skip_research }}" = "true" ]; then
             python main.py --skip-research
@@ -69,6 +77,7 @@ jobs:
             python main.py $ARGS
           fi
       - uses: actions/upload-artifact@v4
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.email_test_only == true) }}
         with:
           name: mvp-output
           path: |
