@@ -10,6 +10,8 @@ from zoneinfo import ZoneInfo
 from dotenv import load_dotenv
 
 from src.market_data import collect_market_snapshot, latest_market_date
+from src.notion_store import sync_market_inbox
+from src.render import render_morning_brief_markdown
 from src.research import run_research
 from src.scoring import score_and_select
 from src.schemas import Mvp2Run
@@ -20,6 +22,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Morning Market Cycle MVP 2")
     parser.add_argument("--date", help="Brief date YYYY-MM-DD. Defaults to Europe/Berlin today.")
     parser.add_argument("--skip-research", action="store_true", help="Collect only market data.")
+    parser.add_argument("--skip-notion", action="store_true", help="Do not sync selected events to Market Inbox.")
     args = parser.parse_args()
 
     load_dotenv()
@@ -42,6 +45,9 @@ def main() -> None:
             "USD/KRW from yfinance is a latest FX observation, not the Korea 15:30 closing rate; "
             "use official/reported Korea-close FX for cross-market interpretation."
         )
+
+    out_dir = Path("data/runs")
+    out_dir.mkdir(parents=True, exist_ok=True)
 
     if args.skip_research:
         output = {
@@ -86,8 +92,40 @@ def main() -> None:
             warnings=warnings,
         ).model_dump(mode="json")
 
-    out_dir = Path("data/runs")
-    out_dir.mkdir(parents=True, exist_ok=True)
+        markdown = render_morning_brief_markdown(
+            brief_date=brief_date,
+            us_market_date=us_market_date,
+            korea_market_date=korea_market_date,
+            brief=morning_brief,
+            estimated_api_cost_usd=estimated_api_cost_usd,
+        )
+        md_path = out_dir / f"{brief_date}.md"
+        md_path.write_text(markdown, encoding="utf-8")
+        output["morning_brief_markdown"] = str(md_path)
+
+        if args.skip_notion:
+            notion_sync = {"status": "SKIPPED", "reason": "--skip-notion supplied", "created": 0, "duplicates": 0}
+        else:
+            try:
+                notion_sync = sync_market_inbox(
+                    brief_date=brief_date,
+                    us_market_date=us_market_date,
+                    korea_market_date=korea_market_date,
+                    selected_events=selected_events,
+                    event_scores=event_scores,
+                    morning_brief=morning_brief,
+                )
+            except Exception as exc:
+                notion_sync = {
+                    "status": "ERROR",
+                    "reason": f"{type(exc).__name__}: {exc}",
+                    "created": 0,
+                    "duplicates": 0,
+                }
+                warnings.append(f"Market Inbox sync failed: {type(exc).__name__}: {exc}")
+        output["notion_sync"] = notion_sync
+        output["warnings"] = warnings
+
     out_path = out_dir / f"{brief_date}.json"
     out_path.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
 
