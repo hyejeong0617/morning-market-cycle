@@ -9,21 +9,6 @@ from typing import Any
 from .schemas import MorningBrief
 
 
-def _portfolio_lines(brief: MorningBrief) -> str:
-    if not brief.portfolio:
-        return "- No directly linked portfolio items today."
-    return "\n".join(
-        f"- {item.asset} [{item.relevance}]: {item.reason}"
-        for item in brief.portfolio
-    )
-
-
-def _question_lines(brief: MorningBrief) -> str:
-    if not brief.questions:
-        return "- No follow-up question."
-    return "\n".join(f"- {q}" for q in brief.questions[:2])
-
-
 def _event_value(event: Any, field: str, default: str = "") -> str:
     if isinstance(event, dict):
         value = event.get(field, default)
@@ -32,131 +17,121 @@ def _event_value(event: Any, field: str, default: str = "") -> str:
     return str(value) if value is not None else default
 
 
-def _more_headline_events(
-    all_events: list[Any],
-    selected_event_keys: list[str],
-    limit: int = 5,
-) -> list[Any]:
+def _more_headline_events(all_events: list[Any], selected_event_keys: list[str], limit: int = 5) -> list[Any]:
     selected = set(selected_event_keys)
-    extras = [
-        event for event in all_events
-        if _event_value(event, "event_key") not in selected
-    ]
-    return extras[:limit]
+    return [e for e in all_events if _event_value(e, "event_key") not in selected][:limit]
 
 
-def _more_headline_lines(events: list[Any]) -> str:
+def _portfolio_lines(brief: MorningBrief) -> str:
+    if not brief.portfolio:
+        return "- 오늘 직접 연결된 보유자산 없음"
+    return "\n".join(f"- {x.asset} [{x.relevance}]: {x.reason}" for x in brief.portfolio)
+
+
+def _question_lines(brief: MorningBrief) -> str:
+    if not brief.questions:
+        return "- 추가 관찰 질문 없음"
+    return "\n".join(f"- {q}" for q in brief.questions[:2])
+
+
+def _headline_lines(events: list[Any]) -> str:
     if not events:
-        return "- No additional headlines today."
+        return "- 추가 헤드라인 없음"
     return "\n".join(
-        f"- [{_event_value(event, 'market', 'OTHER')}] {_event_value(event, 'title', 'Untitled event')}"
-        for event in events
+        f"- [{_event_value(e, 'market', 'OTHER')}] {_event_value(e, 'title', '제목 없음')}"
+        for e in events
     )
 
 
+def _weekend_text(brief: MorningBrief) -> str:
+    if not brief.weekend_watch:
+        return ""
+    return "\n🗓️ WEEKEND WATCH\n" + "\n".join(f"- {x}" for x in brief.weekend_watch) + "\n"
+
+
 def _plain_text(
-    *,
-    brief_date: str,
-    us_market_date: str | None,
-    korea_market_date: str | None,
-    brief: MorningBrief,
-    more_headlines: list[Any],
-    estimated_api_cost_usd: float | None,
+    *, brief_date: str, us_market_date: str | None, korea_market_date: str | None,
+    brief: MorningBrief, more_headlines: list[Any], estimated_api_cost_usd: float | None,
 ) -> str:
     cost = f"${estimated_api_cost_usd:.4f}" if estimated_api_cost_usd is not None else "n/a"
     return f"""Morning Market Brief — {brief_date}
-US market: {us_market_date or 'n/a'} | Korea market: {korea_market_date or 'n/a'}
+미국시장 기준일: {us_market_date or 'n/a'} | 한국시장 기준일: {korea_market_date or 'n/a'}
 
-TODAY IN ONE LINE
+오늘 시장 한 문장
 {brief.market_one_liner}
 
-🇺🇸 OVERNIGHT US
+🇺🇸 미국시장
 {brief.us_one_liner}
-
-🇰🇷 TODAY KOREA
+{_weekend_text(brief)}
+🇰🇷 한국시장
 {brief.korea_one_liner}
 
 🔗 US → KOREA
 Transmission: {brief.cross_market.transmission} ({brief.cross_market.confidence})
-US signal: {brief.cross_market.us_signal}
-Expected Korea response: {brief.cross_market.expected_korea_response}
-Observed Korea response: {brief.cross_market.observed_korea_response}
-Key difference: {brief.cross_market.key_difference}
+미국 신호: {brief.cross_market.us_signal}
+예상 한국 반응: {brief.cross_market.expected_korea_response}
+실제 한국 반응: {brief.cross_market.observed_korea_response}
+핵심 차이: {brief.cross_market.key_difference}
 
-💼 MY PORTFOLIO
+💼 내 포트폴리오
 {_portfolio_lines(brief)}
 
 📰 MORE HEADLINES
-{_more_headline_lines(more_headlines)}
+{_headline_lines(more_headlines)}
 
-🔎 TODAY'S QUESTIONS
+🔎 오늘의 관찰 질문
 {_question_lines(brief)}
 
-Estimated OpenAI API cost for this run: {cost}
+예상 OpenAI API 비용: {cost}
 """
 
 
 def _html_body(
-    *,
-    brief_date: str,
-    us_market_date: str | None,
-    korea_market_date: str | None,
-    brief: MorningBrief,
-    more_headlines: list[Any],
-    estimated_api_cost_usd: float | None,
+    *, brief_date: str, us_market_date: str | None, korea_market_date: str | None,
+    brief: MorningBrief, more_headlines: list[Any], estimated_api_cost_usd: float | None,
 ) -> str:
     esc = html.escape
     cost = f"${estimated_api_cost_usd:.4f}" if estimated_api_cost_usd is not None else "n/a"
-    portfolio = "".join(
-        f"<li><strong>{esc(item.asset)}</strong> [{esc(item.relevance)}]: {esc(item.reason)}</li>"
-        for item in brief.portfolio
-    ) or "<li>No directly linked portfolio items today.</li>"
-    questions = "".join(
-        f"<li>{esc(q)}</li>" for q in brief.questions[:2]
-    ) or "<li>No follow-up question.</li>"
-    factors = "".join(
-        f"<li>{esc(x)}</li>" for x in brief.cross_market.korea_specific_factors
-    )
+    portfolio = "".join(f"<li><strong>{esc(x.asset)}</strong> [{esc(x.relevance)}]: {esc(x.reason)}</li>" for x in brief.portfolio) or "<li>오늘 직접 연결된 보유자산 없음</li>"
+    questions = "".join(f"<li>{esc(q)}</li>" for q in brief.questions[:2]) or "<li>추가 관찰 질문 없음</li>"
+    factors = "".join(f"<li>{esc(x)}</li>" for x in brief.cross_market.korea_specific_factors)
     headlines = "".join(
-        f"<li><strong>{esc(_event_value(event, 'market', 'OTHER'))}</strong> · {esc(_event_value(event, 'title', 'Untitled event'))}</li>"
-        for event in more_headlines
-    ) or "<li>No additional headlines today.</li>"
+        f"<li><strong>{esc(_event_value(e, 'market', 'OTHER'))}</strong> · {esc(_event_value(e, 'title', '제목 없음'))}</li>"
+        for e in more_headlines
+    ) or "<li>추가 헤드라인 없음</li>"
+    weekend = ""
+    if brief.weekend_watch:
+        items = "".join(f"<li>{esc(x)}</li>" for x in brief.weekend_watch)
+        weekend = f"<h3>🗓️ Weekend Watch</h3><ul>{items}</ul>"
 
     return f"""<!doctype html>
 <html><body style="font-family:Arial,sans-serif;max-width:720px;margin:auto;line-height:1.55;color:#222">
 <h2>Morning Market Brief — {esc(brief_date)}</h2>
-<p style="color:#666">US market: {esc(us_market_date or 'n/a')} · Korea market: {esc(korea_market_date or 'n/a')}</p>
+<p style="color:#666">미국시장 기준일: {esc(us_market_date or 'n/a')} · 한국시장 기준일: {esc(korea_market_date or 'n/a')}</p>
 <h3>오늘 시장 한 문장</h3><p><strong>{esc(brief.market_one_liner)}</strong></p>
-<h3>🇺🇸 Overnight US</h3><p>{esc(brief.us_one_liner)}</p>
-<h3>🇰🇷 Today Korea</h3><p>{esc(brief.korea_one_liner)}</p>
+<h3>🇺🇸 미국시장</h3><p>{esc(brief.us_one_liner)}</p>
+{weekend}
+<h3>🇰🇷 한국시장</h3><p>{esc(brief.korea_one_liner)}</p>
 <h3>🔗 US → Korea</h3>
 <p><strong>Transmission: {esc(brief.cross_market.transmission)}</strong> · Confidence: {esc(brief.cross_market.confidence)}</p>
-<p><strong>US signal:</strong> {esc(brief.cross_market.us_signal)}</p>
-<p><strong>Expected:</strong> {esc(brief.cross_market.expected_korea_response)}</p>
-<p><strong>Observed:</strong> {esc(brief.cross_market.observed_korea_response)}</p>
+<p><strong>미국 신호:</strong> {esc(brief.cross_market.us_signal)}</p>
+<p><strong>예상 한국 반응:</strong> {esc(brief.cross_market.expected_korea_response)}</p>
+<p><strong>실제 한국 반응:</strong> {esc(brief.cross_market.observed_korea_response)}</p>
 {f'<ul>{factors}</ul>' if factors else ''}
-<p><strong>Key difference:</strong> {esc(brief.cross_market.key_difference)}</p>
-<h3>💼 My Portfolio</h3><ul>{portfolio}</ul>
+<p><strong>핵심 차이:</strong> {esc(brief.cross_market.key_difference)}</p>
+<h3>💼 내 포트폴리오</h3><ul>{portfolio}</ul>
 <h3>📰 More Headlines</h3><ul>{headlines}</ul>
-<h3>🔎 Today's Questions</h3><ul>{questions}</ul>
-<hr><p style="font-size:12px;color:#777">Estimated OpenAI API cost for this run: {esc(cost)}</p>
+<h3>🔎 오늘의 관찰 질문</h3><ul>{questions}</ul>
+<hr><p style="font-size:12px;color:#777">예상 OpenAI API 비용: {esc(cost)}</p>
 </body></html>"""
 
 
-def _send_via_smtp(
-    *,
-    host: str,
-    port: int,
-    username: str,
-    password: str,
-    msg: EmailMessage,
-) -> None:
+def _send_via_smtp(*, host: str, port: int, username: str, password: str, msg: EmailMessage) -> None:
     if port == 465:
         with smtplib.SMTP_SSL(host, port, timeout=30) as smtp:
             smtp.login(username, password)
             smtp.send_message(msg)
         return
-
     with smtplib.SMTP(host, port, timeout=30) as smtp:
         smtp.ehlo()
         smtp.starttls()
@@ -166,13 +141,8 @@ def _send_via_smtp(
 
 
 def send_morning_brief_email(
-    *,
-    brief_date: str,
-    us_market_date: str | None,
-    korea_market_date: str | None,
-    brief: MorningBrief,
-    all_events: list[Any],
-    selected_event_keys: list[str],
+    *, brief_date: str, us_market_date: str | None, korea_market_date: str | None,
+    brief: MorningBrief, all_events: list[Any], selected_event_keys: list[str],
     estimated_api_cost_usd: float | None,
 ) -> dict:
     host = os.getenv("SMTP_HOST", "smtp.gmail.com").strip()
@@ -182,57 +152,27 @@ def send_morning_brief_email(
     recipient = os.getenv("EMAIL_TO", "").strip()
     sender = os.getenv("EMAIL_FROM", "").strip() or username
 
-    missing = [name for name, value in {
-        "SMTP_USERNAME": username,
-        "SMTP_PASSWORD": password,
-        "EMAIL_TO": recipient,
-    }.items() if not value]
+    missing = [name for name, value in {"SMTP_USERNAME": username, "SMTP_PASSWORD": password, "EMAIL_TO": recipient}.items() if not value]
     if missing:
-        return {
-            "status": "SKIPPED",
-            "reason": f"Missing email configuration: {', '.join(missing)}",
-        }
+        return {"status": "SKIPPED", "reason": f"Missing email configuration: {', '.join(missing)}"}
 
-    more_headlines = _more_headline_events(
-        all_events=all_events,
-        selected_event_keys=selected_event_keys,
-        limit=5,
-    )
-
+    more_headlines = _more_headline_events(all_events, selected_event_keys, limit=5)
     msg = EmailMessage()
     msg["Subject"] = f"Morning Market Brief | {brief_date} | {brief.cross_market.transmission}"
     msg["From"] = sender
     msg["To"] = recipient
     msg.set_content(_plain_text(
-        brief_date=brief_date,
-        us_market_date=us_market_date,
-        korea_market_date=korea_market_date,
-        brief=brief,
-        more_headlines=more_headlines,
-        estimated_api_cost_usd=estimated_api_cost_usd,
+        brief_date=brief_date, us_market_date=us_market_date, korea_market_date=korea_market_date,
+        brief=brief, more_headlines=more_headlines, estimated_api_cost_usd=estimated_api_cost_usd,
     ))
     msg.add_alternative(_html_body(
-        brief_date=brief_date,
-        us_market_date=us_market_date,
-        korea_market_date=korea_market_date,
-        brief=brief,
-        more_headlines=more_headlines,
-        estimated_api_cost_usd=estimated_api_cost_usd,
+        brief_date=brief_date, us_market_date=us_market_date, korea_market_date=korea_market_date,
+        brief=brief, more_headlines=more_headlines, estimated_api_cost_usd=estimated_api_cost_usd,
     ), subtype="html")
 
-    _send_via_smtp(
-        host=host,
-        port=port,
-        username=username,
-        password=password,
-        msg=msg,
-    )
-
+    _send_via_smtp(host=host, port=port, username=username, password=password, msg=msg)
     return {
-        "status": "SENT",
-        "recipient": recipient,
-        "subject": msg["Subject"],
-        "smtp_host": host,
-        "smtp_port": port,
-        "more_headlines_count": len(more_headlines),
+        "status": "SENT", "recipient": recipient, "subject": msg["Subject"],
+        "smtp_host": host, "smtp_port": port, "more_headlines_count": len(more_headlines),
+        "weekend_watch_count": len(brief.weekend_watch),
     }
