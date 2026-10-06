@@ -10,8 +10,8 @@ from zoneinfo import ZoneInfo
 from dotenv import load_dotenv
 
 from src.email_sender import send_morning_brief_email
+from src.learning_signal import build_learning_signal
 from src.market_data import collect_market_snapshot, latest_market_date
-from src.notion_store import sync_market_inbox
 from src.render import render_morning_brief_markdown
 from src.research import run_research
 from src.scoring import score_and_select
@@ -24,7 +24,6 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Morning Market Cycle MVP 2")
     parser.add_argument("--date", help="Brief date YYYY-MM-DD. Defaults to Europe/Berlin today.")
     parser.add_argument("--skip-research", action="store_true", help="Collect only market data.")
-    parser.add_argument("--skip-notion", action="store_true", help="Do not sync selected events to Market Inbox.")
     parser.add_argument("--skip-email", action="store_true", help="Do not send the Morning Brief email.")
     args = parser.parse_args()
 
@@ -76,7 +75,14 @@ def main() -> None:
             "session_info": session_info,
             "market_snapshot": snapshot.model_dump(mode="json"),
             "publication_status": "SKIPPED_BOTH_MARKETS_CLOSED",
-            "notion_sync": {"status": "SKIPPED", "reason": "Both markets had no new session."},
+            "learning_signal": {
+                "signal": False,
+                "strength": "NONE",
+                "reasons": [],
+                "suggested_question": None,
+                "action": "두 시장 모두 신규 정규장 세션이 없어 뉴스레터 발행 생략",
+                "rule_version": "learning-signal-v1",
+            },
             "email_delivery": {"status": "SKIPPED", "reason": "Both markets had no new session."},
             "warnings": warnings,
         }
@@ -107,6 +113,12 @@ def main() -> None:
             session_info=session_info,
         )
 
+        learning_signal = build_learning_signal(
+            event_scores=event_scores,
+            selected_events=selected_events,
+            brief=morning_brief,
+        )
+
         api_usage = [us_result.usage, korea_result.usage, synthesis_usage]
         known_costs = [u.estimated_total_cost_usd for u in api_usage if u.estimated_total_cost_usd is not None]
         estimated_api_cost_usd = round(sum(known_costs), 6) if len(known_costs) == len(api_usage) else None
@@ -126,6 +138,7 @@ def main() -> None:
             warnings=warnings,
         ).model_dump(mode="json")
         output["session_info"] = session_info
+        output["learning_signal"] = learning_signal
 
         markdown = render_morning_brief_markdown(
             brief_date=brief_date,
@@ -138,23 +151,6 @@ def main() -> None:
         md_path.write_text(markdown, encoding="utf-8")
         output["morning_brief_markdown"] = str(md_path)
 
-        if args.skip_notion:
-            notion_sync = {"status": "SKIPPED", "reason": "--skip-notion supplied", "created": 0, "duplicates": 0}
-        else:
-            try:
-                notion_sync = sync_market_inbox(
-                    brief_date=brief_date,
-                    us_market_date=us_market_date,
-                    korea_market_date=korea_market_date,
-                    selected_events=selected_events,
-                    event_scores=event_scores,
-                    morning_brief=morning_brief,
-                )
-            except Exception as exc:
-                notion_sync = {"status": "ERROR", "reason": f"{type(exc).__name__}: {exc}", "created": 0, "duplicates": 0}
-                warnings.append(f"Market Inbox sync failed: {type(exc).__name__}: {exc}")
-        output["notion_sync"] = notion_sync
-
         if args.skip_email:
             email_delivery = {"status": "SKIPPED", "reason": "--skip-email supplied"}
         else:
@@ -166,6 +162,7 @@ def main() -> None:
                     brief=morning_brief,
                     all_events=all_events,
                     selected_event_keys=selected_event_keys,
+                    learning_signal=learning_signal,
                     estimated_api_cost_usd=estimated_api_cost_usd,
                 )
             except Exception as exc:
