@@ -60,6 +60,8 @@ jobs:
             PYTHONPATH=. python scripts/send_email_from_json.py data/fixtures/email_test_2026-10-06.json
           elif [ "${{ github.event_name }}" = "push" ]; then
             python main.py --skip-research
+          elif [ "${{ github.event_name }}" = "schedule" ]; then
+            python main.py --skip-if-existing
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.skip_research }}" = "true" ]; then
             python main.py --skip-research
           else

@@ -10,23 +10,34 @@ def _previous_weekday(day: date) -> date:
     return day
 
 
-def detect_session_status(brief_date: str, us_market_date: str | None, korea_market_date: str | None) -> dict:
-    """Infer whether each market produced the session expected for this weekday.
-
-    This is intentionally data-driven and lightweight: it compares the latest
-    completed regular-session dates from market data with the dates expected for
-    a Germany-morning brief. It does not attempt to maintain a holiday calendar.
-    """
+def expected_session_dates(brief_date: str) -> dict[str, str]:
+    """Return the latest session dates this Germany-morning cycle may use."""
     today = date.fromisoformat(brief_date)
     expected_us = _previous_weekday(today).isoformat()
-    expected_korea = today.isoformat() if today.weekday() < 5 else _previous_weekday(today + timedelta(days=1)).isoformat()
+    expected_korea = (
+        today.isoformat()
+        if today.weekday() < 5
+        else _previous_weekday(today + timedelta(days=1)).isoformat()
+    )
+    return {
+        "expected_us_market_date": expected_us,
+        "expected_korea_market_date": expected_korea,
+    }
 
-    def classify(actual: str | None, expected: str) -> str:
+
+def detect_session_status(brief_date: str, us_market_date: str | None, korea_market_date: str | None) -> dict:
+    """Infer whether each market produced the session expected for this cycle."""
+    today = date.fromisoformat(brief_date)
+    expected = expected_session_dates(brief_date)
+    expected_us = expected["expected_us_market_date"]
+    expected_korea = expected["expected_korea_market_date"]
+
+    def classify(actual: str | None, expected_date: str) -> str:
         if actual is None:
             return "UNKNOWN"
-        if actual == expected:
+        if actual == expected_date:
             return "NEW_SESSION"
-        if actual < expected:
+        if actual < expected_date:
             return "NO_NEW_SESSION"
         return "UNKNOWN"
 

@@ -16,8 +16,40 @@ from src.render import render_morning_brief_markdown
 from src.research import run_research
 from src.scoring import score_and_select
 from src.schemas import Mvp2Run
-from src.session_status import detect_session_status
+from src.session_status import detect_session_status, expected_session_dates
 from src.synthesis import run_synthesis
+
+
+def _existing_record_is_complete(path: Path, brief_date: str, expected: dict[str, str]) -> bool:
+    if not path.exists():
+        return False
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return False
+
+    if data.get("brief_date") != brief_date:
+        return False
+
+    schema = data.get("schema_version")
+    if schema == "mvp2-no-publication":
+        return True
+    if schema != "mvp2-v1":
+        return False
+
+    us_date = data.get("us_market_date")
+    korea_date = data.get("korea_market_date")
+    if us_date and us_date > expected["expected_us_market_date"]:
+        return False
+    if korea_date and korea_date > expected["expected_korea_market_date"]:
+        return False
+
+    session_info = data.get("session_info") or {}
+    if session_info.get("us_status") == "UNKNOWN" or session_info.get("korea_status") == "UNKNOWN":
+        return False
+
+    email_delivery = data.get("email_delivery") or {}
+    return email_delivery.get("status") == "SENT"
 
 
 def main() -> None:
@@ -25,13 +57,31 @@ def main() -> None:
     parser.add_argument("--date", help="Brief date YYYY-MM-DD. Defaults to Europe/Berlin today.")
     parser.add_argument("--skip-research", action="store_true", help="Collect only market data.")
     parser.add_argument("--skip-email", action="store_true", help="Do not send the Morning Brief email.")
+    parser.add_argument(
+        "--skip-if-existing",
+        action="store_true",
+        help="Exit before market/API/email work when today's complete published record already exists.",
+    )
     args = parser.parse_args()
 
     load_dotenv()
     tz = os.getenv("BRIEF_TIMEZONE", "Europe/Berlin")
     brief_date = args.date or datetime.now(ZoneInfo(tz)).date().isoformat()
 
-    snapshot = collect_market_snapshot(tz)
+    out_dir = Path("data/runs")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / f"{brief_date}.json"
+
+    expected = expected_session_dates(brief_date)
+    if args.skip_if_existing and _existing_record_is_complete(out_path, brief_date, expected):
+        print(f"SKIP_EXISTING_COMPLETE: {out_path}")
+        return
+
+    snapshot = collect_market_snapshot(
+        tz,
+        us_cutoff_date=expected["expected_us_market_date"],
+        korea_cutoff_date=expected["expected_korea_market_date"],
+    )
     us_market_date = latest_market_date(snapshot, "US")
     korea_market_date = latest_market_date(snapshot, "KOREA")
     session_info = detect_session_status(brief_date, us_market_date, korea_market_date)
@@ -52,9 +102,6 @@ def main() -> None:
             "USD/KRW from yfinance is a latest FX observation, not the Korea 15:30 closing rate; "
             "use official/reported Korea-close FX for cross-market interpretation."
         )
-
-    out_dir = Path("data/runs")
-    out_dir.mkdir(parents=True, exist_ok=True)
 
     if args.skip_research:
         output = {
@@ -171,7 +218,6 @@ def main() -> None:
         output["email_delivery"] = email_delivery
         output["warnings"] = warnings
 
-    out_path = out_dir / f"{brief_date}.json"
     out_path.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(output, ensure_ascii=False, indent=2))
     print(f"\nSaved: {out_path}")
