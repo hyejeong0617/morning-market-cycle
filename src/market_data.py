@@ -28,11 +28,11 @@ KOREA_DATE_ANCHOR = "^KS11"
 KOREA_DATE_FALLBACK = {"^KS11", "^KQ11", "005930.KS", "000660.KS"}
 
 
-def _quote(symbol: str, label: str, market: str) -> MarketQuote:
+def _quote(symbol: str, label: str, market: str, cutoff_date: str | None = None) -> MarketQuote:
     try:
         hist = yf.download(
             symbol,
-            period="7d",
+            period="10d",
             interval="1d",
             auto_adjust=False,
             progress=False,
@@ -49,10 +49,17 @@ def _quote(symbol: str, label: str, market: str) -> MarketQuote:
             close_col = close_col.iloc[:, 0]
         close_col = close_col.dropna()
 
+        if cutoff_date and not close_col.empty:
+            keep = [
+                (idx.strftime("%Y-%m-%d") if hasattr(idx, "strftime") else str(idx)) <= cutoff_date
+                for idx in close_col.index
+            ]
+            close_col = close_col.loc[keep]
+
         if close_col.empty:
             return MarketQuote(
                 symbol=symbol, label=label, market=market,
-                status="MISSING", note="Close series is empty."
+                status="MISSING", note=f"No daily data on or before allowed cutoff {cutoff_date}."
             )
 
         last = float(close_col.iloc[-1])
@@ -64,7 +71,7 @@ def _quote(symbol: str, label: str, market: str) -> MarketQuote:
         note = ""
         if symbol == "KRW=X":
             note = (
-                "Latest yfinance daily FX observation; NOT a Korea 15:30 closing FX rate. "
+                "Latest yfinance daily FX observation; NOT a Korea 15:30 closing rate. "
                 "Use a Korea-close official/reported USD/KRW observation for cross-market interpretation."
             )
 
@@ -86,9 +93,18 @@ def _quote(symbol: str, label: str, market: str) -> MarketQuote:
         )
 
 
-def collect_market_snapshot(timezone: str = "Europe/Berlin") -> MarketSnapshot:
+def collect_market_snapshot(
+    timezone: str = "Europe/Berlin",
+    us_cutoff_date: str | None = None,
+    korea_cutoff_date: str | None = None,
+) -> MarketSnapshot:
+    cutoff_by_market = {
+        "US": us_cutoff_date,
+        "KOREA": korea_cutoff_date,
+        "CROSS": None,
+    }
     quotes = [
-        _quote(symbol, label, market)
+        _quote(symbol, label, market, cutoff_by_market.get(market))
         for symbol, (label, market) in TICKERS.items()
     ]
     return MarketSnapshot(
@@ -115,12 +131,7 @@ def _anchor_date(snapshot: MarketSnapshot, anchor: str, fallback_symbols: set[st
 
 
 def latest_market_date(snapshot: MarketSnapshot, market: str) -> str | None:
-    """Return the completed regular-session date for the requested market.
-
-    US is anchored to S&P 500, with Nasdaq/SOX/10Y majority fallback.
-    Korea is anchored to KOSPI, with Korea equity majority fallback.
-    This intentionally avoids VIX or 24-hour FX timestamps advancing the cycle date.
-    """
+    """Return the latest allowed regular-session date for the requested market."""
     if market == "US":
         return _anchor_date(snapshot, US_DATE_ANCHOR, US_DATE_FALLBACK)
     if market == "KOREA":
