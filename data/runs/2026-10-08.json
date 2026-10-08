@@ -1,0 +1,485 @@
+{
+  "schema_version": "mvp2-v1",
+  "brief_date": "2026-10-08",
+  "us_market_date": "2026-10-07",
+  "korea_market_date": "2026-10-08",
+  "market_snapshot": {
+    "generated_at": "2026-10-08T09:50:53.433045+02:00",
+    "quotes": [
+      {
+        "symbol": "^GSPC",
+        "label": "S&P 500",
+        "market": "US",
+        "as_of": "2026-10-07",
+        "close": 7801.77,
+        "previous_close": 7818.9302,
+        "change_pct": -0.219,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^IXIC",
+        "label": "Nasdaq Composite",
+        "market": "US",
+        "as_of": "2026-10-07",
+        "close": 27538.6895,
+        "previous_close": 27599.7891,
+        "change_pct": -0.221,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^SOX",
+        "label": "PHLX Semiconductor",
+        "market": "US",
+        "as_of": "2026-10-07",
+        "close": 13066.1504,
+        "previous_close": 13217.8203,
+        "change_pct": -1.147,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^VIX",
+        "label": "VIX",
+        "market": "US",
+        "as_of": "2026-10-07",
+        "close": 15.08,
+        "previous_close": 15.01,
+        "change_pct": 0.466,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^TNX",
+        "label": "US 10Y yield proxy",
+        "market": "US",
+        "as_of": "2026-10-07",
+        "close": 5.277,
+        "previous_close": 5.269,
+        "change_pct": 0.152,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^KS11",
+        "label": "KOSPI",
+        "market": "KOREA",
+        "as_of": "2026-10-08",
+        "close": 6625.9302,
+        "previous_close": 6803.8999,
+        "change_pct": -2.616,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^KQ11",
+        "label": "KOSDAQ",
+        "market": "KOREA",
+        "as_of": "2026-10-08",
+        "close": 892.27,
+        "previous_close": 898.43,
+        "change_pct": -0.686,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "005930.KS",
+        "label": "Samsung Electronics",
+        "market": "KOREA",
+        "as_of": "2026-10-08",
+        "close": 262000.0,
+        "previous_close": 268500.0,
+        "change_pct": -2.421,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "000660.KS",
+        "label": "SK Hynix",
+        "market": "KOREA",
+        "as_of": "2026-10-08",
+        "close": 1681000.0,
+        "previous_close": 1723000.0,
+        "change_pct": -2.438,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "KRW=X",
+        "label": "USD/KRW",
+        "market": "CROSS",
+        "as_of": "2026-10-08",
+        "close": 1340.2,
+        "previous_close": 1339.74,
+        "change_pct": 0.034,
+        "status": "OK",
+        "note": "Latest yfinance daily FX observation; NOT a Korea 15:30 closing rate. Use a Korea-close official/reported USD/KRW observation for cross-market interpretation."
+      }
+    ]
+  },
+  "us_research": {
+    "research_date": "2026-10-08",
+    "market": "US",
+    "events": [
+      {
+        "event_key": "fomc-minutes-inflation-and-rate-path",
+        "title": "FOMC 의사록: 다수 위원이 연내 추가 금리 인상 가능성을 열어둠",
+        "market": "US",
+        "category": "Rates",
+        "event_status": "NEW",
+        "summary": "연준은 10월 7일 9월 15~16일 FOMC 의사록을 공개했다. 의사록은 물가가 목표보다 높은 상태라는 위원들의 우려와 추가 긴축 가능성을 보여준다. 이는 새 금리 결정이 아니라 당시 회의 논의의 기록이다.",
+        "why_important": "연내 금리 경로에 대한 시장 기대와 미 국채 금리에 영향을 줄 수 있는 매파적 신호다. 다만 다음 회의에서의 결정이 확정됐다는 뜻은 아니다.",
+        "facts": [
+          "연준은 2026년 10월 7일 오후 2시(미 동부시간) 의사록을 공개했다.",
+          "AP 보도에 따르면 대다수 위원은 인플레이션 대응을 위한 올해 추가 금리 인상이 필요할 수 있다고 봤다.",
+          "AP 보도는 선물시장이 10월 회의 동결, 12월 인상 가능성을 반영하고 있다고 전했으며, 이는 의사록과 별개의 시장 가격 신호다."
+        ],
+        "sources": [
+          {
+            "title": "Minutes of the Federal Open Market Committee, September 15-16, 2026",
+            "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261007a.htm",
+            "source_type": "PRIMARY"
+          },
+          {
+            "title": "Fed minutes: Another rate hike likely coming this year to combat persistent inflation",
+            "url": "https://apnews.com/article/inflation-trump-federal-reserve-warsh-b7ed20e31e1a6fa5da6d78e5fe35b0c3",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "KODEX 미국나스닥",
+          "TIGER200",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "HIGH",
+        "next_check": "10월 8일 미 국채 금리와 금리선물 반응, 그리고 다음 FOMC 전 공개되는 물가·고용 지표를 확인."
+      },
+      {
+        "event_key": "us-equities-pull-back-amid-rising-yields",
+        "title": "미 증시, 상승금리 부담 속 고점에서 후퇴",
+        "market": "US",
+        "category": "Rates",
+        "event_status": "NEW",
+        "summary": "10월 7일 미국 정규장에 S&P 500과 Nasdaq Composite은 각각 0.2% 하락했고 Dow는 0.7% 내렸다. AP는 글로벌 금리 상승이 주식 등 자산 가격에 부담을 줬다고 보도했지만, 특정 하루의 하락 원인을 단일 요인으로 단정하기는 어렵다.",
+        "why_important": "금리 상승이 이어지면 성장주·기술주 밸류에이션에 부담이 될 수 있어 미국 지수와 반도체 관련 한국 자산의 다음 거래일 흐름에 중요하다.",
+        "facts": [
+          "S&P 500은 7,801.77로 0.2% 하락했다.",
+          "Nasdaq Composite은 27,538.69로 0.2%, Dow Jones Industrial Average는 51,179.87로 0.7% 하락했다.",
+          "이는 10월 6일 기록 경신 다음 거래일의 조정이었다."
+        ],
+        "sources": [
+          {
+            "title": "How major US stock indexes fared Wednesday 10/7/2026",
+            "url": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-00ad8ec13f0265ac3c41a0d9d7fdb265",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "KODEX 미국나스닥",
+          "TIGER200",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "10월 8일 거래에서 장기 국채금리 흐름과 기술·반도체주의 상대 성과가 지속되는지 확인."
+      }
+    ]
+  },
+  "korea_research": {
+    "research_date": "2026-10-08",
+    "market": "KOREA",
+    "events": [
+      {
+        "event_key": "kospi-selloff-yields-flows-20261008",
+        "title": "외국인·기관 동반 매도에 코스피 1% 안팎 하락",
+        "market": "KOREA",
+        "category": "Flows",
+        "event_status": "NEW",
+        "summary": "10월 8일 코스피는 6,750.25로 0.8% 하락 마감했다. 삼성전자 호실적에도 외국인·기관의 동반 매도와 미국 금리 상승 부담이 지수를 압박했다.",
+        "why_important": "실적 호재가 지수 반등으로 이어지지 않은 가운데 수급 부담이 확인됐다. 금리 상승과 외국인 매도세가 다음 거래일에도 이어지는지 확인할 필요가 있다.",
+        "facts": [
+          "AP는 코스피 종가를 6,750.25, 하락률을 0.8%로 보도했다.",
+          "장중 보도 기준 외국인과 기관은 유가증권시장에서 각각 순매도 우위를 보였고, 개인은 순매수했다.",
+          "미국 10년물 국채금리가 다년 최고 수준으로 오른 가운데 유가도 상승해 아시아 주식시장에 부담을 줬다."
+        ],
+        "sources": [
+          {
+            "title": "Asian shares decline under pressure from rising bond yields and surging oil prices",
+            "url": "https://apnews.com/article/stocks-markets-bonds-oil-us-6a096d714c874db13632794a32cebaa6",
+            "source_type": "TRUSTED_REPORTING"
+          },
+          {
+            "title": "Foreign and institutional selling drag South Korea stocks despite Samsung beat",
+            "url": "https://biz.chosun.com/en/en-finance/2026/10/08/JKWB7WWOMVCMTB2GIUR7QSMKSM/?outputType=amp",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER200",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "HIGH",
+        "next_check": "다음 KRX 거래일에 외국인·기관 현물 및 선물 수급, 삼성전자·SK하이닉스 움직임과 미국 장기금리·유가 변화를 확인한다."
+      },
+      {
+        "event_key": "samsung-q3-guidance-20261008",
+        "title": "삼성전자 3분기 잠정 영업이익 107.4조원 발표",
+        "market": "KOREA",
+        "category": "Earnings",
+        "event_status": "NEW",
+        "summary": "삼성전자는 2026년 3분기 잠정 매출 195조원, 영업이익 107.4조원을 발표했다. 영업이익은 전년 동기 대비 782.5% 증가했다.",
+        "why_important": "AI·메모리 업황이 실적에 크게 반영된 잠정치로, 국내 반도체 이익 전망과 삼성전자 비중이 큰 지수의 핵심 변수다. 다만 발표일 주가가 하락해 호실적의 선반영 여부와 수급 부담도 함께 드러났다.",
+        "facts": [
+          "삼성전자 공식 발표 기준 매출은 195조원, 영업이익은 107.4조원이다.",
+          "매출과 영업이익은 전분기 대비 각각 13.70%, 20.01% 증가했다.",
+          "영업이익은 전년 동기 대비 782.50% 증가했으며, 회사는 잠정치로서 결산 완료 후 달라질 수 있다고 밝혔다.",
+          "장중 보도에서는 호실적 발표에도 차익실현과 수급 변수가 나타났다고 전했다."
+        ],
+        "sources": [
+          {
+            "title": "삼성전자, 2026년 3분기 잠정실적 발표",
+            "url": "https://news.samsung.com/kr/%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90-2026%EB%85%84-3%EB%B6%84%EA%B8%B0-%EC%9E%A0%EC%A0%95%EC%8B%A4%EC%A0%81-%EB%B0%9C%ED%91%9C",
+            "source_type": "PRIMARY"
+          },
+          {
+            "title": "Foreign and institutional selling drag South Korea stocks despite Samsung beat",
+            "url": "https://biz.chosun.com/en/en-finance/2026/10/08/JKWB7WWOMVCMTB2GIUR7QSMKSM/?outputType=amp",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "삼성전자",
+          "TIGER200"
+        ],
+        "portfolio_relevance": "HIGH",
+        "next_check": "10월 말 예정된 삼성전자 확정 실적과 사업부별 실적·메모리 수익성 세부 내용을 확인한다."
+      },
+      {
+        "event_key": "lg-energy-solution-q3-guidance-20261008",
+        "title": "LG에너지솔루션 3분기 잠정 영업이익 7,560억원",
+        "market": "KOREA",
+        "category": "Earnings",
+        "event_status": "NEW",
+        "summary": "LG에너지솔루션은 3분기 잠정 매출 9조6,434억원, 영업이익 7,560억원을 발표했다. 전년 동기 대비 각각 59.0%, 25.7% 증가했으며, 북미 생산 세액공제 4,169억원이 포함됐다.",
+        "why_important": "배터리 업종의 실적 개선 신호지만, 세액공제를 제외한 영업이익은 3,391억원으로 보조금 반영 여부에 따라 수익성 해석이 달라진다.",
+        "facts": [
+          "LG 공식 발표에 따르면 매출은 전년 동기 대비 59.0%, 영업이익은 25.7% 증가했다.",
+          "미국 IRA 45X 등 북미 생산 세액공제는 4,169억원이다.",
+          "세액공제를 제외하면 매출은 9조2,265억원, 영업이익은 3,391억원이다.",
+          "발표 당일 장중 보도에서 LG에너지솔루션 주가는 상승세를 보였다."
+        ],
+        "sources": [
+          {
+            "title": "2026년 3분기 잠정실적 발표",
+            "url": "https://lg.co.kr/media/release/30650",
+            "source_type": "PRIMARY"
+          },
+          {
+            "title": "Foreign and institutional selling drag South Korea stocks despite Samsung beat",
+            "url": "https://biz.chosun.com/en/en-finance/2026/10/08/JKWB7WWOMVCMTB2GIUR7QSMKSM/?outputType=amp",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [],
+        "portfolio_relevance": "NONE",
+        "next_check": "확정 실적에서 북미 생산 세액공제의 회계 처리와 ESS·전기차 배터리 부문별 수익성을 확인한다."
+      }
+    ]
+  },
+  "event_scores": [
+    {
+      "event_key": "fomc-minutes-inflation-and-rate-path",
+      "market": "US",
+      "title": "FOMC 의사록: 다수 위원이 연내 추가 금리 인상 가능성을 열어둠",
+      "market_impact": 3,
+      "portfolio_relevance_score": 3,
+      "macro_importance": 2,
+      "evidence_strength": 2,
+      "learning_value": 2,
+      "total_score": 12,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=3, macro=2, evidence=2, learning=2"
+    },
+    {
+      "event_key": "us-equities-pull-back-amid-rising-yields",
+      "market": "US",
+      "title": "미 증시, 상승금리 부담 속 고점에서 후퇴",
+      "market_impact": 3,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 2,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=2, macro=2, evidence=1, learning=2"
+    },
+    {
+      "event_key": "kospi-selloff-yields-flows-20261008",
+      "market": "KOREA",
+      "title": "외국인·기관 동반 매도에 코스피 1% 안팎 하락",
+      "market_impact": 3,
+      "portfolio_relevance_score": 3,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=3, macro=1, evidence=1, learning=2"
+    },
+    {
+      "event_key": "samsung-q3-guidance-20261008",
+      "market": "KOREA",
+      "title": "삼성전자 3분기 잠정 영업이익 107.4조원 발표",
+      "market_impact": 2,
+      "portfolio_relevance_score": 3,
+      "macro_importance": 1,
+      "evidence_strength": 2,
+      "learning_value": 1,
+      "total_score": 9,
+      "include_in_brief": true,
+      "reason": "impact=2, portfolio=3, macro=1, evidence=2, learning=1"
+    },
+    {
+      "event_key": "lg-energy-solution-q3-guidance-20261008",
+      "market": "KOREA",
+      "title": "LG에너지솔루션 3분기 잠정 영업이익 7,560억원",
+      "market_impact": 2,
+      "portfolio_relevance_score": 0,
+      "macro_importance": 1,
+      "evidence_strength": 2,
+      "learning_value": 0,
+      "total_score": 5,
+      "include_in_brief": false,
+      "reason": "impact=2, portfolio=0, macro=1, evidence=2, learning=0"
+    }
+  ],
+  "selected_event_keys": [
+    "fomc-minutes-inflation-and-rate-path",
+    "us-equities-pull-back-amid-rising-yields",
+    "kospi-selloff-yields-flows-20261008",
+    "samsung-q3-guidance-20261008"
+  ],
+  "morning_brief": {
+    "market_one_liner": "미국은 지수 약보합·반도체 약세, 한국은 더 큰 폭의 하락으로 마감해 하방 흐름은 일부 이어졌지만 낙폭 차이는 국내 수급과 실적 반응까지 함께 봐야 합니다.",
+    "us_one_liner": "10월 7일 S&P 500 -0.22%, Nasdaq -0.22%, PHLX 반도체지수 -1.15%였고, 미 10년물 금리 대용치는 5.277%로 소폭 상승했습니다.",
+    "korea_one_liner": "10월 8일 시장 데이터상 KOSPI는 -2.62%, KOSDAQ은 -0.69%였고 삼성전자와 SK하이닉스도 각각 -2.42%, -2.44% 하락했습니다. 삼성전자는 3분기 잠정 영업이익 107.4조원을 발표했지만 주가에는 호재가 반영되지 않았습니다.",
+    "weekend_watch": [],
+    "cross_market": {
+      "us_signal": "미국 정규장에서 주요 지수는 약보합이었고 반도체지수는 1.15% 하락했습니다. 같은 날 FOMC 의사록은 다수 위원이 연내 추가 인상 가능성을 열어뒀음을 보여줬으며, 미 10년물 금리 대용치는 소폭 올랐습니다.",
+      "expected_korea_response": "미국 기술·반도체주 약세와 금리 상승은 한국 반도체주 및 성장주에 부담이 될 수 있습니다. 다만 미국 지수 하락 폭 자체는 제한적이어서 한국 시장의 낙폭이 더 크다면 국내 수급과 개별 요인도 구분할 필요가 있습니다.",
+      "observed_korea_response": "시장 데이터에서는 KOSPI가 -2.62%로 미국 주요 지수보다 크게 하락했고, 삼성전자와 SK하이닉스도 2%대 하락했습니다. 제공된 별도 보도 요약은 KOSPI 종가 6,750.25 및 -0.8%로 시장 데이터와 불일치하므로 정확한 지수 종가·낙폭은 확인이 필요합니다.",
+      "korea_specific_factors": [
+        "보도 요약에 따르면 외국인과 기관의 동반 순매도가 지수에 부담을 줬고 개인은 순매수 우위였습니다.",
+        "삼성전자 3분기 잠정 영업이익은 107.4조원으로 발표됐지만, 발표 당일 주가는 하락해 호실적만으로 매수세가 유입되지는 않았습니다.",
+        "시장 데이터상 원/달러 환율 관측치는 1,340.2원이지만 한국 장 마감 환율이 아니므로 당일 환율 반응 판단에는 사용하지 않았습니다."
+      ],
+      "transmission": "PARTIAL",
+      "confidence": "MEDIUM",
+      "key_difference": "미국은 지수 낙폭이 작았지만 한국 지수·반도체주는 더 크게 하락했습니다. 미국 금리와 반도체 약세가 부담을 보탰을 가능성은 있으나, 국내 수급과 삼성전자 실적 발표 반응도 별도로 작용했으며 공통 움직임만으로 인과를 단정할 수 없습니다."
+    },
+    "portfolio": [
+      {
+        "asset": "TIGER 미국S&P500",
+        "relevance": "MEDIUM",
+        "reason": "미국 S&P 500이 0.22% 하락했고, FOMC 의사록에서 연내 추가 인상 가능성이 제기돼 금리 경로가 주시 대상입니다."
+      },
+      {
+        "asset": "KODEX 미국나스닥",
+        "relevance": "MEDIUM",
+        "reason": "Nasdaq Composite은 0.22% 하락했으며 금리 상승은 성장주 밸류에이션에 부담이 될 수 있습니다."
+      },
+      {
+        "asset": "TIGER200",
+        "relevance": "HIGH",
+        "reason": "시장 데이터상 KOSPI가 2.62% 하락했습니다. 제공된 보도 요약의 지수 종가·낙폭과 차이가 있어 수치 확인이 필요합니다."
+      },
+      {
+        "asset": "삼성전자",
+        "relevance": "HIGH",
+        "reason": "3분기 잠정 영업이익 107.4조원 발표에도 주가는 2.42% 하락했습니다. 실적 호재와 외국인·기관 수급의 엇갈림을 함께 확인할 필요가 있습니다."
+      }
+    ],
+    "questions": [
+      "다음 KRX 거래일에도 외국인·기관 매도가 이어지는가?",
+      "삼성전자 잠정 실적의 세부 내용과 이후 주가 반응은 호실적의 지속성을 뒷받침하는가?"
+    ]
+  },
+  "api_usage": [
+    {
+      "market": "US",
+      "model": "gpt-6-luna",
+      "input_tokens": 24995,
+      "cached_input_tokens": 0,
+      "output_tokens": 1133,
+      "total_tokens": 26128,
+      "web_search_calls": 3,
+      "estimated_model_cost_usd": 0.003066,
+      "estimated_web_search_cost_usd": 0.03,
+      "estimated_total_cost_usd": 0.033066,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    },
+    {
+      "market": "KOREA",
+      "model": "gpt-6-luna",
+      "input_tokens": 49998,
+      "cached_input_tokens": 0,
+      "output_tokens": 2102,
+      "total_tokens": 52100,
+      "web_search_calls": 6,
+      "estimated_model_cost_usd": 0.006051,
+      "estimated_web_search_cost_usd": 0.06,
+      "estimated_total_cost_usd": 0.066051,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    },
+    {
+      "market": "SYNTHESIS",
+      "model": "gpt-6-luna",
+      "input_tokens": 3614,
+      "cached_input_tokens": 0,
+      "output_tokens": 1329,
+      "total_tokens": 4943,
+      "web_search_calls": 0,
+      "estimated_model_cost_usd": 0.001026,
+      "estimated_web_search_cost_usd": 0.0,
+      "estimated_total_cost_usd": 0.001026,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    }
+  ],
+  "estimated_api_cost_usd": 0.100143,
+  "warnings": [
+    "USD/KRW from yfinance is a latest FX observation, not the Korea 15:30 closing rate; use official/reported Korea-close FX for cross-market interpretation."
+  ],
+  "session_info": {
+    "expected_us_market_date": "2026-10-07",
+    "expected_korea_market_date": "2026-10-08",
+    "us_status": "NEW_SESSION",
+    "korea_status": "NEW_SESSION",
+    "both_closed": false,
+    "is_monday": false
+  },
+  "learning_signal": {
+    "signal": true,
+    "strength": "HIGH",
+    "reasons": [
+      "US→Korea 전달이 PARTIAL이고 보유자산 연결이 있어 추가 검토 가치가 있음",
+      "보유자산 연관성과 학습가치가 함께 높은 사건이 있음: FOMC 의사록: 다수 위원이 연내 추가 금리 인상 가능성을 열어둠 (score 12/12)",
+      "시장·거시 학습가치가 높은 핵심 사건: FOMC 의사록: 다수 위원이 연내 추가 금리 인상 가능성을 열어둠 (score 12/12)"
+    ],
+    "suggested_question": "다음 KRX 거래일에도 외국인·기관 매도가 이어지는가?",
+    "action": "Daily Market Filter 실행 권장",
+    "rule_version": "learning-signal-v1"
+  },
+  "morning_brief_markdown": "data/runs/2026-10-08.md",
+  "email_delivery": {
+    "status": "SENT",
+    "recipient": "hyejeong0617@gmail.com",
+    "subject": "Morning Market Brief | 2026-10-08 | SIGNAL",
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "more_headlines_count": 1,
+    "weekend_watch_count": 0,
+    "learning_signal": "SIGNAL"
+  }
+}
