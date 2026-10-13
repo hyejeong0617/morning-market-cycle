@@ -1,0 +1,534 @@
+{
+  "schema_version": "mvp2-v1",
+  "brief_date": "2026-10-13",
+  "us_market_date": "2026-10-12",
+  "korea_market_date": "2026-10-13",
+  "market_snapshot": {
+    "generated_at": "2026-10-13T10:21:00.127008+02:00",
+    "quotes": [
+      {
+        "symbol": "^GSPC",
+        "label": "S&P 500",
+        "market": "US",
+        "as_of": "2026-10-12",
+        "close": 7807.2402,
+        "previous_close": 7811.54,
+        "change_pct": -0.055,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^IXIC",
+        "label": "Nasdaq Composite",
+        "market": "US",
+        "as_of": "2026-10-12",
+        "close": 27245.9004,
+        "previous_close": 27366.1699,
+        "change_pct": -0.439,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^SOX",
+        "label": "PHLX Semiconductor",
+        "market": "US",
+        "as_of": "2026-10-12",
+        "close": 12236.79,
+        "previous_close": 12572.4199,
+        "change_pct": -2.67,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^VIX",
+        "label": "VIX",
+        "market": "US",
+        "as_of": "2026-10-12",
+        "close": 15.21,
+        "previous_close": 14.84,
+        "change_pct": 2.493,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^TNX",
+        "label": "US 10Y yield proxy",
+        "market": "US",
+        "as_of": "2026-10-12",
+        "close": 5.24,
+        "previous_close": 5.244,
+        "change_pct": -0.076,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^KS11",
+        "label": "KOSPI",
+        "market": "KOREA",
+        "as_of": "2026-10-13",
+        "close": 6035.3501,
+        "previous_close": 6384.2402,
+        "change_pct": -5.465,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^KQ11",
+        "label": "KOSDAQ",
+        "market": "KOREA",
+        "as_of": "2026-10-13",
+        "close": 837.03,
+        "previous_close": 849.19,
+        "change_pct": -1.432,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "005930.KS",
+        "label": "Samsung Electronics",
+        "market": "KOREA",
+        "as_of": "2026-10-13",
+        "close": 232000.0,
+        "previous_close": 262000.0,
+        "change_pct": -11.45,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "000660.KS",
+        "label": "SK Hynix",
+        "market": "KOREA",
+        "as_of": "2026-10-13",
+        "close": 1443000.0,
+        "previous_close": 1681000.0,
+        "change_pct": -14.158,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "KRW=X",
+        "label": "USD/KRW",
+        "market": "CROSS",
+        "as_of": "2026-10-13",
+        "close": 1341.91,
+        "previous_close": 1342.99,
+        "change_pct": -0.08,
+        "status": "OK",
+        "note": "Latest yfinance daily FX observation; NOT a Korea 15:30 closing rate. Use a Korea-close official/reported USD/KRW observation for cross-market interpretation."
+      }
+    ]
+  },
+  "us_research": {
+    "research_date": "2026-10-13",
+    "market": "US",
+    "events": [
+      {
+        "event_key": "fed-hammack-restrictive-policy",
+        "title": "Cleveland Fed의 Hammack, 물가 억제를 위한 제한적 정책 기조 필요성 강조",
+        "market": "US",
+        "category": "Rates",
+        "event_status": "NEW",
+        "summary": "Beth Hammack Cleveland Fed 총재는 10월 12일 연설에서 물가가 2%로 적시에 복귀하도록 제한적 통화정책 기조가 적절하다고 밝혔다. 금리 경로는 경제 여건에 따라 달라진다는 점도 강조했다.",
+        "why_important": "연준 인사의 매파적 발언은 금리 기대와 주식 밸류에이션에 영향을 줄 수 있다. 다만 발언 하나만으로 FOMC의 결정이나 전체 위원회 입장을 확정할 수는 없다.",
+        "facts": [
+          "발언은 National Association of Business Economics 연례회의에서 이뤄졌다.",
+          "Hammack은 제한적 정책 기조가 물가의 2% 복귀를 보장하는 데 적절하다고 말했다.",
+          "미 국채시장은 10월 12일 휴장해 당일 수익률 반응을 확인할 수 없었다."
+        ],
+        "sources": [
+          {
+            "title": "President Hammack: “Explaining my reaction function is not a prediction for policy. It’s describing how I expect policy to adjust as conditions change.”",
+            "url": "https://www.clevelandfed.org/collections/press-releases/2026/pr-20261012-cleveland-fed-president-hammack-speech",
+            "source_type": "PRIMARY"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "KODEX 미국나스닥",
+          "TIGER 미국배당다우존스",
+          "TIGER 미국배당다우존스타겟데일리커버드콜"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "10월 14일 CPI 및 이후 연준 발언에서 물가 판단과 금리 경로가 추가로 확인되는지 점검."
+      },
+      {
+        "event_key": "saudi-attacks-oil-risk",
+        "title": "사우디 공항 공격 여파로 유가 상승, 공급 차질 우려 부각",
+        "market": "CROSS-MARKET",
+        "category": "Commodities",
+        "event_status": "FOLLOW-UP",
+        "summary": "주말 사우디 리야드 공항 공격 이후 중동 긴장과 원유 공급 경로 위험에 대한 우려가 커졌다. 10월 12일 Brent는 배럴당 106달러를 웃돌았고 미국 원유 선물도 2% 넘게 상승했다.",
+        "why_important": "유가 상승이 지속되면 인플레이션 부담과 금리 우려를 키울 수 있으며, 에너지 비용 및 위험회피 심리를 통해 미국과 한국 주식시장에 전이될 수 있다. 가격 움직임만으로 향후 공급 차질을 단정할 수는 없다.",
+        "facts": [
+          "Reuters는 주말 리야드 국제공항 공격 이후 유가가 거의 2주 만의 고점에 도달했다고 보도했다.",
+          "Brent 선물은 배럴당 106달러를 상회했고 미국 원유 선물은 2% 넘게 올랐다.",
+          "10월 12일 미국 주식시장에서는 에너지 업종이 S&P 500 주요 업종 중 가장 강했으며, 국채시장은 휴장이었다."
+        ],
+        "sources": [
+          {
+            "title": "Wall Street mixed as oil prices surge, investors await earnings, economic data",
+            "url": "https://www.marketscreener.com/news/wall-street-mixed-as-oil-prices-surge-investors-await-earnings-economic-data-ce785dddd88cf52d",
+            "source_type": "TRUSTED_REPORTING"
+          },
+          {
+            "title": "Saudis probe how defense systems failed to stop deadly Houthi attack on Riyadh airport",
+            "url": "https://apnews.com/article/40c6ab822df376688ce1a0955a044488",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "KODEX 미국나스닥",
+          "TIGER200",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "다음 미국 거래에서 Brent·WTI 가격과 중동 원유 수송 관련 추가 상황을 확인."
+      },
+      {
+        "event_key": "us-stocks-tech-underpressure",
+        "title": "미국 증시 혼조 마감, 기술·반도체 약세가 나스닥 부담",
+        "market": "US",
+        "category": "Semiconductor",
+        "event_status": "NEW",
+        "summary": "10월 12일 S&P 500은 0.1% 하락, Dow는 0.4% 상승, Nasdaq은 0.4% 하락했다. Reuters는 기술주와 특히 반도체주의 약세를 주요 배경으로 전했지만, 당일 지수 움직임은 크지 않았고 국채시장은 휴장이었다.",
+        "why_important": "반도체 약세가 이어지면 AI·기술주 비중이 큰 Nasdaq과 관련 ETF에 부담이 될 수 있다. 다만 하루 등락만으로 추세 전환을 판단하기는 어렵다.",
+        "facts": [
+          "S&P 500은 7,807.24, Dow는 51,850.55, Nasdaq은 27,245.90으로 마감했다.",
+          "Reuters 보도 기준 필라델피아 반도체 지수는 장중 약 2.6% 하락했고 기술 업종이 S&P 500 업종 중 가장 부진했다.",
+          "미 국채 거래는 Columbus Day로 휴장해 당일 수익률 변화는 없었다."
+        ],
+        "sources": [
+          {
+            "title": "Wall Street mixed as oil prices surge, investors await earnings, economic data",
+            "url": "https://www.marketscreener.com/news/wall-street-mixed-as-oil-prices-surge-investors-await-earnings-economic-data-ce785dddd88cf52d",
+            "source_type": "TRUSTED_REPORTING"
+          },
+          {
+            "title": "How major US stock indexes fared Monday 10/12/2026",
+            "url": "https://apnews.com/article/f07713e8b2e438ac5903b50f5ce97235",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "KODEX 미국나스닥",
+          "TIGER 미국S&P500",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "다음 미국 세션에서 반도체주 약세가 이어지는지와 이번 주 물가 지표·대형 은행 실적에 대한 시장 반응을 확인."
+      }
+    ]
+  },
+  "korea_research": {
+    "research_date": "2026-10-13",
+    "market": "KOREA",
+    "events": [
+      {
+        "event_key": "kospi_foreign_selloff_sidecar",
+        "title": "코스피 5.46% 급락…외국인 4.51조원 순매도, 매도 사이드카 발동",
+        "market": "KOREA",
+        "category": "Flows",
+        "event_status": "NEW",
+        "summary": "10월 13일 코스피는 348.89포인트(5.46%) 하락한 6,035.35에 마감했다. 외국인이 4.51조원 순매도했고, 장중 지수가 5% 넘게 하락하자 KRX가 매도 사이드카를 발동했다. 개인과 기관은 각각 2.23조원, 1.69조원 순매수했다.",
+        "why_important": "대규모 외국인 매도와 변동성 급등은 다음 거래일에도 수급 부담이 이어질 수 있음을 보여준다. 장중 6,000선을 밑돌았다가 종가에 회복했지만, 종가 기준 반등으로 추세 전환을 단정하긴 어렵다.",
+        "facts": [
+          "KOSPI 종가: 6,035.35, 전일 대비 -5.46%.",
+          "외국인 순매도 4.51조원; 기관·개인 순매수 각각 1.69조원·2.23조원.",
+          "KRX가 장중 매도 사이드카를 발동했다."
+        ],
+        "sources": [
+          {
+            "title": "Seoul shares dip over 5 pct on tech sell-off on renewed AI, inflation woes",
+            "url": "https://m-en.yna.co.kr/view/AEN20261013007500320?section=economy-finance%2Feconomy",
+            "source_type": "TRUSTED_REPORTING"
+          },
+          {
+            "title": "Foreigners dump 4.5 trillion won as KOSPI slides over 5 percent to hold 6,000 level",
+            "url": "https://www.digitaltoday.co.kr/en/view/113984/foreigners-dump-4-5-trillion-won-as-kospi-slides-over-5-percent-to-hold-6000-level",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER200",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "HIGH",
+        "next_check": "다음 정규장에서 외국인 순매도 지속 여부, 6,000선 지지 여부와 KRX 수급·변동성 지표를 확인."
+      },
+      {
+        "event_key": "memory_chip_selloff_cxmt_ai_concerns",
+        "title": "CXMT 기술 진전·AI 밸류에이션 우려에 삼성전자·SK하이닉스 급락",
+        "market": "CROSS-MARKET",
+        "category": "Semiconductor",
+        "event_status": "NEW",
+        "summary": "중국 메모리 업체 CXMT의 기술 진전 보도와 AI 투자·밸류에이션 우려가 겹치며 반도체주 매도가 확대됐다. 삼성전자는 7.39%, SK하이닉스는 10.09% 하락 마감했다. CXMT 발표는 경쟁 우려의 촉매로 보도됐지만, 장중 낙폭에는 AI·인플레이션 우려와 수급 악화도 함께 작용했다.",
+        "why_important": "한국 증시 대형주와 지수에 대한 반도체 업종 집중도가 높아 경쟁 구도 우려가 외국인 매도와 결합하면 지수 변동성을 키울 수 있다. 다만 CXMT의 기술 진전이 실제 상업 생산·점유율로 이어지는지는 별도 확인이 필요하다.",
+        "facts": [
+          "삼성전자 종가 232,000원, 전일 대비 -7.39%.",
+          "SK하이닉스 종가 1,443,000원, 전일 대비 -10.09%.",
+          "Yonhap은 CXMT의 기술 진전 보도와 AI·인플레이션 우려를 당일 시장 배경으로 언급했다."
+        ],
+        "sources": [
+          {
+            "title": "Seoul shares dip over 5 pct on tech sell-off on renewed AI, inflation woes",
+            "url": "https://m-en.yna.co.kr/view/AEN20261013007500320?section=economy-finance%2Feconomy",
+            "source_type": "TRUSTED_REPORTING"
+          },
+          {
+            "title": "South Korea's Kospi index sinks more than 5% on semiconductor share sell-off",
+            "url": "https://apnews.com/article/a2edaf9ec297fb75ff2a4e245063ec08",
+            "source_type": "TRUSTED_REPORTING"
+          },
+          {
+            "title": "China’s CXMT unveils ‘key progress’ on chip structure pursued by Samsung, SK Hynix",
+            "url": "https://www.scmp.com/tech/big-tech/article/3370505/chinas-cxmt-unveils-key-progress-chip-structure-pursued-samsung-sk-hynix",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "삼성전자",
+          "TIGER200",
+          "KODEX 미국나스닥"
+        ],
+        "portfolio_relevance": "HIGH",
+        "next_check": "CXMT의 구체적인 제품 출시·양산 일정과 삼성전자·SK하이닉스의 후속 설명, 다음 거래일 반도체주 수급을 확인."
+      },
+      {
+        "event_key": "won_close_1344",
+        "title": "원·달러 환율, 서울장 종가 기준 1,344.40원으로 상승",
+        "market": "KOREA",
+        "category": "FX",
+        "event_status": "NEW",
+        "summary": "원·달러 환율은 10월 13일 서울장 종가 기준 1,344.40원으로 전 거래일보다 8.40원 올랐다. 주식시장에서 외국인 매도와 반도체주 급락이 동반된 가운데 원화도 약세를 보였다.",
+        "why_important": "원화 약세는 외국인 투자자의 환산 수익과 국내 수입물가에 영향을 줄 수 있어 주식 수급·물가 민감도를 함께 점검할 필요가 있다. 다만 당일 환율 움직임의 단일 원인을 특정할 근거는 확인되지 않았다.",
+        "facts": [
+          "원·달러 환율: 1,344.40원, 전 거래일 대비 8.40원 상승.",
+          "수치는 10월 13일 서울장 종가로 보도된 값이며, 이후 24시간 거래 환율과 구분한다."
+        ],
+        "sources": [
+          {
+            "title": "Foreigners dump 4.5 trillion won as KOSPI slides over 5 percent to hold 6,000 level",
+            "url": "https://www.digitaltoday.co.kr/en/view/113984/foreigners-dump-4-5-trillion-won-as-kospi-slides-over-5-percent-to-hold-6000-level",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER200",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "다음 서울장 환율 종가와 외국인 주식·채권 순매매를 함께 확인."
+      }
+    ]
+  },
+  "event_scores": [
+    {
+      "event_key": "fed-hammack-restrictive-policy",
+      "market": "US",
+      "title": "Cleveland Fed의 Hammack, 물가 억제를 위한 제한적 정책 기조 필요성 강조",
+      "market_impact": 3,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 2,
+      "evidence_strength": 2,
+      "learning_value": 2,
+      "total_score": 11,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=2, macro=2, evidence=2, learning=2"
+    },
+    {
+      "event_key": "kospi_foreign_selloff_sidecar",
+      "market": "KOREA",
+      "title": "코스피 5.46% 급락…외국인 4.51조원 순매도, 매도 사이드카 발동",
+      "market_impact": 3,
+      "portfolio_relevance_score": 3,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=3, macro=1, evidence=1, learning=2"
+    },
+    {
+      "event_key": "memory_chip_selloff_cxmt_ai_concerns",
+      "market": "CROSS-MARKET",
+      "title": "CXMT 기술 진전·AI 밸류에이션 우려에 삼성전자·SK하이닉스 급락",
+      "market_impact": 3,
+      "portfolio_relevance_score": 3,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=3, macro=1, evidence=1, learning=2"
+    },
+    {
+      "event_key": "won_close_1344",
+      "market": "KOREA",
+      "title": "원·달러 환율, 서울장 종가 기준 1,344.40원으로 상승",
+      "market_impact": 3,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 2,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=2, macro=2, evidence=1, learning=2"
+    },
+    {
+      "event_key": "us-stocks-tech-underpressure",
+      "market": "US",
+      "title": "미국 증시 혼조 마감, 기술·반도체 약세가 나스닥 부담",
+      "market_impact": 3,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 9,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=2, macro=1, evidence=1, learning=2"
+    },
+    {
+      "event_key": "saudi-attacks-oil-risk",
+      "market": "CROSS-MARKET",
+      "title": "사우디 공항 공격 여파로 유가 상승, 공급 차질 우려 부각",
+      "market_impact": 2,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 1,
+      "total_score": 7,
+      "include_in_brief": false,
+      "reason": "impact=2, portfolio=2, macro=1, evidence=1, learning=1"
+    }
+  ],
+  "selected_event_keys": [
+    "fed-hammack-restrictive-policy",
+    "kospi_foreign_selloff_sidecar",
+    "memory_chip_selloff_cxmt_ai_concerns",
+    "won_close_1344",
+    "us-stocks-tech-underpressure"
+  ],
+  "morning_brief": {
+    "market_one_liner": "미국은 지수 등락이 제한됐지만 반도체가 약했고, 한국은 CXMT 경쟁 우려·AI 밸류에이션 부담과 외국인 매도가 겹치며 급락했습니다. 한국 낙폭은 미국 지수 움직임보다 훨씬 컸습니다.",
+    "us_one_liner": "10월 12일 S&P 500은 0.1%, Nasdaq은 0.4% 하락했고 Dow는 0.4% 상승했습니다. PHLX Semiconductor는 2.67% 하락했으며, 미 국채시장은 Columbus Day로 휴장해 금리 반응은 확인할 수 없습니다.",
+    "korea_one_liner": "10월 13일 KOSPI는 5.46% 하락한 6,035.35, KOSDAQ은 1.43% 하락했습니다. 외국인이 4.51조원을 순매도했고 매도 사이드카가 발동됐으며, 서울장 원·달러 환율은 1,344.40원으로 전일보다 8.40원 상승했습니다.",
+    "weekend_watch": [],
+    "cross_market": {
+      "us_signal": "미국 지수는 혼조·소폭 하락에 그쳤지만 반도체 지수는 2.67% 하락했습니다. Hammack Cleveland Fed 총재는 물가가 2%로 복귀하도록 제한적 정책 기조가 적절하다고 발언했습니다. 미 국채시장이 휴장해 발언에 대한 당일 수익률 반응은 관찰되지 않았습니다.",
+      "expected_korea_response": "미국 반도체 약세는 삼성전자·SK하이닉스와 관련 지수에 부담이 될 수 있습니다. 다만 미국 전체 지수의 제한적 움직임만으로 한국 시장의 급락 규모를 설명하기는 어렵습니다.",
+      "observed_korea_response": "반도체주와 지수가 급락해 방향 면에서는 미국 반도체 약세와 같은 흐름이 나타났지만, 낙폭은 훨씬 컸습니다. 삼성전자와 SK하이닉스는 각각 11.45%, 14.16% 하락했고 KOSPI는 5.46% 내렸습니다. 외국인 순매도와 매도 사이드카도 확인됐습니다.",
+      "korea_specific_factors": [
+        "CXMT의 기술 진전 보도가 경쟁 우려의 촉매로 거론됐습니다. 실제 상업 생산과 점유율 영향은 아직 확인할 필요가 있습니다.",
+        "AI 투자·밸류에이션 및 인플레이션 우려가 반도체 매도 배경으로 함께 보도됐습니다.",
+        "외국인 4.51조원 순매도와 매도 사이드카 발동이 국내 수급·변동성 부담을 드러냈습니다.",
+        "서울장 원·달러 종가는 1,344.40원으로 상승했지만, 환율 움직임의 단일 원인은 확인되지 않았습니다."
+      ],
+      "transmission": "PARTIAL",
+      "confidence": "HIGH",
+      "key_difference": "반도체 약세라는 방향은 이어졌지만, 미국의 소폭 지수 하락과 달리 한국은 반도체 집중도, CXMT 경쟁 우려, 외국인 대규모 매도가 겹치며 낙폭이 크게 확대됐습니다. 동조만으로 인과관계를 단정할 수는 없습니다."
+    },
+    "portfolio": [
+      {
+        "asset": "삼성전자",
+        "relevance": "HIGH",
+        "reason": "주가가 11.45% 하락했습니다. CXMT 경쟁 우려와 반도체 매도, 외국인 순매도 지속 여부 및 후속 기업 설명을 확인할 필요가 있습니다."
+      },
+      {
+        "asset": "TIGER200",
+        "relevance": "HIGH",
+        "reason": "KOSPI가 5.46% 하락했고 외국인 순매도와 매도 사이드카가 발생해 지수·수급 변동성에 직접 노출됩니다."
+      },
+      {
+        "asset": "KODEX 미국나스닥",
+        "relevance": "MEDIUM",
+        "reason": "Nasdaq은 0.4%, PHLX Semiconductor는 2.67% 하락했습니다. 반도체 약세의 지속 여부를 다음 미국 세션에서 확인할 필요가 있습니다."
+      },
+      {
+        "asset": "TIGER 미국S&P500",
+        "relevance": "LOW",
+        "reason": "S&P 500은 0.1% 하락에 그쳐 당일 지수 신호는 제한적이었습니다. Hammack의 발언과 향후 물가 지표가 금리 기대에 미칠 영향은 추가 확인 대상입니다."
+      }
+    ],
+    "questions": [
+      "다음 한국 정규장에서 외국인 순매도가 이어지는지, KOSPI가 6,000선을 지키는지 확인할 필요가 있습니다.",
+      "CXMT의 제품 출시·양산 관련 구체적 진전과 10월 14일 미국 CPI에 시장이 어떻게 반응하는지가 다음 관전 포인트입니다."
+    ]
+  },
+  "api_usage": [
+    {
+      "market": "US",
+      "model": "gpt-6-luna",
+      "input_tokens": 33880,
+      "cached_input_tokens": 0,
+      "output_tokens": 1910,
+      "total_tokens": 35790,
+      "web_search_calls": 4,
+      "estimated_model_cost_usd": 0.004343,
+      "estimated_web_search_cost_usd": 0.04,
+      "estimated_total_cost_usd": 0.044343,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    },
+    {
+      "market": "KOREA",
+      "model": "gpt-6-luna",
+      "input_tokens": 29243,
+      "cached_input_tokens": 0,
+      "output_tokens": 1754,
+      "total_tokens": 30997,
+      "web_search_calls": 3,
+      "estimated_model_cost_usd": 0.003801,
+      "estimated_web_search_cost_usd": 0.03,
+      "estimated_total_cost_usd": 0.033801,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    },
+    {
+      "market": "SYNTHESIS",
+      "model": "gpt-6-luna",
+      "input_tokens": 4134,
+      "cached_input_tokens": 0,
+      "output_tokens": 1170,
+      "total_tokens": 5304,
+      "web_search_calls": 0,
+      "estimated_model_cost_usd": 0.000998,
+      "estimated_web_search_cost_usd": 0.0,
+      "estimated_total_cost_usd": 0.000998,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    }
+  ],
+  "estimated_api_cost_usd": 0.079142,
+  "warnings": [
+    "USD/KRW from yfinance is a latest FX observation, not the Korea 15:30 closing rate; use official/reported Korea-close FX for cross-market interpretation."
+  ],
+  "session_info": {
+    "expected_us_market_date": "2026-10-12",
+    "expected_korea_market_date": "2026-10-13",
+    "us_status": "NEW_SESSION",
+    "korea_status": "NEW_SESSION",
+    "both_closed": false,
+    "is_monday": false
+  },
+  "learning_signal": {
+    "signal": true,
+    "strength": "HIGH",
+    "reasons": [
+      "US→Korea 전달이 PARTIAL이고 보유자산 연결이 있어 추가 검토 가치가 있음",
+      "보유자산 연관성과 학습가치가 함께 높은 사건이 있음: Cleveland Fed의 Hammack, 물가 억제를 위한 제한적 정책 기조 필요성 강조 (score 11/12)",
+      "시장·거시 학습가치가 높은 핵심 사건: Cleveland Fed의 Hammack, 물가 억제를 위한 제한적 정책 기조 필요성 강조 (score 11/12)"
+    ],
+    "suggested_question": "다음 한국 정규장에서 외국인 순매도가 이어지는지, KOSPI가 6,000선을 지키는지 확인할 필요가 있습니다.",
+    "action": "Daily Market Filter 실행 권장",
+    "rule_version": "learning-signal-v1"
+  },
+  "morning_brief_markdown": "data/runs/2026-10-13.md",
+  "email_delivery": {
+    "status": "SENT",
+    "recipient": "hyejeong0617@gmail.com",
+    "subject": "Morning Market Brief | 2026-10-13 | SIGNAL",
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "more_headlines_count": 1,
+    "weekend_watch_count": 0,
+    "learning_signal": "SIGNAL"
+  }
+}
