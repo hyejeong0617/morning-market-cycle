@@ -1,0 +1,473 @@
+{
+  "schema_version": "mvp2-v1",
+  "brief_date": "2026-10-14",
+  "us_market_date": "2026-10-13",
+  "korea_market_date": "2026-10-14",
+  "market_snapshot": {
+    "generated_at": "2026-10-14T10:07:11.667799+02:00",
+    "quotes": [
+      {
+        "symbol": "^GSPC",
+        "label": "S&P 500",
+        "market": "US",
+        "as_of": "2026-10-13",
+        "close": 7805.4502,
+        "previous_close": 7807.2402,
+        "change_pct": -0.023,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^IXIC",
+        "label": "Nasdaq Composite",
+        "market": "US",
+        "as_of": "2026-10-13",
+        "close": 27204.3809,
+        "previous_close": 27245.9004,
+        "change_pct": -0.152,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^SOX",
+        "label": "PHLX Semiconductor",
+        "market": "US",
+        "as_of": "2026-10-13",
+        "close": 12208.79,
+        "previous_close": 12236.79,
+        "change_pct": -0.229,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^VIX",
+        "label": "VIX",
+        "market": "US",
+        "as_of": "2026-10-13",
+        "close": 15.27,
+        "previous_close": 15.21,
+        "change_pct": 0.394,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^TNX",
+        "label": "US 10Y yield proxy",
+        "market": "US",
+        "as_of": "2026-10-13",
+        "close": 5.217,
+        "previous_close": 5.24,
+        "change_pct": -0.439,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^KS11",
+        "label": "KOSPI",
+        "market": "KOREA",
+        "as_of": "2026-10-14",
+        "close": 6008.8101,
+        "previous_close": 6035.3501,
+        "change_pct": -0.44,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^KQ11",
+        "label": "KOSDAQ",
+        "market": "KOREA",
+        "as_of": "2026-10-14",
+        "close": 823.88,
+        "previous_close": 837.03,
+        "change_pct": -1.571,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "005930.KS",
+        "label": "Samsung Electronics",
+        "market": "KOREA",
+        "as_of": "2026-10-14",
+        "close": 232000.0,
+        "previous_close": 232000.0,
+        "change_pct": 0.0,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "000660.KS",
+        "label": "SK Hynix",
+        "market": "KOREA",
+        "as_of": "2026-10-14",
+        "close": 1419000.0,
+        "previous_close": 1443000.0,
+        "change_pct": -1.663,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "KRW=X",
+        "label": "USD/KRW",
+        "market": "CROSS",
+        "as_of": "2026-10-14",
+        "close": 1335.1801,
+        "previous_close": 1334.13,
+        "change_pct": 0.079,
+        "status": "OK",
+        "note": "Latest yfinance daily FX observation; NOT a Korea 15:30 closing rate. Use a Korea-close official/reported USD/KRW observation for cross-market interpretation."
+      }
+    ]
+  },
+  "us_research": {
+    "research_date": "2026-10-14",
+    "market": "US",
+    "events": [
+      {
+        "event_key": "us-session-oct-13-indexes",
+        "title": "미국 증시, 주요 지수 혼조 속 보합권 마감",
+        "market": "US",
+        "category": "Flows",
+        "event_status": "NEW",
+        "summary": "10월 13일 S&P 500은 0.02% 하락한 7,805.45, Nasdaq은 0.15% 하락한 27,204.38, Dow는 0.35% 하락한 51,670.10으로 마감했다. 실적 호재와 금리·물가 경계가 엇갈리며 지수 변동은 제한됐다.",
+        "why_important": "미국 주식시장은 사상 최고치 부근을 유지했지만, 지수 보합이 개별 종목의 큰 움직임을 가렸다. 이번 세션만으로 광범위한 위험선호가 강화됐다고 보기 어렵고, 오늘 발표될 CPI가 다음 방향을 좌우할 수 있다.",
+        "facts": [
+          "10월 13일 S&P 500 -0.02%, Dow -0.3%, Nasdaq -0.2%를 기록했다.",
+          "AP 보도는 기업 실적과 유가 하락에 따른 국채수익률 완화를 세션 배경으로 언급했으나, 제한적인 지수 움직임의 단일 원인으로 단정하지 않았다."
+        ],
+        "sources": [
+          {
+            "title": "How major US stock indexes fared Tuesday 10/13/2026",
+            "url": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-a0a577dfd12f63ee6780a56ab02b55c4",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "KODEX 미국나스닥"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "10월 14일 미국 CPI 발표와 이에 대한 주식·국채 금리 반응을 확인."
+      },
+      {
+        "event_key": "big-bank-q3-earnings-oct-13",
+        "title": "대형은행 실적 시즌 시작: 이익은 견조하지만 인플레이션·금리 경고",
+        "market": "US",
+        "category": "Earnings",
+        "event_status": "NEW",
+        "summary": "JPMorgan Chase, Citigroup, Wells Fargo, Goldman Sachs 등 대형은행이 3분기 실적을 발표했다. 전년 대비 이익은 대체로 증가했지만, JPMorgan은 주당순이익이 시장 예상에 못 미쳤고 은행 경영진은 고금리와 물가가 소비자에게 미칠 위험을 지적했다.",
+        "why_important": "은행 실적은 실적 시즌 초반의 소비·기업활동 및 금융시장 수익 신호다. 강한 이익과 인플레이션·금리 부담 경고가 공존해 시장 전체에 일방적인 호재로 해석하기는 어렵다.",
+        "facts": [
+          "JPMorgan은 3분기 순이익 153억 달러, 주당순이익 5.57달러를 발표했으며, 보도에 따르면 애널리스트 예상치 5.93달러를 밑돌았다.",
+          "Goldman Sachs는 3분기 이익 52.9억 달러, 주당순이익 17.01달러를 발표했다."
+        ],
+        "sources": [
+          {
+            "title": "Big bank keep raking in profits but warn about high interest rates and inflation",
+            "url": "https://apnews.com/article/jpmorgan-citi-goldman-wells-banks-earnings-bonds-f3e3daf4ebed0e99a744aa7bac5e86ee",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "KODEX 미국나스닥"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "후속 은행 실적에서 대출·예금, 소비자 건전성, 순이자마진 및 경영진의 물가·금리 전망을 확인."
+      },
+      {
+        "event_key": "september-cpi-oct-14",
+        "title": "오늘 9월 CPI 발표 예정—금리 기대를 움직일 핵심 일정",
+        "market": "US",
+        "category": "Macro",
+        "event_status": "FOLLOW-UP",
+        "summary": "미국 9월 소비자물가지수(CPI)가 10월 14일 발표될 예정이다. 이 브리프 기준으로는 실제 수치가 아직 확인되지 않았으므로, 물가 둔화 또는 재가속 여부에 대한 결론을 내리지 않는다.",
+        "why_important": "CPI는 연준의 금리 경로와 국채수익률 기대에 직접 영향을 줄 수 있어, 사상 최고치 부근의 주식시장과 금리에 민감한 성장주에 중요한 단기 촉매다.",
+        "facts": [
+          "발표 예정 지표는 2026년 9월 CPI다.",
+          "연준의 공식 뉴스·일정 페이지에는 10월 14일 연준 일정이 게시되어 있으나 CPI 수치는 해당 시점에 확인되지 않았다."
+        ],
+        "sources": [
+          {
+            "title": "United States Economic Calendar for October 13, 2026",
+            "url": "https://forex.tradingcharts.com/economic_calendar/2026-10-13.html?code=USD",
+            "source_type": "OTHER"
+          },
+          {
+            "title": "Federal Reserve Board - News & Events",
+            "url": "https://www.federalreserve.gov/newsevents.htm",
+            "source_type": "PRIMARY"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "KODEX 미국나스닥",
+          "TIGER 미국배당다우존스"
+        ],
+        "portfolio_relevance": "HIGH",
+        "next_check": "CPI 발표 후 헤드라인·근원 물가의 월간 및 연간 변화와 미 국채수익률·금리 기대의 반응을 확인."
+      }
+    ]
+  },
+  "korea_research": {
+    "research_date": "2026-10-14",
+    "market": "KOREA",
+    "events": [
+      {
+        "event_key": "kospi-six-session-decline-foreign-selling",
+        "title": "코스피 6거래일 연속 하락…장중 급반등 뒤 6,008.81 마감",
+        "market": "KOREA",
+        "category": "Flows",
+        "event_status": "NEW",
+        "summary": "10월 14일 코스피는 전일 대비 0.44% 하락한 6,008.81로 마감해 6거래일 연속 내렸다. 장 초반에는 반등했으나 하락 전환했고 코스닥도 1.57% 떨어졌다.",
+        "why_important": "연속 하락 흐름과 장중 반등분을 지키지 못한 마감은 위험회피 및 수급 불안이 지속되고 있음을 보여준다. 다음 세션에서는 외국인 매도 강도와 대형주 안정 여부를 확인할 필요가 있다.",
+        "facts": [
+          "News1은 코스피 종가를 6,008.81, 하락 폭을 26.54포인트(-0.44%)로 보도했다.",
+          "코스닥은 823.88로 1.57% 하락 마감했다.",
+          "전일의 급락 이후 장 초반 반등 시도가 있었지만 종가는 하락으로 돌아섰다."
+        ],
+        "sources": [
+          {
+            "title": "코스피, 6거래일 연속 하락해 6008.81 마감…코스닥 1.57%↓(2보)",
+            "url": "https://www.news1.kr/finance/market-exr/6319993",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER200"
+        ],
+        "portfolio_relevance": "HIGH",
+        "next_check": "10월 15일 외국인·기관의 코스피 현물 및 선물 수급, 삼성전자·SK하이닉스의 낙폭 축소 여부."
+      },
+      {
+        "event_key": "usdkrw-session-close",
+        "title": "원/달러 환율, 서울 외환시장 주간 종가 기준 1,338.3원",
+        "market": "KOREA",
+        "category": "FX",
+        "event_status": "NEW",
+        "summary": "10월 14일 서울외환시장에서 원/달러 환율은 전일 오후 3시 30분 주간 종가보다 6.8원 하락한 1,338.3원으로 마감했다.",
+        "why_important": "원화 강세는 수입물가와 외국인 투자심리에 영향을 줄 수 있지만, 당일 코스피가 하락한 만큼 환율 움직임만으로 주식시장 수급 개선을 단정하기 어렵다.",
+        "facts": [
+          "보도된 환율은 서울외환시장 주간 종가 기준이며, 전일 오후 3시 30분 종가 대비 6.8원 하락했다.",
+          "해당 수치는 24시간 거래 환율이 아니라 국내 정규시장 주간 종가를 기준으로 한다."
+        ],
+        "sources": [
+          {
+            "title": "코스피, 6거래일 연속 하락해 6008.81 마감…코스닥 1.57%↓(2보)",
+            "url": "https://www.news1.kr/finance/market-exr/6319993",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER200",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "다음 서울외환시장 15:30 주간 종가와 외국인 주식 순매매를 함께 비교."
+      }
+    ]
+  },
+  "event_scores": [
+    {
+      "event_key": "september-cpi-oct-14",
+      "market": "US",
+      "title": "오늘 9월 CPI 발표 예정—금리 기대를 움직일 핵심 일정",
+      "market_impact": 3,
+      "portfolio_relevance_score": 3,
+      "macro_importance": 2,
+      "evidence_strength": 2,
+      "learning_value": 2,
+      "total_score": 12,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=3, macro=2, evidence=2, learning=2"
+    },
+    {
+      "event_key": "kospi-six-session-decline-foreign-selling",
+      "market": "KOREA",
+      "title": "코스피 6거래일 연속 하락…장중 급반등 뒤 6,008.81 마감",
+      "market_impact": 3,
+      "portfolio_relevance_score": 3,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=3, macro=1, evidence=1, learning=2"
+    },
+    {
+      "event_key": "usdkrw-session-close",
+      "market": "KOREA",
+      "title": "원/달러 환율, 서울 외환시장 주간 종가 기준 1,338.3원",
+      "market_impact": 3,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 2,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=2, macro=2, evidence=1, learning=2"
+    },
+    {
+      "event_key": "us-session-oct-13-indexes",
+      "market": "US",
+      "title": "미국 증시, 주요 지수 혼조 속 보합권 마감",
+      "market_impact": 3,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 9,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=2, macro=1, evidence=1, learning=2"
+    },
+    {
+      "event_key": "big-bank-q3-earnings-oct-13",
+      "market": "US",
+      "title": "대형은행 실적 시즌 시작: 이익은 견조하지만 인플레이션·금리 경고",
+      "market_impact": 2,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 1,
+      "total_score": 7,
+      "include_in_brief": false,
+      "reason": "impact=2, portfolio=2, macro=1, evidence=1, learning=1"
+    }
+  ],
+  "selected_event_keys": [
+    "september-cpi-oct-14",
+    "kospi-six-session-decline-foreign-selling",
+    "usdkrw-session-close",
+    "us-session-oct-13-indexes"
+  ],
+  "morning_brief": {
+    "market_one_liner": "미국 증시는 10월 13일 보합권에 머물렀지만, 다음 날 한국 증시는 코스피 6거래일 연속 하락·코스닥 약세로 부진했다. 한국 장 마감 뒤 예정된 미국 9월 CPI는 아직 미발표다.",
+    "us_one_liner": "S&P 500 -0.02%, Nasdaq -0.15%, 반도체지수(SOX) -0.23%로 소폭 하락했고, 미 10년물 금리 지표는 낮아졌다. 9월 CPI는 10월 14일 발표 예정이며 브리프 기준 실제 수치는 확인되지 않았다.",
+    "korea_one_liner": "코스피는 장 초반 반등을 지키지 못하고 0.44% 하락한 6,008.81로 6거래일 연속 내렸으며, 코스닥은 1.57% 하락했다. 삼성전자는 보합, SK하이닉스는 1.66% 하락했고 원/달러 서울 주간 종가는 1,338.3원으로 전일보다 6.8원 내렸다.",
+    "weekend_watch": [],
+    "cross_market": {
+      "us_signal": "직전 미국 세션에서 주요 지수와 반도체지수는 소폭 하락해 방향성이 제한적이었다. 미 10년물 금리 지표는 하락했으며, CPI 경계가 이어졌다.",
+      "expected_korea_response": "미국 지수 움직임이 제한적이어서 강한 방향성 전이를 예상할 근거는 약했다. 반도체 관련 미국 지표 약세는 국내 반도체주에 부담이 될 수 있으나 다른 국내 수급 요인도 함께 봐야 한다.",
+      "observed_korea_response": "한국 시장은 코스피와 코스닥 모두 하락했고, 특히 코스닥 낙폭이 컸다. SK하이닉스는 내렸지만 삼성전자는 보합이었다. 미국 보합권 흐름과 한국 약세의 동시성만으로 인과관계를 단정할 수 없다.",
+      "korea_specific_factors": [
+        "코스피가 6거래일 연속 하락했고, 장중 반등을 종가까지 유지하지 못했다.",
+        "원/달러 서울 주간 종가는 전일 대비 하락했지만 주식시장은 약세여서, 환율만으로 수급 개선을 확인하기 어렵다.",
+        "제공된 자료에는 당일 외국인·기관의 구체적인 매매 규모가 없어 수급 원인을 확정할 수 없다."
+      ],
+      "transmission": "PARTIAL",
+      "confidence": "MEDIUM",
+      "key_difference": "미국은 보합권이었던 반면 한국은 연속 하락 흐름을 이어갔다. 미국 반도체지수와 SK하이닉스는 함께 약했지만 삼성전자는 보합이어서 종목별 반응은 엇갈렸다."
+    },
+    "portfolio": [
+      {
+        "asset": "TIGER200",
+        "relevance": "HIGH",
+        "reason": "코스피가 6거래일 연속 하락했고 반등 시도도 종가에 유지되지 않았다. 다음 세션에는 외국인·기관 현물 및 선물 수급과 대형주 안정 여부가 중요하다."
+      },
+      {
+        "asset": "SK하이닉스",
+        "relevance": "HIGH",
+        "reason": "미국 반도체지수는 0.23% 하락했고 SK하이닉스는 1.66% 하락했다. 다만 한 세션의 동행만으로 직접적인 원인을 판단하기는 어렵다."
+      },
+      {
+        "asset": "삼성전자",
+        "relevance": "MEDIUM",
+        "reason": "당일 주가는 보합이었다. 반도체 업종 내 종목별 차이가 나타난 만큼 다음 세션의 낙폭 축소 여부를 확인할 필요가 있다."
+      },
+      {
+        "asset": "TIGER 미국S&P500",
+        "relevance": "HIGH",
+        "reason": "미국 지수는 직전 세션에 거의 보합이었고, 예정된 9월 CPI가 금리 기대와 지수 방향에 영향을 줄 수 있다. CPI 실제 수치와 발표 후 시장 반응은 아직 확인되지 않았다."
+      },
+      {
+        "asset": "KODEX 미국나스닥",
+        "relevance": "HIGH",
+        "reason": "Nasdaq은 0.15% 하락했다. CPI 발표 후 금리 반응과 성장주 흐름을 확인할 필요가 있다."
+      },
+      {
+        "asset": "TIGER 미국배당다우존스",
+        "relevance": "MEDIUM",
+        "reason": "9월 CPI가 연준 금리 경로 기대를 바꿀 수 있어 배당주에도 영향을 줄 수 있지만, 발표 전이므로 방향은 불확실하다."
+      }
+    ],
+    "questions": [
+      "9월 CPI 발표 뒤 미 국채수익률과 주식시장이 어떤 방향으로 반응했는가?",
+      "다음 한국 세션에서 외국인·기관 수급과 SK하이닉스·삼성전자의 반응이 안정되는가?"
+    ]
+  },
+  "api_usage": [
+    {
+      "market": "US",
+      "model": "gpt-6-luna",
+      "input_tokens": 24040,
+      "cached_input_tokens": 0,
+      "output_tokens": 1694,
+      "total_tokens": 25734,
+      "web_search_calls": 2,
+      "estimated_model_cost_usd": 0.003251,
+      "estimated_web_search_cost_usd": 0.02,
+      "estimated_total_cost_usd": 0.023251,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    },
+    {
+      "market": "KOREA",
+      "model": "gpt-6-luna",
+      "input_tokens": 19268,
+      "cached_input_tokens": 0,
+      "output_tokens": 1009,
+      "total_tokens": 20277,
+      "web_search_calls": 2,
+      "estimated_model_cost_usd": 0.002431,
+      "estimated_web_search_cost_usd": 0.02,
+      "estimated_total_cost_usd": 0.022431,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    },
+    {
+      "market": "SYNTHESIS",
+      "model": "gpt-6-luna",
+      "input_tokens": 3234,
+      "cached_input_tokens": 0,
+      "output_tokens": 1205,
+      "total_tokens": 4439,
+      "web_search_calls": 0,
+      "estimated_model_cost_usd": 0.000926,
+      "estimated_web_search_cost_usd": 0.0,
+      "estimated_total_cost_usd": 0.000926,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    }
+  ],
+  "estimated_api_cost_usd": 0.046608,
+  "warnings": [
+    "USD/KRW from yfinance is a latest FX observation, not the Korea 15:30 closing rate; use official/reported Korea-close FX for cross-market interpretation."
+  ],
+  "session_info": {
+    "expected_us_market_date": "2026-10-13",
+    "expected_korea_market_date": "2026-10-14",
+    "us_status": "NEW_SESSION",
+    "korea_status": "NEW_SESSION",
+    "both_closed": false,
+    "is_monday": false
+  },
+  "learning_signal": {
+    "signal": true,
+    "strength": "HIGH",
+    "reasons": [
+      "US→Korea 전달이 PARTIAL이고 보유자산 연결이 있어 추가 검토 가치가 있음",
+      "보유자산 연관성과 학습가치가 함께 높은 사건이 있음: 오늘 9월 CPI 발표 예정—금리 기대를 움직일 핵심 일정 (score 12/12)",
+      "시장·거시 학습가치가 높은 핵심 사건: 오늘 9월 CPI 발표 예정—금리 기대를 움직일 핵심 일정 (score 12/12)"
+    ],
+    "suggested_question": "9월 CPI 발표 뒤 미 국채수익률과 주식시장이 어떤 방향으로 반응했는가?",
+    "action": "Daily Market Filter 실행 권장",
+    "rule_version": "learning-signal-v1"
+  },
+  "morning_brief_markdown": "data/runs/2026-10-14.md",
+  "email_delivery": {
+    "status": "SENT",
+    "recipient": "hyejeong0617@gmail.com",
+    "subject": "Morning Market Brief | 2026-10-14 | SIGNAL",
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "more_headlines_count": 1,
+    "weekend_watch_count": 0,
+    "learning_signal": "SIGNAL"
+  }
+}
