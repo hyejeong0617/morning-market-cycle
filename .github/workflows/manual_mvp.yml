@@ -43,6 +43,12 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          # Phase 3 private Portfolio Watch. These secrets are optional; when they
+          # are absent the email falls back to the existing generic portfolio impact.
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_STRATEGY_DATA_SOURCE_ID: ${{ secrets.NOTION_STRATEGY_DATA_SOURCE_ID }}
+          NOTION_HOLDINGS_DATA_SOURCE_ID: ${{ secrets.NOTION_HOLDINGS_DATA_SOURCE_ID }}
+          NOTION_API_VERSION: ${{ vars.NOTION_API_VERSION || '2025-09-03' }}
         run: |
           if [ "${{ inputs.email_test_only }}" = "true" ]; then
             PYTHONPATH=. python scripts/send_email_from_json.py data/fixtures/email_test_2026-10-06.json
