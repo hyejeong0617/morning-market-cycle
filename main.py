@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 from src.email_sender import send_morning_brief_email
 from src.learning_signal import build_learning_signal
 from src.market_data import collect_market_snapshot, latest_market_date
+from src.portfolio_watch import build_private_portfolio_watch
 from src.render import render_morning_brief_markdown
 from src.research import run_research
 from src.scoring import score_and_select
@@ -160,6 +161,11 @@ def main() -> None:
             session_info=session_info,
         )
 
+        # Private Phase 3 layer: read Holdings + Strategy from Notion and create a
+        # strategic-bias watch for the email only. Never add this object to output,
+        # because data/runs is committed to the public repository.
+        portfolio_watch = build_private_portfolio_watch(morning_brief)
+
         learning_signal = build_learning_signal(
             event_scores=event_scores,
             selected_events=selected_events,
@@ -187,6 +193,8 @@ def main() -> None:
         output["session_info"] = session_info
         output["learning_signal"] = learning_signal
 
+        # Public Markdown intentionally contains only market research / generic
+        # portfolio relevance, not private allocation targets or strategic bias.
         markdown = render_morning_brief_markdown(
             brief_date=brief_date,
             us_market_date=us_market_date,
@@ -211,6 +219,7 @@ def main() -> None:
                     selected_event_keys=selected_event_keys,
                     learning_signal=learning_signal,
                     estimated_api_cost_usd=estimated_api_cost_usd,
+                    portfolio_watch=portfolio_watch,
                 )
             except Exception as exc:
                 email_delivery = {"status": "ERROR", "reason": f"{type(exc).__name__}: {exc}"}
