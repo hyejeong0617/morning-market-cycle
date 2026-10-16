@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from src.email_sender import send_morning_brief_email
+from src.portfolio_watch import build_private_portfolio_watch
 from src.schemas import MorningBrief
 
 
@@ -29,6 +30,7 @@ def main() -> None:
         "action": "이 fixture에는 Learning Signal이 저장되어 있지 않음",
         "rule_version": "fixture-default",
     }
+    portfolio_watch = build_private_portfolio_watch(brief)
 
     result = send_morning_brief_email(
         brief_date=data["brief_date"],
@@ -39,6 +41,7 @@ def main() -> None:
         all_events=all_events,
         selected_event_keys=data.get("selected_event_keys", []),
         learning_signal=learning_signal,
+        portfolio_watch=portfolio_watch,
     )
 
     print(json.dumps(result, ensure_ascii=False, indent=2))
