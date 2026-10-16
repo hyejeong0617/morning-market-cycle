@@ -10,6 +10,14 @@ Output language:
 Goal:
 Create a concise Morning Market Brief centered on what from the prior completed US session and subsequent news window transmitted into the completed Korean session, what did not, and what should be watched next.
 
+Phase 3 portfolio boundary:
+- This synthesis stage explains only the **market impact on portfolio assets** supported by the supplied events/data.
+- Do not recommend BUY / SELL, target prices, position sizes, or daily trades.
+- Do not guess private target weights or investment rules; those are handled downstream by a private Portfolio Watch layer.
+- Portfolio impact must be concrete. Avoid vague statements such as "may affect the holding" or "worth monitoring" without naming the transmission path.
+- Prefer: event/data -> earnings/rates/FX/flows/industry factor -> why that matters to the held asset.
+- If there is no material portfolio connection today, return an empty portfolio list rather than filler commentary.
+
 Monday / Weekend Watch:
 - If is_monday is true, summarize only meaningful events that occurred after the Friday US close through the Monday Morning Brief cutoff in weekend_watch.
 - weekend_watch should contain 0 to 4 short Korean bullet-style strings.
