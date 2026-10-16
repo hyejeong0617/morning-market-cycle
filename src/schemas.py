@@ -8,6 +8,18 @@ MarketScope = Literal["US", "KOREA", "CROSS-MARKET"]
 EventStatus = Literal["NEW", "FOLLOW-UP", "REPEAT", "NOISE"]
 PortfolioRelevance = Literal["HIGH", "MEDIUM", "LOW", "NONE"]
 Transmission = Literal["YES", "PARTIAL", "NO", "UNCLEAR", "N/A"]
+PortfolioBias = Literal[
+    "INCREASE BIAS",
+    "HOLD",
+    "REDUCE BIAS",
+    "EXIT PLAN",
+    "THESIS ALERT",
+]
+PortfolioWatchStatus = Literal[
+    "STRATEGY UNCHANGED",
+    "WEEKLY REVIEW NEEDED",
+    "THESIS ALERT",
+]
 
 
 class SourceItem(BaseModel):
@@ -95,6 +107,21 @@ class PortfolioImpact(BaseModel):
     asset: str
     relevance: Literal["HIGH", "MEDIUM", "LOW"]
     reason: str
+
+
+class PortfolioWatchItem(BaseModel):
+    asset_group: str
+    signal: PortfolioBias
+    current_weight_pct: float | None = None
+    target_weight_pct: float | None = None
+    reason: str
+    market_note: str = ""
+
+
+class PortfolioWatch(BaseModel):
+    status: PortfolioWatchStatus = "STRATEGY UNCHANGED"
+    signals: list[PortfolioWatchItem] = []
+    note: str = "Daily strategic bias only; actual trade decisions belong in the weekly portfolio review."
 
 
 class CrossMarketAnalysis(BaseModel):
