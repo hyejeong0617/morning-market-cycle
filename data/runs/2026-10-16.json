@@ -1,0 +1,594 @@
+{
+  "schema_version": "mvp2-v1",
+  "brief_date": "2026-10-16",
+  "us_market_date": "2026-10-15",
+  "korea_market_date": "2026-10-16",
+  "market_snapshot": {
+    "generated_at": "2026-10-16T11:22:38.525747+02:00",
+    "quotes": [
+      {
+        "symbol": "^GSPC",
+        "label": "S&P 500",
+        "market": "US",
+        "as_of": "2026-10-15",
+        "close": 7744.0601,
+        "previous_close": 7718.9399,
+        "change_pct": 0.325,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^IXIC",
+        "label": "Nasdaq Composite",
+        "market": "US",
+        "as_of": "2026-10-15",
+        "close": 26713.0293,
+        "previous_close": 26692.8691,
+        "change_pct": 0.076,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^SOX",
+        "label": "PHLX Semiconductor",
+        "market": "US",
+        "as_of": "2026-10-15",
+        "close": 11581.21,
+        "previous_close": 11684.3799,
+        "change_pct": -0.883,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^VIX",
+        "label": "VIX",
+        "market": "US",
+        "as_of": "2026-10-15",
+        "close": 16.46,
+        "previous_close": 16.87,
+        "change_pct": -2.43,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^TNX",
+        "label": "US 10Y yield proxy",
+        "market": "US",
+        "as_of": "2026-10-15",
+        "close": 5.089,
+        "previous_close": 5.19,
+        "change_pct": -1.946,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^KS11",
+        "label": "KOSPI",
+        "market": "KOREA",
+        "as_of": "2026-10-16",
+        "close": 5668.0498,
+        "previous_close": 5554.2202,
+        "change_pct": 2.049,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^KQ11",
+        "label": "KOSDAQ",
+        "market": "KOREA",
+        "as_of": "2026-10-16",
+        "close": 794.78,
+        "previous_close": 760.82,
+        "change_pct": 4.464,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "005930.KS",
+        "label": "Samsung Electronics",
+        "market": "KOREA",
+        "as_of": "2026-10-16",
+        "close": 215500.0,
+        "previous_close": 210000.0,
+        "change_pct": 2.619,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "000660.KS",
+        "label": "SK Hynix",
+        "market": "KOREA",
+        "as_of": "2026-10-16",
+        "close": 1272000.0,
+        "previous_close": 1262000.0,
+        "change_pct": 0.792,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "KRW=X",
+        "label": "USD/KRW",
+        "market": "CROSS",
+        "as_of": "2026-10-16",
+        "close": 1330.77,
+        "previous_close": 1339.35,
+        "change_pct": -0.641,
+        "status": "OK",
+        "note": "Latest yfinance daily FX observation; NOT a Korea 15:30 closing rate. Use a Korea-close official/reported USD/KRW observation for cross-market interpretation."
+      }
+    ]
+  },
+  "us_research": {
+    "research_date": "2026-10-16",
+    "market": "US",
+    "events": [
+      {
+        "event_key": "september-ppi-inflation",
+        "title": "9월 PPI 급등, 생산자물가 압력 재확인",
+        "market": "US",
+        "category": "Macro",
+        "event_status": "NEW",
+        "summary": "9월 최종수요 PPI는 전월 대비 1.3% 올라 2022년 3월 이후 가장 큰 월간 상승폭을 기록했고, 전년 대비 상승률은 6.3%였다. 에너지 가격 상승이 증가분의 큰 몫을 차지했다.",
+        "why_important": "최근 CPI 상승에 이어 생산자물가까지 강하게 나오면서 물가 압력이 소비자 가격으로 전가될 가능성과 연준의 추가 긴축 우려가 커질 수 있다. 다만 이번 자료만으로 금리 경로나 시장 반응의 원인을 단정할 수는 없다.",
+        "facts": [
+          "BLS 발표 시각은 2026년 10월 15일 오전 8:30 ET였다.",
+          "최종수요 상품 가격은 전월 대비 2.6%, 서비스는 0.8% 상승했다.",
+          "식품·에너지·무역서비스 제외 지수는 전월 대비 0.5%, 전년 대비 5.0% 상승했다."
+        ],
+        "sources": [
+          {
+            "title": "Producer Price Index News Release - 2026 M09 Results",
+            "url": "https://www.bls.gov/news.release/archives/ppi_10152026.htm",
+            "source_type": "PRIMARY"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "KODEX 미국나스닥",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "HIGH",
+        "next_check": "다음 물가 지표와 연준 발언에서 에너지발 상승이 기조 물가로 확산되는지, 금리 기대가 추가로 조정되는지 확인."
+      },
+      {
+        "event_key": "september-retail-sales",
+        "title": "9월 소매판매 증가, 소비 수요는 견조",
+        "market": "US",
+        "category": "Macro",
+        "event_status": "NEW",
+        "summary": "미국 9월 소매·외식 판매는 전월 대비 0.8% 증가한 7,450억 달러로 집계됐다. 강한 수요 신호는 경기에는 긍정적일 수 있지만, 물가가 높은 상황에서는 금리 인하 기대를 제한할 수 있다.",
+        "why_important": "물가 상승과 소비 강세가 함께 나타나면 연준이 완화로 선회할 여지가 좁아질 수 있다. 판매액은 가격 변화를 조정하지 않은 명목 수치이므로 실질 소비 증가로 그대로 해석하면 안 된다.",
+        "facts": [
+          "미 Census Bureau는 2026년 10월 15일 자료를 발표했다.",
+          "전년 동월 대비 증가율은 6.3%였으며, 7~9월 분기 판매액은 전년 동기 대비 5.5% 증가했다.",
+          "7월 대비 8월 증가율은 기존 1.1%에서 1.3%로 상향 수정됐다."
+        ],
+        "sources": [
+          {
+            "title": "Advance Monthly Sales for Retail and Food Services",
+            "url": "https://www.census.gov/retail/sales.html",
+            "source_type": "PRIMARY"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "TIGER 미국배당다우존스"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "후속 소비·고용 자료에서 명목 판매 강세가 실질 수요의 견조함으로 이어지는지 확인."
+      },
+      {
+        "event_key": "warsh-rate-guidance-oct16",
+        "title": "Warsh 의장, 향후 금리 결정에 대한 새 신호는 유보",
+        "market": "US",
+        "category": "Rates",
+        "event_status": "NEW",
+        "summary": "Kevin Warsh 연준 의장은 10월 16일 방콕에서 물가 안정 의지를 강조했지만, 10월·12월 회의에서의 금리 결정은 미리 판단하지 않겠다고 말했다. 구체적인 새 금리 경로 신호는 제시하지 않았다.",
+        "why_important": "최근 물가 지표가 강한 가운데 의장의 발언은 금리 기대에 주목을 모을 수 있지만, 이번 발언 자체는 정책 방향을 새로 확정하기보다 기존 데이터 의존적 접근을 재확인한 수준이다.",
+        "facts": [
+          "발언은 IMF·세계은행 연차총회 관련 대담에서 나왔다.",
+          "Warsh는 연준이 물가 안정을 제공하겠다는 점을 분명히 했다고 말했으나, 차기 회의 결정을 선제적으로 예고하지 않았다."
+        ],
+        "sources": [
+          {
+            "title": "Fed chair Warsh says price stability is key but shies away from signals about rates",
+            "url": "https://apnews.com/article/us-economy-warsh-fed-ai-imf-4c80750c113a82a464a46f58a4fdab43",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "KODEX 미국나스닥"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "10월·12월 FOMC 전후 발언과 물가·고용 데이터가 금리 경로에 주는 영향을 확인."
+      },
+      {
+        "event_key": "tsmc-record-earnings-us-expansion",
+        "title": "TSMC 기록적 실적과 미국 생산 확대 검토",
+        "market": "CROSS-MARKET",
+        "category": "Semiconductor",
+        "event_status": "NEW",
+        "summary": "TSMC는 3분기 순이익이 전년 대비 69% 증가한 기록적 실적을 발표했고, 미국 내 생산 확대 후보지로 텍사스를 검토 중이라고 밝혔다. 회사는 AI 수요가 공급능력을 크게 웃돈다고 설명했다.",
+        "why_important": "AI 가속기 공급망의 핵심 기업이 강한 수요와 증설 의지를 재확인해 미국 반도체·AI 투자 기대에 영향을 줄 수 있다. 다만 텍사스 투자는 검토 단계로 확정된 투자 계획은 아니다.",
+        "facts": [
+          "3분기 순이익은 7,631억 대만달러, 매출은 1조4,900억 대만달러였다.",
+          "TSMC는 고객사들의 생산능력 확대 요청이 있다고 밝혔고, 텍사스 부지 평가팀을 보냈다고 설명했다.",
+          "회사는 2026년 자본지출 전망을 600억~640억 달러로 제시했다고 보도됐다."
+        ],
+        "sources": [
+          {
+            "title": "Taiwan chipmaker TSMC explores Texas investment to expand production in the US",
+            "url": "https://apnews.com/article/taiwan-tsmc-chip-manufacturing-ai-us-arizona-d1fbfb0bec8a914b0365996b39ecc138",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "KODEX 미국나스닥",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "HIGH",
+        "next_check": "TSMC의 공식 실적 자료와 후속 투자 공시에서 텍사스 계획의 범위·일정이 구체화되는지 확인."
+      },
+      {
+        "event_key": "us-equities-oct15-close",
+        "title": "10월 15일 미 증시 반등 마감, 지수별 흐름은 엇갈림",
+        "market": "US",
+        "category": "Flows",
+        "event_status": "FOLLOW-UP",
+        "summary": "최신 완료 세션인 10월 15일 미국 주식시장은 상승 마감했다. S&P 500은 0.3%, Dow는 1.1%, Nasdaq은 0.1% 올랐으며, 장중 하락을 되돌렸다. 하루 상승에도 Nasdaq은 해당 주 누적으로 2.4% 하락한 상태였다.",
+        "why_important": "강한 물가 발표 직후에도 지수가 반등해 하루 가격 움직임만으로 인플레이션 충격이 해소됐다고 보기 어렵다. 발표 후 시장 반응의 단일 원인은 확인된 자료만으로 특정하지 않는다.",
+        "facts": [
+          "S&P 500 종가는 7,744.06, Dow는 52,177.69, Nasdaq 종가는 26,713.03이었다.",
+          "AP는 AI 관련 우려로 불안한 출발을 했으나 AI 종목 낙폭이 축소되고 미국 기업 실적이 다른 종목을 지지했다고 전했다."
+        ],
+        "sources": [
+          {
+            "title": "How major US stock indexes fared Thursday 10/15/2026",
+            "url": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-f0a4f8aa60a6a24237c419aba38f31fd",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "KODEX 미국나스닥",
+          "TIGER200",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "10월 16일 세션에서 물가·연준 해석이 이어지는지, 특히 Nasdaq과 반도체주의 상대 흐름을 확인."
+      }
+    ]
+  },
+  "korea_research": {
+    "research_date": "2026-10-16",
+    "market": "KOREA",
+    "events": [
+      {
+        "event_key": "kospi-rebound-foreign-buying",
+        "title": "폭락 다음 날 코스피 2.05% 반등…외국인 9거래일 만에 순매수",
+        "market": "KOREA",
+        "category": "Flows",
+        "event_status": "NEW",
+        "summary": "10월 16일 코스피는 5,668.05로 2.05% 상승 마감했고 코스닥은 4.46% 올랐다. 외국인은 코스피에서 1,721억원 순매수해 8거래일 연속 매도 흐름을 끊었지만, 이는 전날 순매도 규모인 3.6조원 이상에 크게 못 미쳤다.",
+        "why_important": "급락 뒤 반등과 외국인 매수 전환은 단기 수급 악화가 진정될 가능성을 보여주지만, 하루의 매수만으로 추세 전환을 확인하기는 어렵다. 코스닥 매수 사이드카도 발동돼 장중 변동성이 여전히 컸다.",
+        "facts": [
+          "코스피 종가는 5,668.05(+2.05%), 코스닥은 794.78(+4.46%).",
+          "외국인은 코스피에서 1,721억원 순매수했고 기관과 개인은 각각 5,559억원, 4,434억원 순매도했다.",
+          "코스피 장중 고점은 5,809.94로, 상승폭 일부를 반납하고 마감했다."
+        ],
+        "sources": [
+          {
+            "title": "Foreigners end eight-day sell-off as KOSPI, Nikkei rebound",
+            "url": "https://www.ajupress.com/view/20261016153219133",
+            "source_type": "TRUSTED_REPORTING"
+          },
+          {
+            "title": "코스피, 2.05% 상승한 5668.05 마감…코스닥 4.46%↑(2보)",
+            "url": "https://www.fnnews.com/news/202610161537097996",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER200"
+        ],
+        "portfolio_relevance": "HIGH",
+        "next_check": "다음 거래일 외국인 순매수가 이어지는지, 반도체 대형주가 반등을 뒷받침하는지 확인."
+      },
+      {
+        "event_key": "krw-strengthens-korea-close",
+        "title": "원/달러 환율, 서울 외환시장 주간 종가 기준 1,331.4원",
+        "market": "KOREA",
+        "category": "FX",
+        "event_status": "NEW",
+        "summary": "원/달러 환율은 전일 서울 외환시장 오후 3시 30분 주간 종가보다 13.2원 내린 1,331.4원에 마감했다.",
+        "why_important": "원화 강세는 외국인 투자자의 원화 자산 환산 부담을 낮추는 방향이지만, 주식 매수세가 이어지는지와 함께 봐야 한다. 장 마감 이후의 24시간 환율 호가와는 구분해 해석할 필요가 있다.",
+        "facts": [
+          "보도된 원/달러 환율은 서울 외환시장 주간 종가 기준 1,331.4원이다.",
+          "전일 오후 3시 30분 주간 종가보다 13.2원 하락했다."
+        ],
+        "sources": [
+          {
+            "title": "코스피, 2.05% 상승한 5668.05 마감…코스닥 4.46%↑(2보)",
+            "url": "https://www.fnnews.com/news/202610161537097996",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER200",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "다음 서울 외환시장 오후 3시 30분 주간 종가와 외국인 주식 수급을 함께 확인."
+      },
+      {
+        "event_key": "semiconductor-relief-rally",
+        "title": "반도체주 낙폭과대 매수로 반등…급락 뒤 회복 여부가 관건",
+        "market": "KOREA",
+        "category": "Semiconductor",
+        "event_status": "FOLLOW-UP",
+        "summary": "전날 큰 폭으로 하락한 국내 대형 반도체주에 저가 매수세가 유입되며 시장 반등에 기여했다. 시장 보도는 미국 금리 우려 완화와 AI 성장에 대한 낙관적 발언도 투자심리 회복 배경으로 언급했지만, 당일 상승만으로 업황 우려가 해소됐다고 보기는 어렵다.",
+        "why_important": "삼성전자 등 반도체 대형주 움직임은 코스피 지수와 관련 보유자산에 직접적인 영향을 준다. 급락 후 반등이 지속되는지, 외국인 수급과 함께 확인해야 한다.",
+        "facts": [
+          "10월 16일 코스피는 전날 7.57% 급락한 뒤 2.05% 반등했다.",
+          "보도에 따르면 삼성전자와 SK하이닉스를 포함한 대형 기술주에 저가 매수세가 유입됐다.",
+          "이번 반등은 급락 뒤 하루의 회복으로, 지속적인 수요 회복을 입증하지는 않는다."
+        ],
+        "sources": [
+          {
+            "title": "Seoul stocks rebound over 2% on eased chip rout, Fed bets",
+            "url": "https://www.koreatimes.co.kr/economy/20261016/seoul-stocks-rebound-over-2-on-eased-chip-rout-fed-bets",
+            "source_type": "TRUSTED_REPORTING"
+          },
+          {
+            "title": "Foreigners end eight-day sell-off as KOSPI, Nikkei rebound",
+            "url": "https://www.ajupress.com/view/20261016153219133",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "삼성전자",
+          "TIGER200",
+          "KODEX 미국나스닥"
+        ],
+        "portfolio_relevance": "HIGH",
+        "next_check": "삼성전자·SK하이닉스의 다음 거래일 주가와 외국인 순매수 지속 여부를 확인."
+      }
+    ]
+  },
+  "event_scores": [
+    {
+      "event_key": "september-ppi-inflation",
+      "market": "US",
+      "title": "9월 PPI 급등, 생산자물가 압력 재확인",
+      "market_impact": 3,
+      "portfolio_relevance_score": 3,
+      "macro_importance": 2,
+      "evidence_strength": 2,
+      "learning_value": 2,
+      "total_score": 12,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=3, macro=2, evidence=2, learning=2"
+    },
+    {
+      "event_key": "september-retail-sales",
+      "market": "US",
+      "title": "9월 소매판매 증가, 소비 수요는 견조",
+      "market_impact": 3,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 2,
+      "evidence_strength": 2,
+      "learning_value": 2,
+      "total_score": 11,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=2, macro=2, evidence=2, learning=2"
+    },
+    {
+      "event_key": "warsh-rate-guidance-oct16",
+      "market": "US",
+      "title": "Warsh 의장, 향후 금리 결정에 대한 새 신호는 유보",
+      "market_impact": 3,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 2,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=2, macro=2, evidence=1, learning=2"
+    },
+    {
+      "event_key": "tsmc-record-earnings-us-expansion",
+      "market": "CROSS-MARKET",
+      "title": "TSMC 기록적 실적과 미국 생산 확대 검토",
+      "market_impact": 3,
+      "portfolio_relevance_score": 3,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=3, macro=1, evidence=1, learning=2"
+    },
+    {
+      "event_key": "kospi-rebound-foreign-buying",
+      "market": "KOREA",
+      "title": "폭락 다음 날 코스피 2.05% 반등…외국인 9거래일 만에 순매수",
+      "market_impact": 3,
+      "portfolio_relevance_score": 3,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=3, macro=1, evidence=1, learning=2"
+    },
+    {
+      "event_key": "krw-strengthens-korea-close",
+      "market": "KOREA",
+      "title": "원/달러 환율, 서울 외환시장 주간 종가 기준 1,331.4원",
+      "market_impact": 3,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 2,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=2, macro=2, evidence=1, learning=2"
+    },
+    {
+      "event_key": "semiconductor-relief-rally",
+      "market": "KOREA",
+      "title": "반도체주 낙폭과대 매수로 반등…급락 뒤 회복 여부가 관건",
+      "market_impact": 3,
+      "portfolio_relevance_score": 3,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=3, macro=1, evidence=1, learning=2"
+    },
+    {
+      "event_key": "us-equities-oct15-close",
+      "market": "US",
+      "title": "10월 15일 미 증시 반등 마감, 지수별 흐름은 엇갈림",
+      "market_impact": 3,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 9,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=2, macro=1, evidence=1, learning=2"
+    }
+  ],
+  "selected_event_keys": [
+    "september-ppi-inflation",
+    "september-retail-sales",
+    "warsh-rate-guidance-oct16",
+    "tsmc-record-earnings-us-expansion",
+    "kospi-rebound-foreign-buying"
+  ],
+  "morning_brief": {
+    "market_one_liner": "미국은 물가·소비 지표가 강한 가운데 S&P 500은 0.33% 상승했지만 반도체지수는 0.88% 하락했고, 한국은 급락 다음 날 외국인 순매수 전환과 함께 코스피 2.05%, 코스닥 4.46% 반등했다.",
+    "us_one_liner": "10월 15일 S&P 500은 0.33% 상승, Nasdaq은 0.08% 상승, SOX는 0.88% 하락했다. 10년물 금리 대용치는 5.19%에서 5.09%로 낮아졌고 VIX는 16.46으로 하락했다. 9월 PPI는 전월 대비 1.3%, 소매판매는 0.8% 증가했다.",
+    "korea_one_liner": "10월 16일 코스피는 5,668.05(+2.05%), 코스닥은 794.78(+4.46%)로 마감했다. 외국인은 코스피에서 1,721억원 순매수로 8거래일 연속 매도를 끝냈지만, 전날 3.6조원 이상 순매도에 비해 규모는 작았고 코스닥 매수 사이드카가 발동되는 등 변동성이 컸다.",
+    "weekend_watch": [],
+    "cross_market": {
+      "us_signal": "미국 지수 전반은 소폭 상승하고 변동성지수와 10년물 금리 대용치는 하락했지만, 강한 PPI와 소매판매는 물가 압력 및 금리 인하 기대 제약 요인이다. SOX는 하락해 반도체 신호는 시장 전체와 엇갈렸다.",
+      "expected_korea_response": "미국의 금리 대용치 하락과 TSMC의 기록적 실적·AI 수요 언급은 한국 반도체주에 우호적일 수 있다. 반면 강한 물가·소비 지표는 금리 부담 요인이다. 다만 미국 반도체지수 하락과 한국 국내 수급·급락 후 반등 요인을 함께 고려해야 한다.",
+      "observed_korea_response": "한국 증시는 급반등했으나, 이를 미국발 신호의 전달로 단정하기 어렵다. 미국 SOX는 하락했고 한국 반도체주는 삼성전자 +2.62%, SK하이닉스 +0.79%로 서로 다른 폭의 상승을 보였다. 외국인 순매수 전환과 전날 급락 이후의 반등이 함께 관찰됐다.",
+      "korea_specific_factors": [
+        "외국인은 코스피에서 1,721억원 순매수해 8거래일 연속 매도 흐름을 끊었으나, 전날 순매도 규모를 크게 밑돌았다.",
+        "코스피는 장중 고점 5,809.94에서 상승폭을 반납하고 마감했다.",
+        "코스닥은 4.46% 상승했고 장중 매수 사이드카가 발동돼 변동성이 컸다."
+      ],
+      "transmission": "PARTIAL",
+      "confidence": "MEDIUM",
+      "key_difference": "미국에서는 SOX가 하락한 반면 한국 반도체 대형주는 상승했다. 한국의 반등은 미국 신호만으로 설명하기보다 외국인 수급 전환과 급락 뒤 되돌림을 함께 봐야 하며, 하루의 순매수만으로 추세 전환을 판단할 수 없다."
+    },
+    "portfolio": [
+      {
+        "asset": "TIGER200",
+        "relevance": "HIGH",
+        "reason": "코스피가 2.05% 반등하고 외국인이 1,721억원 순매수로 전환해 지수와 수급에 우호적이었다. 다만 순매수 규모가 전날 대규모 매도를 크게 만회하지 못했고 장중 상승폭도 일부 반납해, 하루 수급 변화만으로 지속성을 확인하기는 어렵다."
+      },
+      {
+        "asset": "삼성전자",
+        "relevance": "HIGH",
+        "reason": "TSMC는 기록적 실적과 AI 수요가 공급능력을 웃돈다고 밝혀 반도체 수요 기대를 뒷받침했지만, 미국 SOX는 0.88% 하락했다. 삼성전자는 한국장에서 2.62% 상승했으며, TSMC의 텍사스 생산 확대는 검토 단계라 확정 투자로 해석할 수 없다."
+      },
+      {
+        "asset": "TIGER 미국S&P500",
+        "relevance": "MEDIUM",
+        "reason": "미국 S&P 500은 0.33% 상승했지만 9월 PPI가 전월 대비 1.3%, 소매판매가 0.8% 증가해 물가 압력과 금리 인하 기대 제약이 함께 부각됐다. 지수 상승만으로 금리 여건의 부담이 해소됐다고 보기는 어렵다."
+      },
+      {
+        "asset": "KODEX 미국나스닥",
+        "relevance": "MEDIUM",
+        "reason": "Nasdaq은 0.08% 상승했으며 TSMC의 기록적 실적과 AI 수요 언급은 기술·AI 공급망 기대를 지지한다. 반면 PPI 급등은 향후 금리 기대를 흔들 수 있고, 미국 SOX 하락은 반도체 전반의 동조를 확인해 주지 않는다."
+      }
+    ],
+    "questions": [
+      "다음 거래일 외국인의 코스피 순매수가 이어지는지, 급락 후 반등이 수급 개선으로 이어지는지 확인할 필요가 있는가?",
+      "다음 물가 지표와 연준 발언에서 에너지발 PPI 상승이 기조 물가 및 금리 기대에 확산되는지 확인할 필요가 있는가?"
+    ]
+  },
+  "api_usage": [
+    {
+      "market": "US",
+      "model": "gpt-6-luna",
+      "input_tokens": 32063,
+      "cached_input_tokens": 0,
+      "output_tokens": 2599,
+      "total_tokens": 34662,
+      "web_search_calls": 3,
+      "estimated_model_cost_usd": 0.004506,
+      "estimated_web_search_cost_usd": 0.03,
+      "estimated_total_cost_usd": 0.034506,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    },
+    {
+      "market": "KOREA",
+      "model": "gpt-6-luna",
+      "input_tokens": 21657,
+      "cached_input_tokens": 0,
+      "output_tokens": 1788,
+      "total_tokens": 23445,
+      "web_search_calls": 2,
+      "estimated_model_cost_usd": 0.00306,
+      "estimated_web_search_cost_usd": 0.02,
+      "estimated_total_cost_usd": 0.02306,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    },
+    {
+      "market": "SYNTHESIS",
+      "model": "gpt-6-luna",
+      "input_tokens": 3857,
+      "cached_input_tokens": 0,
+      "output_tokens": 1357,
+      "total_tokens": 5214,
+      "web_search_calls": 0,
+      "estimated_model_cost_usd": 0.001064,
+      "estimated_web_search_cost_usd": 0.0,
+      "estimated_total_cost_usd": 0.001064,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    }
+  ],
+  "estimated_api_cost_usd": 0.05863,
+  "warnings": [
+    "USD/KRW from yfinance is a latest FX observation, not the Korea 15:30 closing rate; use official/reported Korea-close FX for cross-market interpretation."
+  ],
+  "session_info": {
+    "expected_us_market_date": "2026-10-15",
+    "expected_korea_market_date": "2026-10-16",
+    "us_status": "NEW_SESSION",
+    "korea_status": "NEW_SESSION",
+    "both_closed": false,
+    "is_monday": false
+  },
+  "learning_signal": {
+    "signal": true,
+    "strength": "HIGH",
+    "reasons": [
+      "US→Korea 전달이 PARTIAL이고 보유자산 연결이 있어 추가 검토 가치가 있음",
+      "보유자산 연관성과 학습가치가 함께 높은 사건이 있음: 9월 PPI 급등, 생산자물가 압력 재확인 (score 12/12)",
+      "시장·거시 학습가치가 높은 핵심 사건: 9월 PPI 급등, 생산자물가 압력 재확인 (score 12/12)"
+    ],
+    "suggested_question": "다음 거래일 외국인의 코스피 순매수가 이어지는지, 급락 후 반등이 수급 개선으로 이어지는지 확인할 필요가 있는가?",
+    "action": "Daily Market Filter 실행 권장",
+    "rule_version": "learning-signal-v1"
+  },
+  "morning_brief_markdown": "data/runs/2026-10-16.md",
+  "email_delivery": {
+    "status": "SENT",
+    "recipient": "hyejeong0617@gmail.com",
+    "subject": "Morning Market Brief | 2026-10-16 | SIGNAL",
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "more_headlines_count": 3,
+    "weekend_watch_count": 0,
+    "learning_signal": "SIGNAL",
+    "portfolio_watch": "CONNECTED"
+  }
+}
