@@ -6,7 +6,7 @@ import smtplib
 from email.message import EmailMessage
 from typing import Any
 
-from .schemas import MorningBrief
+from .schemas import MorningBrief, PortfolioWatch
 
 
 def _event_value(event: Any, field: str, default: str = "") -> str:
@@ -26,6 +26,46 @@ def _portfolio_lines(brief: MorningBrief) -> str:
     if not brief.portfolio:
         return "- 오늘 직접 연결된 보유자산 없음"
     return "\n".join(f"- {x.asset} [{x.relevance}]: {x.reason}" for x in brief.portfolio)
+
+
+def _portfolio_watch_text(portfolio_watch: PortfolioWatch | None) -> str:
+    if portfolio_watch is None:
+        return "Private Portfolio Watch 미연결 — 기존 시장 영향만 확인"
+    if not portfolio_watch.signals:
+        return f"{portfolio_watch.status}\n- NO MATERIAL CHANGE"
+    lines = [portfolio_watch.status]
+    for item in portfolio_watch.signals:
+        lines.append(f"- {item.asset_group} — {item.signal}: {item.reason}")
+        if item.market_note:
+            lines.append(f"  오늘 시장 연결: {item.market_note}")
+    lines.append("※ 당일 주문 신호가 아님. 실제 ADD/HOLD/TRIM/EXIT 판단은 Weekly Portfolio Review에서 수행.")
+    return "\n".join(lines)
+
+
+def _portfolio_watch_html(portfolio_watch: PortfolioWatch | None) -> str:
+    esc = html.escape
+    if portfolio_watch is None:
+        return (
+            "<div style='padding:14px;border:1px solid #ddd;border-radius:8px'>"
+            "<h3>🧭 Portfolio Watch</h3>"
+            "<p>Private Portfolio Watch 미연결 — 기존 시장 영향만 확인</p></div>"
+        )
+    items = ""
+    for item in portfolio_watch.signals:
+        market_note = f"<br><span style='color:#666'>오늘 시장 연결: {esc(item.market_note)}</span>" if item.market_note else ""
+        items += (
+            f"<li><strong>{esc(item.asset_group)} — {esc(item.signal)}</strong><br>"
+            f"{esc(item.reason)}{market_note}</li>"
+        )
+    if not items:
+        items = "<li>NO MATERIAL CHANGE</li>"
+    return (
+        "<div style='padding:14px;border:1px solid #9aa7b0;border-radius:8px'>"
+        f"<h3>🧭 Portfolio Watch — {esc(portfolio_watch.status)}</h3>"
+        f"<ul>{items}</ul>"
+        "<p style='font-size:12px;color:#666'>당일 주문 신호가 아닙니다. 실제 ADD/HOLD/TRIM/EXIT 판단은 Weekly Portfolio Review에서 수행합니다.</p>"
+        "</div>"
+    )
 
 
 def _question_lines(brief: MorningBrief) -> str:
@@ -64,7 +104,7 @@ def _learning_signal_text(learning_signal: dict[str, Any]) -> str:
 def _plain_text(
     *, brief_date: str, us_market_date: str | None, korea_market_date: str | None,
     brief: MorningBrief, more_headlines: list[Any], learning_signal: dict[str, Any],
-    estimated_api_cost_usd: float | None,
+    portfolio_watch: PortfolioWatch | None, estimated_api_cost_usd: float | None,
 ) -> str:
     cost = f"${estimated_api_cost_usd:.4f}" if estimated_api_cost_usd is not None else "n/a"
     return f"""Morning Market Brief — {brief_date}
@@ -88,8 +128,11 @@ Transmission: {brief.cross_market.transmission} ({brief.cross_market.confidence}
 실제 한국 반응: {brief.cross_market.observed_korea_response}
 핵심 차이: {brief.cross_market.key_difference}
 
-💼 내 포트폴리오
+💼 내 포트폴리오 영향
 {_portfolio_lines(brief)}
+
+🧭 PORTFOLIO WATCH
+{_portfolio_watch_text(portfolio_watch)}
 
 📰 MORE HEADLINES
 {_headline_lines(more_headlines)}
@@ -104,7 +147,7 @@ Transmission: {brief.cross_market.transmission} ({brief.cross_market.confidence}
 def _html_body(
     *, brief_date: str, us_market_date: str | None, korea_market_date: str | None,
     brief: MorningBrief, more_headlines: list[Any], learning_signal: dict[str, Any],
-    estimated_api_cost_usd: float | None,
+    portfolio_watch: PortfolioWatch | None, estimated_api_cost_usd: float | None,
 ) -> str:
     esc = html.escape
     cost = f"${estimated_api_cost_usd:.4f}" if estimated_api_cost_usd is not None else "n/a"
@@ -152,7 +195,8 @@ def _html_body(
 <p><strong>실제 한국 반응:</strong> {esc(brief.cross_market.observed_korea_response)}</p>
 {f'<ul>{factors}</ul>' if factors else ''}
 <p><strong>핵심 차이:</strong> {esc(brief.cross_market.key_difference)}</p>
-<h3>💼 내 포트폴리오</h3><ul>{portfolio}</ul>
+<h3>💼 내 포트폴리오 영향</h3><ul>{portfolio}</ul>
+{_portfolio_watch_html(portfolio_watch)}
 <h3>📰 More Headlines</h3><ul>{headlines}</ul>
 <h3>🔎 오늘의 관찰 질문</h3><ul>{questions}</ul>
 <hr><p style="font-size:12px;color:#777">예상 OpenAI API 비용: {esc(cost)}</p>
@@ -177,6 +221,7 @@ def send_morning_brief_email(
     *, brief_date: str, us_market_date: str | None, korea_market_date: str | None,
     brief: MorningBrief, all_events: list[Any], selected_event_keys: list[str],
     learning_signal: dict[str, Any], estimated_api_cost_usd: float | None,
+    portfolio_watch: PortfolioWatch | None = None,
 ) -> dict:
     host = os.getenv("SMTP_HOST", "smtp.gmail.com").strip()
     port = int(os.getenv("SMTP_PORT", "587"))
@@ -198,12 +243,12 @@ def send_morning_brief_email(
     msg.set_content(_plain_text(
         brief_date=brief_date, us_market_date=us_market_date, korea_market_date=korea_market_date,
         brief=brief, more_headlines=more_headlines, learning_signal=learning_signal,
-        estimated_api_cost_usd=estimated_api_cost_usd,
+        portfolio_watch=portfolio_watch, estimated_api_cost_usd=estimated_api_cost_usd,
     ))
     msg.add_alternative(_html_body(
         brief_date=brief_date, us_market_date=us_market_date, korea_market_date=korea_market_date,
         brief=brief, more_headlines=more_headlines, learning_signal=learning_signal,
-        estimated_api_cost_usd=estimated_api_cost_usd,
+        portfolio_watch=portfolio_watch, estimated_api_cost_usd=estimated_api_cost_usd,
     ), subtype="html")
 
     _send_via_smtp(host=host, port=port, username=username, password=password, msg=msg)
@@ -211,4 +256,5 @@ def send_morning_brief_email(
         "status": "SENT", "recipient": recipient, "subject": msg["Subject"],
         "smtp_host": host, "smtp_port": port, "more_headlines_count": len(more_headlines),
         "weekend_watch_count": len(brief.weekend_watch), "learning_signal": signal_label,
+        "portfolio_watch": "CONNECTED" if portfolio_watch is not None else "NOT_CONNECTED",
     }
