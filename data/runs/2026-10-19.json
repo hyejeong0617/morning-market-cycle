@@ -1,0 +1,447 @@
+{
+  "schema_version": "mvp2-v1",
+  "brief_date": "2026-10-19",
+  "us_market_date": "2026-10-16",
+  "korea_market_date": "2026-10-19",
+  "market_snapshot": {
+    "generated_at": "2026-10-19T10:46:24.680548+02:00",
+    "quotes": [
+      {
+        "symbol": "^GSPC",
+        "label": "S&P 500",
+        "market": "US",
+        "as_of": "2026-10-16",
+        "close": 7659.4399,
+        "previous_close": 7744.0601,
+        "change_pct": -1.093,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^IXIC",
+        "label": "Nasdaq Composite",
+        "market": "US",
+        "as_of": "2026-10-16",
+        "close": 26140.0293,
+        "previous_close": 26713.0293,
+        "change_pct": -2.145,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^SOX",
+        "label": "PHLX Semiconductor",
+        "market": "US",
+        "as_of": "2026-10-16",
+        "close": 11137.29,
+        "previous_close": 11581.21,
+        "change_pct": -3.833,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^VIX",
+        "label": "VIX",
+        "market": "US",
+        "as_of": "2026-10-16",
+        "close": 19.99,
+        "previous_close": 16.46,
+        "change_pct": 21.446,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^TNX",
+        "label": "US 10Y yield proxy",
+        "market": "US",
+        "as_of": "2026-10-16",
+        "close": 5.098,
+        "previous_close": 5.089,
+        "change_pct": 0.177,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^KS11",
+        "label": "KOSPI",
+        "market": "KOREA",
+        "as_of": "2026-10-19",
+        "close": 5768.0098,
+        "previous_close": 5668.0498,
+        "change_pct": 1.764,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "^KQ11",
+        "label": "KOSDAQ",
+        "market": "KOREA",
+        "as_of": "2026-10-19",
+        "close": 808.89,
+        "previous_close": 794.78,
+        "change_pct": 1.775,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "005930.KS",
+        "label": "Samsung Electronics",
+        "market": "KOREA",
+        "as_of": "2026-10-19",
+        "close": 218000.0,
+        "previous_close": 215500.0,
+        "change_pct": 1.16,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "000660.KS",
+        "label": "SK Hynix",
+        "market": "KOREA",
+        "as_of": "2026-10-19",
+        "close": 1277000.0,
+        "previous_close": 1272000.0,
+        "change_pct": 0.393,
+        "status": "OK",
+        "note": ""
+      },
+      {
+        "symbol": "KRW=X",
+        "label": "USD/KRW",
+        "market": "CROSS",
+        "as_of": "2026-10-19",
+        "close": 1329.76,
+        "previous_close": 1340.95,
+        "change_pct": -0.834,
+        "status": "OK",
+        "note": "Latest yfinance daily FX observation; NOT a Korea 15:30 closing rate. Use a Korea-close official/reported USD/KRW observation for cross-market interpretation."
+      }
+    ]
+  },
+  "us_research": {
+    "research_date": "2026-10-19",
+    "market": "US",
+    "events": [
+      {
+        "event_key": "tech-selloff-oct16",
+        "title": "10월 16일 미국 증시, 기술주·반도체 매도로 하락 마감",
+        "market": "US",
+        "category": "Semiconductor",
+        "event_status": "FOLLOW-UP",
+        "summary": "10월 16일 S&P 500과 Nasdaq이 하락 마감했다. AP는 대형 기술주 약세가 지수에 부담을 줬고, 기술주 매도가 주간 하락을 이끌었다고 보도했다. AI 투자 지속성 우려가 배경으로 거론됐지만, 개별 하락 원인을 한 가지로 단정하기는 어렵다.",
+        "why_important": "미국 기술주 약세가 이어지면 다음 한국 거래일의 삼성전자와 미국 성장주 비중 상품에 부담이 될 수 있다. 금요일 종가 동향이며 월요일 장중 움직임을 뜻하지 않는다.",
+        "facts": [
+          "10월 16일 Dow는 175.28포인트 하락한 52,002.41, Nasdaq은 572.99포인트 하락한 26,140.03으로 마감했다.",
+          "AP 보도에 따르면 S&P 500 기술주 75개 종목 중 68개가 하락 마감했다."
+        ],
+        "sources": [
+          {
+            "title": "How major US stock indexes fared Friday 10/16/2026",
+            "url": "https://apnews.com/article/c27809783ae3230b44c26e5ee4bea056",
+            "source_type": "TRUSTED_REPORTING"
+          },
+          {
+            "title": "US markets are weighed down by an extended sell-off in the tech sector",
+            "url": "https://apnews.com/article/d2655f64db7ec8ae450525d58f97b628",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "KODEX 미국나스닥",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "HIGH",
+        "next_check": "10월 19일 미국 정규장 개장 후 기술주·반도체 매도세의 지속 여부와 지수 내 하락 확산을 확인한다."
+      },
+      {
+        "event_key": "september-cpi-inflation",
+        "title": "9월 CPI 상승률 3.7%…물가 재가속 부담",
+        "market": "US",
+        "category": "Macro",
+        "event_status": "FOLLOW-UP",
+        "summary": "BLS가 10월 14일 발표한 9월 CPI는 전년 대비 3.7%, 전월 대비 0.6% 상승했다. 금요일 이후 새로 나온 지표는 아니지만, 지난주 주식·금리 움직임에 영향을 준 핵심 물가 배경으로 이번 주 시장의 금리 기대를 계속 좌우할 수 있다.",
+        "why_important": "물가 압력이 지속되면 금리 인하 기대가 약해지거나 국채 금리 변동성이 커질 수 있어 주식 가치평가에 부담이 될 수 있다. 이 지표만으로 연준의 향후 결정을 단정할 수는 없다.",
+        "facts": [
+          "9월 CPI는 전월 대비 0.6%, 전년 대비 3.7% 상승했다.",
+          "BLS 발표일은 2026년 10월 14일이다."
+        ],
+        "sources": [
+          {
+            "title": "Consumer Price Index News Release - 2026 M09 Results",
+            "url": "https://www.bls.gov/news.release/archives/cpi_10142026.htm",
+            "source_type": "PRIMARY"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "KODEX 미국나스닥",
+          "TIGER 미국배당다우존스",
+          "TIGER 미국배당다우존스타겟데일리커버드콜"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "이번 주 발표되는 연준 발언과 국채 금리 반응을 확인해 물가 발표가 금리 경로 기대에 미치는 영향을 점검한다."
+      },
+      {
+        "event_key": "russia-sanctions-waiver",
+        "title": "트럼프 대통령, 대러 제재 시행 보류…유가 하락 압력",
+        "market": "CROSS-MARKET",
+        "category": "Policy",
+        "event_status": "NEW",
+        "summary": "주말 보도에 따르면 트럼프 대통령은 금요일 대러시아 제재 조치를 보류하는 행정명령에 서명했고, 주말 동안 의회에서 반발이 나왔다. 월요일 아시아 거래에서 브렌트유는 하락했으며, 보도는 제재 완화가 러시아산 에너지 공급 전망에 영향을 준 배경으로 제시했다. 유가 반응의 크기와 지속성은 불확실하다.",
+        "why_important": "유가 하락이 이어지면 에너지 가격을 통한 물가 부담을 일부 낮출 수 있지만, 제재 정책의 불확실성은 지정학적 위험과 원자재 가격 변동성을 키울 수 있다.",
+        "facts": [
+          "AP는 미국 대통령이 10월 16일 새 대러 제재를 보류하는 행정명령에 서명했다고 보도했다.",
+          "AP의 10월 19일 아시아 장 보도에서 브렌트유는 배럴당 107.16달러로 2.5% 하락했다."
+        ],
+        "sources": [
+          {
+            "title": "Trump puts new Russia sanctions that he recently signed into law on hold, citing national interest",
+            "url": "https://apnews.com/article/e50c561ab805883bb4e484c092d8fadd",
+            "source_type": "TRUSTED_REPORTING"
+          },
+          {
+            "title": "Asian shares are mixed with tech stocks volatile, and oil falls on Trump's Russian sanctions waiver",
+            "url": "https://apnews.com/article/494fbe4361a0360b2f6368e7a6d8f058",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER 미국S&P500",
+          "TIGER 미국배당다우존스"
+        ],
+        "portfolio_relevance": "MEDIUM",
+        "next_check": "미국 장 개장 이후 유가가 하락세를 유지하는지, 행정부의 후속 제재·에너지 정책 발표가 나오는지 확인한다."
+      }
+    ]
+  },
+  "korea_research": {
+    "research_date": "2026-10-19",
+    "market": "KOREA",
+    "events": [
+      {
+        "event_key": "kospi_intraday_reversal_institutional_buying",
+        "title": "코스피, 장중 급락에서 반등해 1.76% 상승 마감…기관 순매수·외국인 소폭 순매도",
+        "market": "KOREA",
+        "category": "Flows",
+        "event_status": "NEW",
+        "summary": "10월 19일 코스피는 전 거래일 대비 1.76% 오른 5,768.01로 마감했다. 장 초반 3.17% 하락 출발해 장중 5,488.41까지 밀렸지만, 기관의 순매수에 힘입어 상승 전환했다. 기관은 5,746억6천만원 순매수했고 외국인은 378억7천만원 순매도했다. 삼성전자는 1.16%, SK하이닉스는 0.39% 상승했다.",
+        "why_important": "장 초반 급락을 뒤집은 상승은 최근 변동성 속 저가 매수와 국내 기관 수급의 영향이 컸음을 보여준다. 다만 외국인은 순매도로 마감했고 AI 인프라 투자 수익성 우려가 이어져, 하루 반등만으로 위험 선호 회복이나 하락 추세 종료를 단정하기는 어렵다.",
+        "facts": [
+          "코스피 종가 5,768.01, 전 거래일 대비 99.96포인트(1.76%) 상승.",
+          "장 초반 3.17% 하락 출발, 장중 저점 5,488.41 기록 후 상승 마감.",
+          "기관 5,746억6천만원 순매수, 외국인 378억7천만원 순매도, 개인 1조900억원 순매도.",
+          "삼성전자 218,000원(+1.16%), SK하이닉스 1,280,000원(+0.39%)에 마감.",
+          "USD/KRW는 서울 외환시장 오후 3시 30분 기준 1,330.3원."
+        ],
+        "sources": [
+          {
+            "title": "(LEAD) Seoul shares end higher on institutional buying amid AI investment concerns",
+            "url": "https://en.yna.co.kr/view/AEN20261019007051320",
+            "source_type": "TRUSTED_REPORTING"
+          }
+        ],
+        "portfolio_links": [
+          "TIGER200",
+          "삼성전자"
+        ],
+        "portfolio_relevance": "HIGH",
+        "next_check": "다음 거래일에 외국인 순매수 전환 여부와 삼성전자·SK하이닉스의 반등 지속성을 확인하고, AI 투자수익성 우려가 다시 매도 압력으로 이어지는지 점검."
+      }
+    ]
+  },
+  "event_scores": [
+    {
+      "event_key": "september-cpi-inflation",
+      "market": "US",
+      "title": "9월 CPI 상승률 3.7%…물가 재가속 부담",
+      "market_impact": 3,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 2,
+      "evidence_strength": 2,
+      "learning_value": 2,
+      "total_score": 11,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=2, macro=2, evidence=2, learning=2"
+    },
+    {
+      "event_key": "tech-selloff-oct16",
+      "market": "US",
+      "title": "10월 16일 미국 증시, 기술주·반도체 매도로 하락 마감",
+      "market_impact": 3,
+      "portfolio_relevance_score": 3,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=3, macro=1, evidence=1, learning=2"
+    },
+    {
+      "event_key": "russia-sanctions-waiver",
+      "market": "CROSS-MARKET",
+      "title": "트럼프 대통령, 대러 제재 시행 보류…유가 하락 압력",
+      "market_impact": 3,
+      "portfolio_relevance_score": 2,
+      "macro_importance": 2,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=2, macro=2, evidence=1, learning=2"
+    },
+    {
+      "event_key": "kospi_intraday_reversal_institutional_buying",
+      "market": "KOREA",
+      "title": "코스피, 장중 급락에서 반등해 1.76% 상승 마감…기관 순매수·외국인 소폭 순매도",
+      "market_impact": 3,
+      "portfolio_relevance_score": 3,
+      "macro_importance": 1,
+      "evidence_strength": 1,
+      "learning_value": 2,
+      "total_score": 10,
+      "include_in_brief": true,
+      "reason": "impact=3, portfolio=3, macro=1, evidence=1, learning=2"
+    }
+  ],
+  "selected_event_keys": [
+    "september-cpi-inflation",
+    "tech-selloff-oct16",
+    "russia-sanctions-waiver",
+    "kospi_intraday_reversal_institutional_buying"
+  ],
+  "morning_brief": {
+    "market_one_liner": "10월 16일 미국 기술주·반도체가 큰 폭으로 하락했지만, 10월 19일 한국 증시는 기관 순매수에 힘입어 반등해 방향성 전이는 제한적이었다.",
+    "us_one_liner": "10월 16일 S&P 500은 1.09%, Nasdaq은 2.15%, 필라델피아 반도체지수는 3.83% 하락했고 VIX는 21.45% 상승했다. 10년물 금리 대용치는 소폭 상승했다.",
+    "korea_one_liner": "10월 19일 코스피와 코스닥은 각각 1.76% 상승 마감했다. 코스피는 장 초반 급락을 되돌렸으며 기관 순매수와 외국인 소폭 순매도가 함께 나타났다.",
+    "weekend_watch": [
+      "트럼프 대통령이 10월 16일 대러 제재 시행을 보류하는 행정명령에 서명했다는 주말 보도가 나왔다. 월요일 아시아 거래에서 브렌트유는 2.5% 하락했지만, 유가 반응의 지속성은 불확실하다."
+    ],
+    "cross_market": {
+      "us_signal": "미국 기술·반도체 매도세가 두드러졌고 VIX도 상승했다. 9월 CPI는 전월 대비 0.6%, 전년 대비 3.7% 올라 금리 기대를 좌우할 물가 배경으로 남아 있다.",
+      "expected_korea_response": "미국 기술주와 반도체 약세가 이어진다면 한국 반도체주와 성장주에 부담이 될 수 있었다.",
+      "observed_korea_response": "한국 증시는 상승했다. 코스피는 1.76% 올랐고, 삼성전자는 1.16%, SK하이닉스는 0.39% 상승했다. 기관은 순매수, 외국인은 순매도였으며 서울 외환시장 15시 30분 USD/KRW는 1,330.3원이었다.",
+      "korea_specific_factors": [
+        "기관이 5,746억6천만원 순매수해 장 초반 급락 후 반등에 힘을 보탰다.",
+        "외국인은 378억7천만원 순매도했고, 개인도 순매도해 수급 전반의 위험 선호 회복으로 단정하기 어렵다.",
+        "AI 투자 수익성 우려가 남아 있어 하루 반등만으로 하락 압력 해소를 판단할 수 없다."
+      ],
+      "transmission": "NO",
+      "confidence": "MEDIUM",
+      "key_difference": "미국 기술·반도체 약세와 달리 한국 지수 및 반도체 대표주는 상승했다. 관측된 국내 기관 매수와 외국인 순매도 등 국내 수급이 당일 흐름을 설명하는 요인이며, 동행하지 않은 결과만으로 미국 약세가 한국 반등의 원인이라고 볼 수 없다."
+    },
+    "portfolio": [
+      {
+        "asset": "KODEX 미국나스닥",
+        "relevance": "HIGH",
+        "reason": "미국 Nasdaq이 10월 16일 2.15% 하락하고 기술주 매도가 확산됐다. 미국 성장주 비중에 직접 연결되는 지수 흐름으로, 다음 미국 거래에서도 기술주 매도가 이어지는지에 따라 상품의 기초자산 흐름이 달라질 수 있다."
+      },
+      {
+        "asset": "TIGER 미국S&P500",
+        "relevance": "MEDIUM",
+        "reason": "S&P 500이 1.09% 하락했다. 9월 CPI 상승률(전월 대비 0.6%, 전년 대비 3.7%)은 금리 기대와 주식 가치평가에 부담이 될 수 있으나, 지표만으로 향후 금리 경로를 단정할 수 없다."
+      },
+      {
+        "asset": "TIGER 미국배당다우존스",
+        "relevance": "LOW",
+        "reason": "대러 제재 보류 보도 뒤 아시아 거래에서 브렌트유가 하락했다. 유가 하락이 이어지면 에너지 가격을 통한 물가 압력을 낮출 수 있지만, 지속 여부와 미국 배당주에 미칠 영향은 아직 불확실하다."
+      },
+      {
+        "asset": "TIGER 미국배당다우존스타겟데일리커버드콜",
+        "relevance": "LOW",
+        "reason": "미국 CPI와 금리 기대가 주식 가치평가에 영향을 줄 수 있다. 다만 제공된 자료만으로 이 상품의 구체적 수익 경로를 더 좁혀 말하기는 어렵다."
+      },
+      {
+        "asset": "삼성전자",
+        "relevance": "HIGH",
+        "reason": "미국 반도체지수는 3.83% 하락했지만 삼성전자는 한국 장에서 1.16% 상승했다. 미국 반도체 약세는 업종 부담 요인이며, 당일 한국 주가 반등은 기관 매수와 함께 나타나 미국 신호가 그대로 전이되지는 않았다."
+      },
+      {
+        "asset": "TIGER200",
+        "relevance": "MEDIUM",
+        "reason": "코스피가 1.76% 상승했지만 장중 급락을 되돌린 움직임이고 기관 순매수와 외국인 순매도가 엇갈렸다. 지수 반등은 상품 기초자산에 긍정적인 당일 흐름이지만, 지속적인 위험 선호 회복으로 단정할 수 없다."
+      }
+    ],
+    "questions": [
+      "다음 거래일에도 한국 기관 매수가 이어지고 외국인이 순매수로 전환하는가?",
+      "미국 기술·반도체 매도세가 재개되는지, 그리고 유가 하락이 지속되는지 확인할 필요가 있다."
+    ]
+  },
+  "api_usage": [
+    {
+      "market": "US",
+      "model": "gpt-6-luna",
+      "input_tokens": 22000,
+      "cached_input_tokens": 0,
+      "output_tokens": 1555,
+      "total_tokens": 23555,
+      "web_search_calls": 2,
+      "estimated_model_cost_usd": 0.002978,
+      "estimated_web_search_cost_usd": 0.02,
+      "estimated_total_cost_usd": 0.022978,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    },
+    {
+      "market": "KOREA",
+      "model": "gpt-6-luna",
+      "input_tokens": 13471,
+      "cached_input_tokens": 0,
+      "output_tokens": 809,
+      "total_tokens": 14280,
+      "web_search_calls": 1,
+      "estimated_model_cost_usd": 0.001752,
+      "estimated_web_search_cost_usd": 0.01,
+      "estimated_total_cost_usd": 0.011752,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    },
+    {
+      "market": "SYNTHESIS",
+      "model": "gpt-6-luna",
+      "input_tokens": 3694,
+      "cached_input_tokens": 0,
+      "output_tokens": 1545,
+      "total_tokens": 5239,
+      "web_search_calls": 0,
+      "estimated_model_cost_usd": 0.001142,
+      "estimated_web_search_cost_usd": 0.0,
+      "estimated_total_cost_usd": 0.001142,
+      "pricing_note": "Estimate using 2026-10-06 Standard API list prices; web search assumed $0.01/call. Actual billing may differ by service tier, region, caching, or future price changes."
+    }
+  ],
+  "estimated_api_cost_usd": 0.035872,
+  "warnings": [
+    "USD/KRW from yfinance is a latest FX observation, not the Korea 15:30 closing rate; use official/reported Korea-close FX for cross-market interpretation."
+  ],
+  "session_info": {
+    "expected_us_market_date": "2026-10-16",
+    "expected_korea_market_date": "2026-10-19",
+    "us_status": "NEW_SESSION",
+    "korea_status": "NEW_SESSION",
+    "both_closed": false,
+    "is_monday": true
+  },
+  "learning_signal": {
+    "signal": true,
+    "strength": "HIGH",
+    "reasons": [
+      "US→Korea 전달이 NO이고 보유자산 연결이 있어 추가 검토 가치가 있음",
+      "보유자산 연관성과 학습가치가 함께 높은 사건이 있음: 9월 CPI 상승률 3.7%…물가 재가속 부담 (score 11/12)",
+      "시장·거시 학습가치가 높은 핵심 사건: 9월 CPI 상승률 3.7%…물가 재가속 부담 (score 11/12)"
+    ],
+    "suggested_question": "다음 거래일에도 한국 기관 매수가 이어지고 외국인이 순매수로 전환하는가?",
+    "action": "Daily Market Filter 실행 권장",
+    "rule_version": "learning-signal-v1"
+  },
+  "morning_brief_markdown": "data/runs/2026-10-19.md",
+  "email_delivery": {
+    "status": "SENT",
+    "recipient": "hyejeong0617@gmail.com",
+    "subject": "Morning Market Brief | 2026-10-19 | SIGNAL",
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "more_headlines_count": 0,
+    "weekend_watch_count": 1,
+    "learning_signal": "SIGNAL",
+    "portfolio_watch": "CONNECTED"
+  }
+}
